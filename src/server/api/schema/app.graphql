@@ -3,6 +3,7 @@
 
 scalar JSON
 
+# SEE: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object.html
 type TwitterUser {
     id: ID!
     id_str: String
@@ -41,6 +42,10 @@ type TwitterUser {
     default_profile_image: Boolean
     withheld_in_countries: [String]
     withheld_scope: String
+
+    tweets(
+        limit: Int
+    ): [Tweet]
 }
 
 type ProfileGeo {
@@ -180,8 +185,8 @@ type Tweet {
     in_reply_to_status_id: ID
     in_reply_to_status_id_str: String
     in_reply_to_user_id: ID
-    in_reply_to_user_id_str    : String
-    in_reply_to_screen_name    : String
+    in_reply_to_user_id_str: String
+    in_reply_to_screen_name: String
 
     """
     The user who posted this Tweet. See User data dictionary for complete list of attributes.
@@ -192,12 +197,15 @@ type Tweet {
     Nullable. Represents the geographic location of this Tweet as reported by the user or client application. The inner coordinates array is formatted as geoJSON (longitude first, then latitude).
     """
     coordinates: Coordinates
+
     place: Place
     quoted_status_id: ID
     quoted_status_id_str: String
     is_quote_status: Boolean
     quoted_status: Tweet
+
     retweeted_status: Tweet
+
     quote_count: Int
     reply_count: Int
     retweet_count: Int
@@ -215,14 +223,58 @@ type Tweet {
     withheld_copyright: Boolean
     withheld_in_countries: [String]
     withheld_scope: String
+
+    retweets(
+        limit: Int
+    ): [Tweet]
+}
+
+enum UserIdentifierType {
+    ID,
+    NAME
+}
+
+enum SearchResponseType {
+    MIXED,
+    RECENT,
+    POPULAR
+}
+
+# Twitter related api.
+type TwitterAPI {
+    user(
+        identity: ID
+        identifier: UserIdentifierType
+    ): TwitterUser
+
+    tweet(
+        id: ID
+    ): Tweet
+
+    tweets(
+        user_id: ID!
+        limit: Int
+        max_id: ID
+    ): [Tweet]
+
+    search(
+        q: String
+        count: Int
+        result_type: SearchResponseType
+    ): [Tweet]
+}
+
+# Twitter related mutation api.
+type TwitterMutationAPI {
+    postTweet (
+        status: String!
+    ): Tweet
 }
 
 type Query {
-    dummy: String
+    twitter: TwitterAPI
 }
 
 type Mutation {
-    tweet (
-        status: String!
-    ): Tweet
+    twitter: TwitterMutationAPI
 }

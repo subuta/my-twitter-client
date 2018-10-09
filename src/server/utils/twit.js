@@ -29,12 +29,33 @@ const getPromise = (endpoint, parameters, resultPath = null, method = 'get') => 
   )
 })
 
-const tweet = (status) => getPromise('statuses/update', { status }, null, 'post');
+const postTweet = (status) => getPromise('statuses/update', { status }, null, 'post')
+const getUser = (identifier, identity) => getPromise('users/show', { [identifier]: identity })
+
+const getTweets = (userId, count, maxId = null) => getPromise('statuses/user_timeline', _.pickBy({
+  count,
+  user_id: userId,
+  max_id: maxId
+}, _.identity))
+
+const getTweet = (id) => getPromise('statuses/show', { id })
+const getRetweets = (id, count) => getPromise('statuses/retweets', { id, count })
+const searchFor = (queryParams) => getPromise('search/tweets', queryParams, 'statuses')
 
 export {
-  tweet
+  postTweet,
+  getUser,
+  getTweets,
+  getTweet,
+  getRetweets,
+  searchFor
 }
 
 export default {
-  tweet
+  postTweet,
+  getUser,
+  getTweets,
+  getTweet,
+  getRetweets,
+  searchFor
 }
