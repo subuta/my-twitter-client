@@ -1,4 +1,4 @@
-import twit from 'src/server/utils/twit'
+import t from 'src/server/utils/twitter'
 
 export default {
   Mutation: {
@@ -6,8 +6,8 @@ export default {
   },
 
   TwitterMutationAPI: {
-    postTweet (obj, args, context, info) {
-      return twit.tweet(args.status)
+    postTweet (obj, { status }, context, info) {
+      return t.postTweet(status)
     }
   }
 }

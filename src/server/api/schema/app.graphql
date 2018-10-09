@@ -253,13 +253,25 @@ type TwitterAPI {
 
     tweets(
         user_id: ID!
-        limit: Int
+        limit: Int = 200
         max_id: ID
     ): [Tweet]
 
+    followers(
+        user_id: ID!
+        count: Int = 200
+        cursor: ID = -1
+    ): [TwitterUser]
+
+    friends(
+        user_id: ID!
+        count: Int = 200
+        cursor: ID = -1
+    ): [TwitterUser]
+
     search(
         q: String
-        count: Int
+        count: Int = 200
         result_type: SearchResponseType
     ): [Tweet]
 }

@@ -9,6 +9,7 @@ import {
 } from '../utils/api'
 
 const Channel = ({ tweets = [] }) => {
+  console.log(tweets)
   return (
     <>
       <Helmet>

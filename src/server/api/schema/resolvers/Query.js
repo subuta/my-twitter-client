@@ -1,4 +1,4 @@
-import twit from 'src/server/utils/twit'
+import t from 'src/server/utils/twitter'
 
 export default {
   Query: {
@@ -8,13 +8,13 @@ export default {
 
   TwitterUser: {
     tweets ({ id: userId }, { limit = 30 }, context, info) {
-      return twit.getTweets(userId, limit)
+      return t.getTweets(userId, limit)
     },
   },
 
   Tweet: {
     retweets ({ id_str: tweetId }, { limit = 5 }, context, info) {
-      return twit.getRetweets(tweetId, limit)
+      return t.getRetweets(tweetId, limit)
     }
   },
 
@@ -29,15 +29,23 @@ export default {
         identifier = 'screen_name'
       }
 
-      return twit.getUser(identifier, identity)
+      return t.getUser(identifier, identity)
     },
 
-    tweets (obj, { user_id, max_id, limit = 30 }, context, info) {
-      return twit.getTweets(user_id, limit, max_id)
+    tweets (obj, { user_id, limit = 30, max_id = null }, context, info) {
+      return t.getTweets(user_id, limit, max_id)
+    },
+
+    followers (obj, { user_id, count = 30, cursor = -1 }, context, info) {
+      return t.getFollowers(user_id, count, cursor)
+    },
+
+    friends (obj, { user_id, count = 30, cursor = -1 }, context, info) {
+      return t.getFriends(user_id, count, cursor)
     },
 
     tweet (obj, { id }, context, info) {
-      return twit.getTweet(id)
+      return t.getTweet(id)
     },
 
     search (obj, args, context, info) {
@@ -51,7 +59,7 @@ export default {
       } else if (args.result_type === 'POPULAR') {
         args.result_type = 'popular'
       }
-      return twit.searchFor(args)
+      return t.searchFor(args)
     }
   }
 }
