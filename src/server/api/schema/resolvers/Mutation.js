@@ -1,10 +1,7 @@
-import { forwardTo } from 'prisma-binding'
+import twit from 'src/server/utils/twit'
 
 export default {
-  createTodo: forwardTo('binding'),
-  updateTodo: forwardTo('binding'),
-  updateManyTodoes: forwardTo('binding'),
-  upsertTodo: forwardTo('binding'),
-  deleteTodo: forwardTo('binding'),
-  deleteManyTodoes: forwardTo('binding')
+  tweet (obj, args, context, info) {
+    return twit.tweet(args.status)
+  }
 }

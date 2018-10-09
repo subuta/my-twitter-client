@@ -1,1 +1,228 @@
 # SEE: https://www.prisma.io/docs/data-model-and-migrations/data-model-knul/#a-note-on-the-application-schema
+# Inspired by https://github.com/clayallsopp/graphqlhub/blob/master/graphqlhub-schemas/src/twitter.js
+
+scalar JSON
+
+type TwitterUser {
+    id: ID!
+    id_str: String
+    name: String
+    screen_name: String
+    location: String
+    url: String
+    description: String
+    derived: ProfileGeo
+    protected: Boolean
+    verified: Boolean
+    followers_count: Int
+    friends_count: Int
+    listed_count: Int
+    favourites_count: Int
+    statuses_count: Int
+    created_at: String
+    utc_offset: String
+    time_zone: String
+    geo_enabled: Boolean
+    lang: String
+    contributors_enabled: Boolean
+    profile_background_color: String
+    profile_background_image_url: String
+    profile_background_image_url_https: String
+    profile_background_tile: Boolean
+    profile_banner_url: String
+    profile_image_url: String
+    profile_banneprofile_image_url_httpsr_url: String
+    profile_link_color: String
+    profile_sidebar_border_color: String
+    profile_sidebar_fill_color: String
+    profile_text_color: String
+    profile_use_background_image: Boolean
+    default_profile: Boolean
+    default_profile_image: Boolean
+    withheld_in_countries: [String]
+    withheld_scope: String
+}
+
+type ProfileGeo {
+    country: String
+    country_code: String
+    locality: String
+    region: String
+    sub_region: String
+    full_name: String
+    geo: Coordinates
+}
+
+type Coordinates {
+    coordinates: [Int]
+    type: String
+}
+
+type Polygon {
+    coordinates: [[[Int]]]
+    type: String
+}
+
+type Place {
+    id: String
+    url: String
+    place_type: String
+    name: String
+    full_name: String
+    country_code: String
+    country: String
+    bounding_box: Polygon
+    attributes: String
+}
+
+type Hashtag {
+    indices: [Int]
+    text: String
+}
+
+type Media {
+    type: String
+    sizes: MediaSizes
+    indices: [Int]
+    url: String
+    media_url: String
+    display_url: String
+    id: Int
+    id_str: String
+    expanded_url: String
+    media_url_https: String
+}
+
+type MediaSizes {
+    thumb: MediaSize
+    large: MediaSize
+    medium: MediaSize
+    small: MediaSize
+}
+
+type MediaSize {
+    h: Int,
+    resize: String
+    w: Int
+}
+
+type Url {
+    indices: [Int]
+    url: String
+    display_url: String
+    expanded_url: String
+    unwound: Unwound
+}
+
+type Entities {
+    hashtags: [Hashtag]
+    media: [Media]
+    urls: [Url]
+    user_mentions: [UserMention]
+    symbols: [Symbol]
+    polls: [Poll]
+}
+
+type Unwound {
+    url: String
+    status: Int
+    title: String
+    description: String
+}
+
+type UserMention {
+    name: String
+    indices: [Int]
+    screen_name: String
+    id: ID
+    id_str: String
+}
+
+type Symbol {
+    indices: [Int]
+    text: String
+}
+
+type Poll {
+    options: [PollOption]
+    end_datetime: String
+    duration_minutes: Int
+}
+
+type PollOption {
+    position: Int
+    text: String
+}
+
+type ExtendedEntities {
+    media: [Media]
+}
+
+type MatchingRule {
+    tag: String,
+    id: ID,
+    id_str: String
+}
+
+type CurrentUserRetweet {
+    id: ID
+    id_str: String
+}
+
+# SEE: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
+type Tweet {
+    created_at: String
+    id: ID!
+    id_str: String
+    text: String
+    source: String
+    truncated: Boolean
+    in_reply_to_status_id: ID
+    in_reply_to_status_id_str: String
+    in_reply_to_user_id: ID
+    in_reply_to_user_id_str    : String
+    in_reply_to_screen_name    : String
+
+    """
+    The user who posted this Tweet. See User data dictionary for complete list of attributes.
+    """
+    user: TwitterUser
+
+    """
+    Nullable. Represents the geographic location of this Tweet as reported by the user or client application. The inner coordinates array is formatted as geoJSON (longitude first, then latitude).
+    """
+    coordinates: Coordinates
+    place: Place
+    quoted_status_id: ID
+    quoted_status_id_str: String
+    is_quote_status: Boolean
+    quoted_status: Tweet
+    retweeted_status: Tweet
+    quote_count: Int
+    reply_count: Int
+    retweet_count: Int
+    favorite_count: Int
+    entities: Entities
+    extended_entities: ExtendedEntities
+    favorited: Boolean
+    retweeted: Boolean
+    possibly_sensitive: Boolean
+    filter_level: String
+    lang: String
+    matching_rules: [MatchingRule]
+    current_user_retweet: CurrentUserRetweet
+    scopes: JSON
+    withheld_copyright: Boolean
+    withheld_in_countries: [String]
+    withheld_scope: String
+}
+
+type Query {
+    dummy: String
+}
+
+type Mutation {
+    tweet (
+        status: String!
+    ): Tweet
+}

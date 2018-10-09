@@ -38,6 +38,7 @@
     "graphql-request": "^1.8.2",
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.0",
+    "graphql-type-json": "^0.2.1",
     "graphqlhub-schemas": "^0.1.0",
     "icepick": "^2.3.1",
     "isomorphic-unfetch": "^3.0.0",
@@ -60,6 +61,7 @@
     "react-ur-tools": "^0.1.10",
     "recompose": "^0.30.0",
     "subscriptions-transport-ws": "^0.9.15",
+    "twit": "^2.2.11",
     "waait": "^1.0.2"
   },
   "devDependencies": {

@@ -4,8 +4,6 @@ import Router from 'koa-router'
 // import { ApolloServer } from 'apollo-server-koa'
 import { graphqlKoa } from 'apollo-server-koa'
 
-import prismaBinding from './prisma-binding'
-import { prisma } from './schema/generated/prisma-client'
 import schema from './schema'
 
 const router = new Router({
@@ -13,11 +11,7 @@ const router = new Router({
 })
 
 const graphQLServerOptions = {
-  schema,
-  context: {
-    binding: prismaBinding,
-    db: prisma
-  }
+  schema
 }
 
 router.post('/', graphqlKoa(graphQLServerOptions))
