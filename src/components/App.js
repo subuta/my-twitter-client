@@ -13,6 +13,8 @@ export default () => {
             font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
           }
         `}</style>
+
+        <link rel="stylesheet" type="text/css" href="/app.css" />
       </Helmet>
 
       <Routes configure={(pages) =>

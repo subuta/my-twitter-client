@@ -4,42 +4,51 @@ import graphQLClient from './graphQLClient'
 // import minDelay from 'p-min-delay'
 
 // Fetch list of tweets
-export const getTweets = async (userId, limit = 30) => {
+export const getTweets = async (userId, limit = null) => {
   // Get sorted todoes by dueDate ASC.
   const query = gql`
+    fragment tweetFields on Tweet {
+      id_str
+      user {
+        screen_name
+      }
+      text
+      retweet_count
+      favorite_count
+      lang
+      entities {
+        urls {
+          url
+          display_url
+        }
+
+        media {
+          url
+          display_url
+          media_url
+          sizes {
+            small {
+              w
+              h
+              resize
+            }
+
+            large {
+              w
+              h
+              resize
+            }
+          }
+        }
+      }
+    }
+    
     query getTweets($user_id: ID!, $limit: Int) {
       twitter {
         tweets(user_id: $user_id, limit: $limit) {
-          id
-          user {
-            screen_name
-          }
-          text
-          retweet_count
-          favorite_count
-          lang
+          ...tweetFields
           quoted_status {
-            id
-            text
-          }
-          entities {
-            urls {
-              url
-              display_url
-            }
-
-            media {
-              url
-              display_url
-              media_url
-              sizes {
-                small {
-                  w
-                  h
-                  resize
-                }
-              }
-            }
+            ...tweetFields
           }
         }
       }

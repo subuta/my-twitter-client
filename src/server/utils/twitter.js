@@ -39,6 +39,9 @@ const twitterClient = new Twitter(credentials)
 const getPromise = async (endpoint, parameters, resultPath = null, method = 'get') => {
   const args = method === 'get' ? [endpoint, parameters] : [endpoint, null, parameters]
   const result = await twitterClient[method].apply(twitterClient, args)
+    .catch(err => {
+      console.error(err)
+    })
 
   let data = resultPath !== null ? _.get(result, resultPath) : result
 

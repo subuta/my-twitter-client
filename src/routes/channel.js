@@ -19,7 +19,7 @@ const Channel = ({ tweets = [] }) => {
       <h1>Channel</h1>
 
       <ul>
-        {_.map(tweets, ({ id, text }) => {
+        {_.map(tweets, ({ id_str: id, text }) => {
           return (
             <li key={id}>{text}</li>
           )
