@@ -2,6 +2,7 @@ import React from 'react'
 import Router from 'koa-router'
 import Boom from 'boom'
 import _ from 'lodash'
+import { rewind } from 'react-free-style'
 
 import { asyncRenderServer } from 'react-ur'
 
@@ -12,8 +13,27 @@ const router = new Router()
 router.get('*', async (ctx) => {
   let html = null
 
+  // Rewind styles after rendered.
+  const onAfterRender = () => {
+    const styles = rewind()
+
+    // Inject custom head tag.
+    const head = (
+      <>
+        {styles.toComponent()}
+      </>
+    )
+
+    return {
+      head
+    }
+  }
+
   try {
-    html = await asyncRenderServer(ctx.url, { App })
+    html = await asyncRenderServer(ctx.url, {
+      App,
+      onAfterRender
+    })
   } catch (err) {
     // Handle expected(boom) error.
     if (Boom.isBoom(err)) {

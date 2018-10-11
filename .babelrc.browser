@@ -1,6 +1,6 @@
 {
   "presets": [
-    "react-ur-tools/babel/node"
+    "react-ur-tools/babel/browser"
   ],
   "plugins": [
   ]

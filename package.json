@@ -6,9 +6,8 @@
   "scripts": {
     "copy": "copyfiles -u 1 src/**/*.graphql lib",
     "build": "npm run copy && npm run build:css && NODE_ENV=production rur build",
-    "build:css": "tailwind build ./src/styles/app.css -o ./public/app.css",
     "pdeploy": "cd prisma && prisma deploy",
-    "serve": "npm run build:css && rur start",
+    "serve": "rur start",
     "lserve": "run-s ulink serve",
     "playground": "graphql playground --port 3001",
     "servep": "NODE_PATH=./ NODE_ENV=production rur start",
@@ -31,6 +30,7 @@
     "@koa/cors": "^2.2.2",
     "apollo-server-koa": "^1.4.0",
     "boom": "^7.2.0",
+    "css-as-js": "^0.1.3",
     "dotenv": "^6.1.0",
     "esm": "^3.0.84",
     "graphql": "0.13.0",
@@ -54,11 +54,12 @@
     "prisma-client-lib": "^1.17.1",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
+    "react-free-style": "^7.0.2",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.7",
     "react-router-dom": "^4.3.1",
-    "react-ur": "^0.1.10",
-    "react-ur-tools": "^0.1.10",
+    "react-ur": "^0.1.12",
+    "react-ur-tools": "^0.1.12",
     "recompose": "^0.30.0",
     "subscriptions-transport-ws": "^0.9.15",
     "twitter-lite": "^0.7.0",
@@ -69,6 +70,7 @@
     "copyfiles": "^2.1.0",
     "npm-run-all": "^4.1.3",
     "sane": "^3.0.0",
+    "find-up": "^3.0.0",
     "tailwindcss": "^0.6.6"
   }
 }

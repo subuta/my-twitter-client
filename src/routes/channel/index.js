@@ -1,22 +1,32 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { hot } from 'react-hot-loader'
-import { Link } from 'react-router-dom'
 import _ from 'lodash'
 
 import {
   getTweets
-} from '../utils/api'
+} from '../../utils/api'
 
-const Channel = ({ tweets = [] }) => {
-  console.log(tweets)
+import withStyles from './_styles'
+
+import {
+  compose
+} from 'recompose'
+
+const enhance = compose(
+  hot(module),
+  withStyles
+)
+
+const Channel = enhance(({ tweets = [], styles }) => {
+  // console.log(tweets)
   return (
-    <>
+    <div className="container">
       <Helmet>
         <title>Channel</title>
       </Helmet>
 
-      <h1>Channel</h1>
+      <h1 className={styles.h1}>Channel</h1>
 
       <ul>
         {_.map(tweets, ({ id_str: id, text }) => {
@@ -25,9 +35,9 @@ const Channel = ({ tweets = [] }) => {
           )
         })}
       </ul>
-    </>
+    </div>
   )
-}
+})
 
 Channel.getInitialProps = async () => {
   const userId = '320096369' // @subuta_nico.
@@ -37,4 +47,4 @@ Channel.getInitialProps = async () => {
   }
 }
 
-export default hot(module)(Channel)
+export default Channel
