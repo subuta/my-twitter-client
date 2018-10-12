@@ -4,22 +4,17 @@ import koaBody from 'koa-body'
 import serve from 'koa-static'
 import cors from '@koa/cors'
 import clearModule from 'clear-module'
-import path from 'path'
 
 import {
   ROOT_DIR,
   PUBLIC_DIR
 } from '../../config'
 
-import { generateRoutesJson } from 'react-ur-tools'
-
 const {
   PORT
 } = process.env
 
 const dev = process.env.NODE_ENV !== 'production'
-
-generateRoutesJson(true)
 
 const port = parseInt(PORT, 10) || 3000
 const app = new Koa()
@@ -35,11 +30,17 @@ app.use(cors())
 
 if (dev) {
   // Server side hot-module-replacement :)
-  const watcher = require('sane')(path.resolve(ROOT_DIR, './src'))
+  const watcher = require('sane')(ROOT_DIR, {
+    glob: ['src/**/*.js', 'tmp/**/*.json'],
+    ignored: [
+      /node_modules/
+    ]
+  })
   watcher.on('ready', () => {
     watcher.on('all', () => {
       console.log('Clearing src module cache from server')
       clearModule.match(/src/)
+      clearModule.match(/(css-as-js|react-ur)/)
     })
   })
 }

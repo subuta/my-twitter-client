@@ -3,6 +3,7 @@ import Router from 'koa-router'
 import Boom from 'boom'
 import _ from 'lodash'
 import { rewind } from 'react-free-style'
+import path from 'path'
 
 import { asyncRenderServer } from 'react-ur'
 
@@ -11,6 +12,8 @@ import App from '../../components/App'
 const router = new Router()
 
 router.get('*', async (ctx) => {
+  if (path.extname(ctx.url)) return
+
   let html = null
 
   // Rewind styles after rendered.
