@@ -28,6 +28,8 @@ const Channel = enhance(({ tweets = [], styles }) => {
 
       <h1 className={styles.h1}>Channel</h1>
 
+      <button className={styles.button}>fetch!</button>
+
       <ul>
         {_.map(tweets, ({ id_str: id, text }) => {
           return (

@@ -4,15 +4,13 @@ import { Helmet } from 'react-helmet'
 import withStyles from './style'
 import { Routes } from 'react-ur'
 
-import {
-  ruleCss
-} from 'css-as-js'
+import { css } from 'css-as-js'
 
 export default withStyles(() => {
   return (
     <div>
       <Helmet>
-        <style type="text/css">{ruleCss}</style>
+        <style type="text/css">{css}</style>
       </Helmet>
 
       <Routes configure={(pages) =>
