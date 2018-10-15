@@ -15,31 +15,41 @@ import {
   compose,
   withHandlers,
   withPropsOnChange,
-  withStateHandlers
+  withStateHandlers,
+  lifecycle,
+  withState,
+  branch,
+  renderComponent
 } from 'recompose'
+
+import mapVh from 'src/hocs/mapVh'
 
 const SCROLL_DIRECTION_UP = 'SCROLL_DIRECTION_UP'
 const SCROLL_DIRECTION_DOWN = 'SCROLL_DIRECTION_DOWN'
 
 const enhance = compose(
   hot(module),
+  mapVh,
+  withState('isMounted', 'setIsMounted', false),
   withStyles,
   withStateHandlers(
     () => {
-      const virtualRowsCount = 1000
-      const rows = _.fill(Array(20), _.uniqueId())
+      const rows = _.fill(Array(20), 1)
+      const virtualRowsCount = rows.length + 50
       return {
-        virtualRowsCount: 1000,
+        virtualRowsCount,
         rows,
-        scrollToIndex: virtualRowsCount - 1
+        initialScrollToIndex: virtualRowsCount - 1
       }
     },
     {
-      prependRows: (state) => (rows, index) => {
+      prependRows: (state) => (rows, doScrollToIndex = false) => {
         const nextRows = [...state.rows, ...rows]
+        const nextVirtualRowsCount = nextRows.length + 50
+
         return {
-          rows: nextRows,
-          scrollToIndex: index ? (state.virtualRowsCount - index - 1)  : null
+          virtualRowsCount: nextVirtualRowsCount,
+          rows: nextRows
         }
       }
     }
@@ -50,29 +60,34 @@ const enhance = compose(
     }
   }),
   withHandlers({
-    onLoadMore: ({ prependRows }) => ({ isAtFirst, currentIndex }) => {
+    onLoadMore: ({ prependRows }) => ({ isAtFirst, isAtVirtualLast }) => {
       if (isAtFirst) return
       // Simulate delay of loading.
-      _.delay(() => prependRows(_.fill(Array(20), _.uniqueId()), currentIndex), 1000)
+      _.delay(() => prependRows(_.fill(Array(20), 1), isAtVirtualLast), 1000)
     }
   }),
   withHandlers((props) => {
-    let lastStartIndex = -1
+    let lastArg = {
+      startIndex: -1,
+      stopIndex: -1
+    }
+    let scrollDirection = SCROLL_DIRECTION_UP
 
-    const debouncedOnLoadMore = _.debounce(props.onLoadMore, 100, { leading: true, trailing: false })
+    const debouncedOnLoadMore = _.debounce(props.onLoadMore, 100)
 
     return {
-      onItemsRendered: ({ rows, getVirtualIndex }) => (arg) => {
+      onItemsRendered: ({ virtualRowsCount, rows, getVirtualIndex }) => (arg) => {
         // Swap args for reversed list.
         const startIndex = getVirtualIndex(arg.stopIndex)
         const stopIndex = getVirtualIndex(arg.startIndex)
 
         // Assign lastStartIndex at first render.
-        if (lastStartIndex === -1) lastStartIndex = startIndex
+        if (lastArg.startIndex === -1) lastArg.startIndex = startIndex
         // Ignore no-change.
-        if (lastStartIndex === startIndex) return
+        if (lastArg.startIndex === startIndex) return
 
-        const scrollDirection = lastStartIndex > startIndex ? SCROLL_DIRECTION_UP : SCROLL_DIRECTION_DOWN
+        scrollDirection = lastArg.startIndex > startIndex ? SCROLL_DIRECTION_UP : SCROLL_DIRECTION_DOWN
+        
         const IsAtFirstOfRows = scrollDirection === SCROLL_DIRECTION_UP && startIndex === 0
         const IsAtLastOfRows = scrollDirection === SCROLL_DIRECTION_DOWN && stopIndex >= rows.length - 1
         const currentIndex = scrollDirection === SCROLL_DIRECTION_UP ? startIndex : stopIndex
@@ -82,11 +97,12 @@ const enhance = compose(
             scrollDirection,
             currentIndex,
             isAtFirst: IsAtFirstOfRows,
-            isAtLast: IsAtLastOfRows
+            isAtLast: IsAtLastOfRows,
+            isAtVirtualLast: currentIndex === virtualRowsCount - 1
           })
         }
 
-        lastStartIndex = startIndex
+        lastArg = arg
       }
     }
   }),
@@ -123,6 +139,17 @@ const enhance = compose(
         )
       }
     })
+  ),
+  lifecycle({
+    componentDidMount () {
+      console.log('mounted!')
+      this.props.setIsMounted(true)
+    }
+  }),
+  branch(
+    ({ isMounted }) => !isMounted,
+    renderComponent(() => null),
+    _.identity
   )
 )
 
@@ -133,22 +160,19 @@ const Channel = enhance((props) => {
     tweets = [],
     styles,
     rows,
+    vh,
     virtualRowsCount,
-    scrollToIndex,
+    initialScrollToIndex,
     onItemsRendered,
     renderItem
   } = props
 
   // console.log(tweets)
   return (
-    <div className="container">
+    <>
       <Helmet>
         <title>Channel</title>
       </Helmet>
-
-      <h1 className={styles.h1}>Channel</h1>
-
-      <button className={styles.button}>fetch!</button>
 
       {/*<ul className="p-0">*/}
       {/*{_.map(tweets, ({ id_str: id, text }) => {*/}
@@ -158,18 +182,21 @@ const Channel = enhance((props) => {
       {/*})}*/}
       {/*</ul>*/}
 
-      <VirtualList
-        width="auto"
-        height={200}
-        itemCount={virtualRowsCount}
-        renderItem={renderItem}
-        itemSize={50}
-        className="VirtualList"
-        scrollToIndex={scrollToIndex}
-        stickyIndices={stickyIndices}
-        onItemsRendered={onItemsRendered}
-      />
-    </div>
+      <div style={{height: '100vh', position: 'relative'}}>
+        <VirtualList
+          width="auto"
+          height={vh || window.innerHeight}
+          itemCount={virtualRowsCount}
+          overscanCount={10}
+          renderItem={renderItem}
+          itemSize={50}
+          className="VirtualList"
+          scrollToIndex={initialScrollToIndex}
+          stickyIndices={stickyIndices}
+          onItemsRendered={onItemsRendered}
+        />
+      </div>
+    </>
   )
 })
 
