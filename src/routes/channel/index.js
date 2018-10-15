@@ -26,36 +26,47 @@ const enhance = compose(
   withStyles,
   withStateHandlers(
     () => {
+      const virtualRowsCount = 1000
       const rows = _.fill(Array(20), _.uniqueId())
       return {
+        virtualRowsCount: 1000,
         rows,
-        scrollToIndex: rows.length - 1
+        scrollToIndex: virtualRowsCount - 1
       }
     },
     {
-      prependRows: (state) => (rows) => {
-        const nextRows = [...rows, ...state.rows]
+      prependRows: (state) => (rows, index) => {
+        const nextRows = [...state.rows, ...rows]
         return {
           rows: nextRows,
-          scrollToIndex: rows.length - 1
+          scrollToIndex: index ? (state.virtualRowsCount - index - 1)  : null
         }
       }
     }
   ),
   withHandlers({
-    onLoadMore: ({ prependRows }) => ({ isAtLast }) => {
-      if (isAtLast) return
+    getVirtualIndex: ({ virtualRowsCount }) => (index) => {
+      return virtualRowsCount - index - 1
+    }
+  }),
+  withHandlers({
+    onLoadMore: ({ prependRows }) => ({ isAtFirst, currentIndex }) => {
+      if (isAtFirst) return
       // Simulate delay of loading.
-      _.delay(() => prependRows(_.fill(Array(20), _.uniqueId())), 300)
+      _.delay(() => prependRows(_.fill(Array(20), _.uniqueId()), currentIndex), 1000)
     }
   }),
   withHandlers((props) => {
     let lastStartIndex = -1
 
-    const debouncedOnLoadMore = _.debounce(props.onLoadMore, 1000 / 60)
+    const debouncedOnLoadMore = _.debounce(props.onLoadMore, 100, { leading: true, trailing: false })
 
     return {
-      onItemsRendered: ({ rows }) => ({ startIndex, stopIndex }) => {
+      onItemsRendered: ({ rows, getVirtualIndex }) => (arg) => {
+        // Swap args for reversed list.
+        const startIndex = getVirtualIndex(arg.stopIndex)
+        const stopIndex = getVirtualIndex(arg.startIndex)
+
         // Assign lastStartIndex at first render.
         if (lastStartIndex === -1) lastStartIndex = startIndex
         // Ignore no-change.
@@ -63,12 +74,13 @@ const enhance = compose(
 
         const scrollDirection = lastStartIndex > startIndex ? SCROLL_DIRECTION_UP : SCROLL_DIRECTION_DOWN
         const IsAtFirstOfRows = scrollDirection === SCROLL_DIRECTION_UP && startIndex === 0
-        const IsAtLastOfRows = scrollDirection === SCROLL_DIRECTION_DOWN && stopIndex === rows.length - 1
+        const IsAtLastOfRows = scrollDirection === SCROLL_DIRECTION_DOWN && stopIndex >= rows.length - 1
         const currentIndex = scrollDirection === SCROLL_DIRECTION_UP ? startIndex : stopIndex
 
         if (IsAtFirstOfRows || IsAtLastOfRows) {
           debouncedOnLoadMore({
             scrollDirection,
+            currentIndex,
             isAtFirst: IsAtFirstOfRows,
             isAtLast: IsAtLastOfRows
           })
@@ -82,15 +94,27 @@ const enhance = compose(
     (props, nextProps) => {
       return props.rows.length !== nextProps.rows.length
     },
-    ({ rows }) => ({
-      renderItem ({ style, index }) {
+    ({ rows, getVirtualIndex }) => ({
+      renderItem (arg) {
+        const { style } = arg
+
+        const index = getVirtualIndex(arg.index)
         const row = rows[index]
+
         const itemStyle = stickyIndices.includes(index)
           ? {
             ...style,
             backgroundColor: '#EEE',
           }
           : style
+
+        if (!row) {
+          return (
+            <div className="Row" style={itemStyle} key={index}>
+              Loading... ({index})
+            </div>
+          )
+        }
 
         return (
           <div className="Row" style={itemStyle} key={index}>
@@ -109,6 +133,7 @@ const Channel = enhance((props) => {
     tweets = [],
     styles,
     rows,
+    virtualRowsCount,
     scrollToIndex,
     onItemsRendered,
     renderItem
@@ -136,7 +161,7 @@ const Channel = enhance((props) => {
       <VirtualList
         width="auto"
         height={200}
-        itemCount={rows.length}
+        itemCount={virtualRowsCount}
         renderItem={renderItem}
         itemSize={50}
         className="VirtualList"
