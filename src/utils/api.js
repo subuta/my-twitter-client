@@ -4,9 +4,23 @@ import graphQLClient from './graphQLClient'
 // import minDelay from 'p-min-delay'
 
 // Fetch list of tweets
-export const getTweets = async (userId, limit = null) => {
+export const getTweetsWithProfile = async (userId, limit = null) => {
   // Get sorted todoes by dueDate ASC.
   const query = gql`
+    fragment userFields on TwitterUser {
+      created_at
+      description
+      id
+      screen_name
+      name
+      profile_image_url
+      profile_banner_url
+      profile_background_color
+      url
+      friends_count
+      followers_count
+    }
+    
     fragment tweetFields on Tweet {
       id_str
       user {
@@ -43,8 +57,12 @@ export const getTweets = async (userId, limit = null) => {
       }
     }
     
-    query getTweets($user_id: ID!, $limit: Int) {
+    query getTweetsWithProfile($user_id: ID!, $limit: Int) {
       twitter {
+        user (identifier: ID, identity: $user_id) {
+          ...userFields
+        }
+        
         tweets(user_id: $user_id, limit: $limit) {
           ...tweetFields
           quoted_status {
@@ -56,5 +74,5 @@ export const getTweets = async (userId, limit = null) => {
   `
 
   const data = await graphQLClient.request(query, { user_id: userId, limit })
-  return _.get(data, 'twitter.tweets', [])
+  return _.get(data, 'twitter', [])
 }
