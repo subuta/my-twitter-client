@@ -9,5 +9,6 @@ dayjs.extend(relativeTime)
 
 export const isToday = (date) => dayjs().diff(date, 'day') === 0
 export const isYesterday = (date) => dayjs().subtract(1, 'day').diff(date, 'day') === 0
+export const isThisYear = (date) => dayjs().startOf('year').isBefore(date)
 
 export default dayjs

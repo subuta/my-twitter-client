@@ -25,6 +25,7 @@ export const tweetFields = gql`
     user {
       screen_name
     }
+    full_text
     text
     created_at
     retweet_count
@@ -34,6 +35,8 @@ export const tweetFields = gql`
       urls {
         url
         display_url
+        indices
+        expanded_url
       }
 
       media {

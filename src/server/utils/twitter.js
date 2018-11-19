@@ -82,6 +82,7 @@ const getFollowers = (id, count, cursor) => getPromiseWithCache('followers/list'
 const searchFor = (queryParams) => getPromiseWithCache('search/tweets', queryParams, 'statuses')
 const getTweets = (userId, count, max_id) => getPromiseWithCache(`statuses/user_timeline`, _.pickBy({
   count,
+  tweet_mode: 'extended',
   user_id: userId,
   max_id: max_id
 }, _.identity))

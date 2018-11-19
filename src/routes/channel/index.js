@@ -5,6 +5,7 @@ import _ from 'lodash'
 
 import dayjs, {
   isToday,
+  isThisYear,
   isYesterday
 } from 'src/utils/dayjs'
 
@@ -21,7 +22,7 @@ import {
 } from 'recompose'
 
 import withPreventSSR from 'src/hocs/withPreventSSR'
-import withStyles from './_styles'
+import withStyles from './_style'
 
 import gql from 'graphql-tag'
 import graphQLClient, {
@@ -35,7 +36,7 @@ const SCROLL_DIRECTION_DOWN = 'SCROLL_DIRECTION_DOWN'
 
 const USER_ID = '320096369' // @subuta_nico.
 
-import Tweet from './_Tweet'
+import Tweet from 'src/components/Tweet'
 
 const enhance = compose(
   hot(module),
@@ -97,11 +98,10 @@ const enhance = compose(
   withStyles
 )
 
-const renderRow = ({ row, user, setSizeRef, style }) => {
-  // console.log(row)
+const renderRow = ({ row, user, setSizeRef, style, styles }) => {
   return (
     <Tweet
-      className={`row-${row.id_str}`}
+      className={`row-${row.id_str} ${styles.Row}`}
       style={style}
       user={user}
       tweet={row}
@@ -113,7 +113,7 @@ const renderRow = ({ row, user, setSizeRef, style }) => {
 const renderGroupHeader = ({ row, setSizeRef, style, styles }) => {
   const { groupHeader } = row
   return (
-    <div style={style}>
+    <div style={style} className='pointer-events-none'>
       <div
         ref={setSizeRef}
         className={`c-sticky ${styles.GroupHeaderContainer}`}
@@ -124,6 +124,33 @@ const renderGroupHeader = ({ row, setSizeRef, style, styles }) => {
       </div>
     </div>
   )
+}
+
+const getGroupHeaderForRow = (row) => {
+  const createdAt = dayjs(row.created_at)
+
+  if (isToday(createdAt)) {
+    return 'Today'
+  } else if (isYesterday(createdAt)) {
+    return 'Yesterday'
+  } else if (isThisYear(createdAt)) {
+    return createdAt.format('dddd, MMMM Do')
+  }
+
+  return createdAt.format('MMMM Do, YYYY')
+}
+
+const groupRowBy = ({ rows, row, index, lastGroupHeader }) => {
+  const groupHeader = getGroupHeaderForRow(row)
+
+  if (!rows[index + 1]) return groupHeader
+
+  const nextGroupHeader = getGroupHeaderForRow(rows[index + 1])
+
+  // Push nextGroupHeader position to last occurrence.
+  if (groupHeader !== nextGroupHeader) return groupHeader
+
+  return lastGroupHeader
 }
 
 const Channel = enhance((props) => {
@@ -142,7 +169,7 @@ const Channel = enhance((props) => {
       </Helmet>
 
       <div className='flex flex-col h-screen'>
-        <header className='p-4 flex-0'>Fixed header area</header>
+        <header className='pt-4 pb-2 px-4 flex-0'>Fixed header area</header>
 
         <Sized>
           {({ size, setSizeRef }) => {
@@ -156,21 +183,11 @@ const Channel = enhance((props) => {
                   onScroll={onScroll}
                   height={size.height}
                   rows={rows}
-                  groupBy={({ row }) => {
-                    const createdAt = dayjs(row.created_at)
-
-                    if (isToday(createdAt)) {
-                      return 'Today'
-                    } else if (isYesterday(createdAt)) {
-                      return 'Yesterday'
-                    }
-
-                    return createdAt.format('dddd, MMMM Do')
-                  }}
+                  groupBy={groupRowBy}
                   renderGroupHeader={(props) => renderGroupHeader({ ...props, styles })}
                   reversed
                 >
-                  {(props) => renderRow({ ...props, user })}
+                  {(props) => renderRow({ ...props, user, styles })}
                 </VirtualList>
               </div>
             )

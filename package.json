@@ -58,7 +58,7 @@
     "react-free-style": "^7.0.2",
     "react-helmet": "^5.2.0",
     "react-hot-loader": "^4.3.7",
-    "react-renderless-virtual-list": "^0.1.4",
+    "react-renderless-virtual-list": "^0.1.5",
     "react-router-dom": "^4.3.1",
     "react-tiny-virtual-list": "^2.2.0",
     "react-ur": "^0.1.15",
@@ -67,6 +67,7 @@
     "resize-observer-polyfill": "^1.5.0",
     "subscriptions-transport-ws": "^0.9.15",
     "twitter-lite": "^0.7.0",
+    "twitter-text": "^3.0.0",
     "waait": "^1.0.2"
   },
   "devDependencies": {
