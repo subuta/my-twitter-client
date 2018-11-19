@@ -3,7 +3,10 @@ import { Helmet } from 'react-helmet'
 import { hot } from 'react-hot-loader'
 import _ from 'lodash'
 
-import dayjs from 'src/utils/dayjs'
+import dayjs, {
+  isToday,
+  isYesterday
+} from 'src/utils/dayjs'
 
 import {
   VirtualList,
@@ -35,7 +38,6 @@ const USER_ID = '320096369' // @subuta_nico.
 import Tweet from './_Tweet'
 
 const enhance = compose(
-  withStyles,
   hot(module),
   withPreventSSR,
   withHandlers({
@@ -91,13 +93,15 @@ const enhance = compose(
       // Simulate delay of loading.
       prependRows(tweets)
     }
-  })
+  }),
+  withStyles
 )
 
 const renderRow = ({ row, user, setSizeRef, style }) => {
+  // console.log(row)
   return (
     <Tweet
-      className={`row-${row.id}`}
+      className={`row-${row.id_str}`}
       style={style}
       user={user}
       tweet={row}
@@ -106,15 +110,17 @@ const renderRow = ({ row, user, setSizeRef, style }) => {
   )
 }
 
-const renderGroupHeader = ({ row, setSizeRef, style }) => {
+const renderGroupHeader = ({ row, setSizeRef, style, styles }) => {
   const { groupHeader } = row
   return (
     <div style={style}>
       <div
         ref={setSizeRef}
-        className='c-sticky pin-t z-50 w-screen'
+        className={`c-sticky ${styles.GroupHeaderContainer}`}
       >
-        <div className="py-2 px-4 bg-red text-white font-bold">{groupHeader}</div>
+        <div className={styles.GroupHeader}>
+          <span className={styles.GroupHeaderLabel}>{groupHeader}</span>
+        </div>
       </div>
     </div>
   )
@@ -125,7 +131,8 @@ const Channel = enhance((props) => {
     rows,
     onScroll,
     onLoadMore,
-    user
+    user,
+    styles
   } = props
 
   return (
@@ -135,7 +142,7 @@ const Channel = enhance((props) => {
       </Helmet>
 
       <div className='flex flex-col h-screen'>
-        <header className='p-4 flex-0 border-b-2'>Fixed header area</header>
+        <header className='p-4 flex-0'>Fixed header area</header>
 
         <Sized>
           {({ size, setSizeRef }) => {
@@ -149,8 +156,18 @@ const Channel = enhance((props) => {
                   onScroll={onScroll}
                   height={size.height}
                   rows={rows}
-                  groupBy={({ row }) => dayjs(row.created_at).fromNow()}
-                  renderGroupHeader={renderGroupHeader}
+                  groupBy={({ row }) => {
+                    const createdAt = dayjs(row.created_at)
+
+                    if (isToday(createdAt)) {
+                      return 'Today'
+                    } else if (isYesterday(createdAt)) {
+                      return 'Yesterday'
+                    }
+
+                    return createdAt.format('dddd, MMMM Do')
+                  }}
+                  renderGroupHeader={(props) => renderGroupHeader({ ...props, styles })}
                   reversed
                 >
                   {(props) => renderRow({ ...props, user })}
