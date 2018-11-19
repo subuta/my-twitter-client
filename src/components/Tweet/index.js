@@ -8,6 +8,7 @@ import twitter from 'twitter-text'
 import _ from 'lodash'
 
 import dayjs from 'src/utils/dayjs'
+import emoji from 'src/utils/emoji'
 
 import withStyles from './style'
 
@@ -37,7 +38,8 @@ export default enhance((props) => {
 
   const createdAt = dayjs(created_at)
   const urlEntities = _.get(tweet, 'entities.urls', [])
-  const tweetHtml = twitter.autoLink(full_text, {
+
+  const tweetHtml = twitter.autoLink(emoji.replace_unified(full_text), {
     targetBlank: true,
     urlTarget: '_blank',
     urlEntities
