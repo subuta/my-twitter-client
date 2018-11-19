@@ -60,3 +60,13 @@
  * @import "utilities/background-patterns";
  * @import "utilities/skew-transforms";
  */
+
+ul {
+  @apply list-reset;
+}
+
+.c-sticky {
+  position: static;
+  position: -webkit-sticky;
+  position: sticky;
+}
