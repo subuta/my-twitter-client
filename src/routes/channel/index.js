@@ -3,206 +3,409 @@ import { Helmet } from 'react-helmet'
 import { hot } from 'react-hot-loader'
 import _ from 'lodash'
 
-import VirtualList from 'react-tiny-virtual-list'
+import dayjs from 'src/utils/dayjs'
 
 import {
-  getTweetsWithProfile
-} from '../../utils/api'
-
-import withStyles from './_styles'
+  VirtualList,
+  Sized
+} from 'react-renderless-virtual-list'
 
 import {
   compose,
   withHandlers,
   withPropsOnChange,
   withStateHandlers,
-  lifecycle,
-  withState,
-  branch,
-  renderComponent
 } from 'recompose'
 
-import mapVh from 'src/hocs/mapVh'
+import withPreventSSR from 'src/hocs/withPreventSSR'
+import withStyles from './_styles'
+
+import gql from 'graphql-tag'
+import graphQLClient, {
+  tweetFields,
+  userFields
+} from 'src/utils/graphQLClient'
 
 const SCROLL_DIRECTION_UP = 'SCROLL_DIRECTION_UP'
+const SCROLL_DIRECTION_NONE = 'SCROLL_DIRECTION_NONE'
 const SCROLL_DIRECTION_DOWN = 'SCROLL_DIRECTION_DOWN'
 
+const USER_ID = '320096369' // @subuta_nico.
+
+// import Tweet from './_Tweet'
+
 const enhance = compose(
-  hot(module),
-  mapVh,
-  withState('isMounted', 'setIsMounted', false),
   withStyles,
+  hot(module),
+  withPreventSSR,
+  withHandlers({
+    getTweets: () => async (maxId) => {
+      // Get sorted todoes by dueDate ASC.
+      const query = gql`
+        ${tweetFields}
+
+        query getTweetsWithProfile($user_id: ID!, $limit: Int, $max_id: ID!) {
+          twitter {
+            tweets(user_id: $user_id, limit: $limit, max_id: $max_id) {
+              ...tweetFields
+              quoted_status {
+                ...tweetFields
+              }
+            }
+          }
+        }
+      `
+
+      const data = await graphQLClient.request(query, { user_id: USER_ID, limit: 101, max_id: maxId })
+      const tweets = _.get(data, 'twitter.tweets', [])
+
+      return _.tail(tweets)
+    }
+  }),
   withStateHandlers(
-    () => {
-      const rows = _.fill(Array(20), 1)
-      const virtualRowsCount = rows.length + 50
+    ({ tweets }) => {
       return {
-        virtualRowsCount,
-        rows,
-        initialScrollToIndex: virtualRowsCount - 1
+        rows: tweets
       }
     },
     {
-      prependRows: (state) => (rows, doScrollToIndex = false) => {
-        const nextRows = [...state.rows, ...rows]
-        const nextVirtualRowsCount = nextRows.length + 50
-
+      prependRows: (state) => (rows) => {
         return {
-          virtualRowsCount: nextVirtualRowsCount,
-          rows: nextRows
+          rows: [...state.rows, ...rows]
         }
       }
     }
   ),
-  withHandlers({
-    getVirtualIndex: ({ virtualRowsCount }) => (index) => {
-      return virtualRowsCount - index - 1
-    }
-  }),
-  withHandlers({
-    onLoadMore: ({ prependRows }) => ({ isAtFirst, isAtVirtualLast }) => {
-      if (isAtFirst) return
-      // Simulate delay of loading.
-      _.delay(() => prependRows(_.fill(Array(20), 1), isAtVirtualLast), 1000)
-    }
-  }),
-  withHandlers((props) => {
-    let lastArg = {
-      startIndex: -1,
-      stopIndex: -1
-    }
-    let scrollDirection = SCROLL_DIRECTION_UP
-
-    const debouncedOnLoadMore = _.debounce(props.onLoadMore, 100)
-
-    return {
-      onItemsRendered: ({ virtualRowsCount, rows, getVirtualIndex }) => (arg) => {
-        // Swap args for reversed list.
-        const startIndex = getVirtualIndex(arg.stopIndex)
-        const stopIndex = getVirtualIndex(arg.startIndex)
-
-        // Assign lastStartIndex at first render.
-        if (lastArg.startIndex === -1) lastArg.startIndex = startIndex
-        // Ignore no-change.
-        if (lastArg.startIndex === startIndex) return
-
-        scrollDirection = lastArg.startIndex > startIndex ? SCROLL_DIRECTION_UP : SCROLL_DIRECTION_DOWN
-        
-        const IsAtFirstOfRows = scrollDirection === SCROLL_DIRECTION_UP && startIndex === 0
-        const IsAtLastOfRows = scrollDirection === SCROLL_DIRECTION_DOWN && stopIndex >= rows.length - 1
-        const currentIndex = scrollDirection === SCROLL_DIRECTION_UP ? startIndex : stopIndex
-
-        if (IsAtFirstOfRows || IsAtLastOfRows) {
-          debouncedOnLoadMore({
-            scrollDirection,
-            currentIndex,
-            isAtFirst: IsAtFirstOfRows,
-            isAtLast: IsAtLastOfRows,
-            isAtVirtualLast: currentIndex === virtualRowsCount - 1
-          })
-        }
-
-        lastArg = arg
-      }
-    }
-  }),
   withPropsOnChange(
-    (props, nextProps) => {
-      return props.rows.length !== nextProps.rows.length
-    },
-    ({ rows, getVirtualIndex }) => ({
-      renderItem (arg) {
-        const { style } = arg
-
-        const index = getVirtualIndex(arg.index)
-        const row = rows[index]
-
-        const itemStyle = stickyIndices.includes(index)
-          ? {
-            ...style,
-            backgroundColor: '#EEE',
-          }
-          : style
-
-        if (!row) {
-          return (
-            <div className="Row" style={itemStyle} key={index}>
-              Loading... ({index})
-            </div>
-          )
-        }
-
-        return (
-          <div className="Row" style={itemStyle} key={index}>
-            Row #{index} {row}
-          </div>
-        )
-      }
+    ['prependRows'],
+    ({ prependRows }) => ({
+      // Prevent duplicate call.
+      prependRows: _.debounce(prependRows, 300, { leading: true, trailing: false })
     })
   ),
-  lifecycle({
-    componentDidMount () {
-      console.log('mounted!')
-      this.props.setIsMounted(true)
+  withHandlers({
+    onLoadMore: ({ prependRows, rows, getTweets }) => async ({ isAtFirst }) => {
+      if (isAtFirst) return
+      const lastId = _.get(_.last(rows), 'id_str')
+      const tweets = await getTweets(lastId)
+      // Simulate delay of loading.
+      prependRows(tweets)
     }
-  }),
-  branch(
-    ({ isMounted }) => !isMounted,
-    renderComponent(() => null),
-    _.identity
-  )
+  })
+  // withStateHandlers(
+  //   ({ tweets }) => {
+  //     const rows = tweets
+  //     const virtualRowsCount = rows.length + 50
+  //     return {
+  //       overScanCount: 3,
+  //       virtualRowsCount,
+  //       rows,
+  //       initialScrollToIndex: virtualRowsCount - 1
+  //     }
+  //   },
+  //   {
+  //     prependRows: (state) => (rows) => {
+  //       const nextRows = [...state.rows, ...rows]
+  //       const nextVirtualRowsCount = nextRows.length + 50
+  //       return {
+  //         virtualRowsCount: nextVirtualRowsCount,
+  //         rows: nextRows
+  //       }
+  //     }
+  //   }
+  // ),
+  // withHandlers(({ overScanCount }) => {
+  //   let lastArg = {
+  //     startIndex: -1,
+  //     stopIndex: -1
+  //   }
+  //   let scrollDirection = SCROLL_DIRECTION_NONE
+  //
+  //   return {
+  //     getVirtualIndex: ({ virtualRowsCount }) => (index) => {
+  //       return virtualRowsCount - index - 1
+  //     },
+  //
+  //     compareScroll: () => (arg) => {
+  //       // Assign lastStartIndex at first render.
+  //       if (lastArg.startIndex === -1) lastArg.startIndex = arg.startIndex
+  //       // Ignore no-change.
+  //       if (lastArg.startIndex === arg.startIndex) return { scrollDirection: SCROLL_DIRECTION_NONE }
+  //
+  //       scrollDirection = lastArg.startIndex > arg.startIndex ? SCROLL_DIRECTION_UP : SCROLL_DIRECTION_DOWN
+  //
+  //       // Get in-visible (includes overScan) row index.
+  //       const currentIndex = scrollDirection === SCROLL_DIRECTION_UP ? arg.startIndex : arg.stopIndex
+  //       // Get visible row index.
+  //       const visibleCurrentIndex = scrollDirection === SCROLL_DIRECTION_UP ? (arg.startIndex + overScanCount) : (arg.stopIndex - overScanCount)
+  //
+  //       // Keep lastArg.
+  //       lastArg = arg
+  //
+  //       return {
+  //         scrollDirection,
+  //         currentIndex,
+  //         visibleCurrentIndex
+  //       }
+  //     },
+  //
+  //     getTweets: () => async (maxId) => {
+  //       // Get sorted todoes by dueDate ASC.
+  //       const query = gql`
+  //         ${tweetFields}
+  //
+  //         query getTweetsWithProfile($user_id: ID!, $limit: Int, $max_id: ID!) {
+  //           twitter {
+  //             tweets(user_id: $user_id, limit: $limit, max_id: $max_id) {
+  //               ...tweetFields
+  //               quoted_status {
+  //                 ...tweetFields
+  //               }
+  //             }
+  //           }
+  //         }
+  //       `
+  //
+  //       const data = await graphQLClient.request(query, { user_id: USER_ID, limit: 101, max_id: maxId })
+  //       const tweets = _.get(data, 'twitter.tweets', [])
+  //
+  //       return _.tail(tweets)
+  //     }
+  //   }
+  // }),
+  // withPropsOnChange(
+  //   ['prependRows'],
+  //   ({ prependRows }) => ({
+  //     // Prevent duplicate call.
+  //     prependRows: _.debounce(prependRows, 300, { leading: true, trailing: false })
+  //   })
+  // ),
+  // withHandlers({
+  //   onLoadMore: ({ prependRows, rows, getTweets }) => async ({ isAtFirst }) => {
+  //     if (isAtFirst) return
+  //     const lastId = _.get(_.last(rows), 'id_str')
+  //     const tweets = await getTweets(lastId)
+  //     // Simulate delay of loading.
+  //     prependRows(tweets)
+  //   }
+  // }),
+  // withHandlers((props) => {
+  //   const onLoadMore = _.debounce(props.onLoadMore, 100, { leading: true })
+  //
+  //   return {
+  //     onItemsRendered: ({ virtualRowsCount, rows, getVirtualIndex }) => (arg) => {
+  //       // Swap args for reversed list.
+  //       const startIndex = getVirtualIndex(arg.stopIndex)
+  //       const stopIndex = getVirtualIndex(arg.startIndex)
+  //
+  //       const { scrollDirection, currentIndex } = props.compareScroll({ startIndex, stopIndex })
+  //
+  //       // Ignore no-change.
+  //       if (scrollDirection === SCROLL_DIRECTION_NONE) return
+  //
+  //       const IsAtFirstOfRows = scrollDirection === SCROLL_DIRECTION_UP && startIndex === 0
+  //       const IsAtLastOfRows = scrollDirection === SCROLL_DIRECTION_DOWN && stopIndex >= rows.length - 1
+  //
+  //       if (IsAtFirstOfRows || IsAtLastOfRows) {
+  //         onLoadMore({
+  //           scrollDirection,
+  //           currentIndex,
+  //           isAtFirst: IsAtFirstOfRows,
+  //           isAtLast: IsAtLastOfRows
+  //         })
+  //       }
+  //     }
+  //   }
+  // }),
+  // // withRTVLUtil,
+  // withHandlers(() => {
+  //   let itemSizesCache = []
+  //   let listRef = null
+  //   let refresh = _.noop
+  //   let forceUpdate = _.noop
+  //
+  //   return {
+  //     setListRef: () => (ref) => {
+  //       listRef = ref
+  //
+  //       if (listRef) {
+  //         refresh = () => requestAnimationFrame(() => {
+  //           console.log('refresh!')
+  //           listRef && listRef.recomputeSizes()
+  //           // listRef && listRef.forceUpdate()
+  //         })
+  //       }
+  //     },
+  //
+  //     refresh: () => () => refresh(),
+  //
+  //     setItemSizesCache: () => (index, height) => {
+  //       itemSizesCache[index] = height
+  //       refresh()
+  //     },
+  //
+  //     getItemSizesCache: () => () => itemSizesCache
+  //   }
+  // }),
+  // withPropsOnChange(
+  //   (props, nextProps) => {
+  //     return props.rows.length !== nextProps.rows.length
+  //   },
+  //   (props) => {
+  //     const {
+  //       rows,
+  //       user,
+  //       getVirtualIndex,
+  //       getItemSizesCache,
+  //       setItemSizesCache,
+  //       refresh
+  //     } = props
+  //
+  //     return {
+  //       renderItem (arg) {
+  //         const { style } = arg
+  //
+  //         const index = getVirtualIndex(arg.index)
+  //         const row = rows[index]
+  //
+  //         // While loading...
+  //         if (!row || !user) {
+  //           return (
+  //             <div className={`row-${index}`} style={style} key={index}>
+  //               Loading...
+  //             </div>
+  //           )
+  //         }
+  //
+  //         // console.log(index, 'style = ', style)
+  //
+  //         return (
+  //           <div
+  //             className={`row-${index}`}
+  //             style={style}
+  //             key={index}
+  //           >
+  //             <Tweet
+  //               user={user}
+  //               tweet={row}
+  //               onMeasure={({ height }) => setItemSizesCache(index, height)}
+  //               refresh={refresh}
+  //             />
+  //           </div>
+  //         )
+  //       },
+  //
+  //       getItemSizes: () => {
+  //         const filled = _.fill(new Array(rows.length), 0)
+  //         const itemSizesCache = getItemSizesCache()
+  //         return _.merge(filled, itemSizesCache)
+  //       }
+  //     }
+  //   }
+  // )
 )
 
-const stickyIndices = []
+const renderRow = ({ row, setSizeRef, style }) => {
+  return (
+    <div
+      className={`row-${row.id}`}
+      style={style}
+    >
+      <div
+        ref={setSizeRef}
+        className='relative px-4 py-2 border-b'
+      >
+        <span className='text-red font-bold'>Row: {row.id}</span>
+
+        <p>{row.text}</p>
+      </div>
+    </div>
+  )
+}
+
+const renderGroupHeader = ({ row, setSizeRef, style }) => {
+  const { groupHeader } = row
+  return (
+    <div
+      className={`header-${groupHeader}`}
+      style={style}
+    >
+      <div
+        ref={setSizeRef}
+        className='c-sticky pin-t z-50 w-screen'
+      >
+        <div className="py-2 px-4 bg-red text-white font-bold">{groupHeader}th</div>
+      </div>
+    </div>
+  )
+}
+
 
 const Channel = enhance((props) => {
-  const {
-    tweets = [],
-    styles,
-    rows,
-    vh,
-    virtualRowsCount,
-    initialScrollToIndex,
-    onItemsRendered,
-    renderItem
-  } = props
+  const { rows, onScroll, onLoadMore } = props
 
-  // console.log(tweets)
   return (
     <>
       <Helmet>
         <title>Channel</title>
       </Helmet>
 
-      {/*<ul className="p-0">*/}
-      {/*{_.map(tweets, ({ id_str: id, text }) => {*/}
-      {/*return (*/}
-      {/*<li key={id} className="p-4">{text}</li>*/}
-      {/*)*/}
-      {/*})}*/}
-      {/*</ul>*/}
+      <div className='flex flex-col h-screen'>
+        <header className='p-4 flex-0 border-b-2'>Fixed header area</header>
 
-      <div style={{height: '100vh', position: 'relative'}}>
-        <VirtualList
-          width="auto"
-          height={vh || window.innerHeight}
-          itemCount={virtualRowsCount}
-          overscanCount={10}
-          renderItem={renderItem}
-          itemSize={50}
-          className="VirtualList"
-          scrollToIndex={initialScrollToIndex}
-          stickyIndices={stickyIndices}
-          onItemsRendered={onItemsRendered}
-        />
+        <Sized>
+          {({ size, setSizeRef }) => {
+            return (
+              <div
+                className='flex-1 overflow-hidden'
+                ref={setSizeRef}
+              >
+                <VirtualList
+                  onLoadMore={onLoadMore}
+                  onScroll={onScroll}
+                  height={size.height}
+                  rows={rows}
+                  // groupBy={({ row }) => {
+                  //   return Math.floor(row.id / 25) * 25
+                  // }}
+                  // renderGroupHeader={renderGroupHeader}
+                  reversed
+                >
+                  {renderRow}
+                </VirtualList>
+              </div>
+            )
+          }}
+        </Sized>
       </div>
     </>
   )
 })
 
 Channel.getInitialProps = async () => {
-  const userId = '320096369' // @subuta_nico.
-  return await getTweetsWithProfile(userId)
+  // Get sorted todoes by dueDate ASC.
+  const query = gql`
+    ${userFields}
+    ${tweetFields}
+
+    query getTweetsWithProfile($user_id: ID!, $limit: Int) {
+      twitter {
+        user (identifier: ID, identity: $user_id) {
+          ...userFields
+        }
+
+        tweets(user_id: $user_id, limit: $limit) {
+          ...tweetFields
+          quoted_status {
+            ...tweetFields
+          }
+        }
+      }
+    }
+  `
+
+  const data = await graphQLClient.request(query, { user_id: USER_ID, limit: 100 })
+  return _.get(data, 'twitter', [])
 }
 
 export default Channel
