@@ -28,6 +28,7 @@
   "dependencies": {
     "@koa/cors": "^2.2.2",
     "apollo-server-koa": "^1.4.0",
+    "axios": "^0.18.0",
     "bluebird": "^3.5.2",
     "boom": "^7.2.0",
     "css-as-js": "^0.1.6",

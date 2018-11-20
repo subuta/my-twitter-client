@@ -1,9 +1,11 @@
 import t from 'src/server/utils/twitter'
+import iframely from 'src/server/utils/iframely'
 
 export default {
   Query: {
     // SEE: https://stackoverflow.com/questions/40901845/how-to-create-a-nested-resolver-in-apollo-graphql-server
-    twitter: () => ({})
+    twitter: () => ({}),
+    iframely: () => ({})
   },
 
   TwitterUser: {
@@ -15,6 +17,18 @@ export default {
   Tweet: {
     retweets ({ id_str: tweetId }, { limit = 5 }, context, info) {
       return t.getRetweets(tweetId, limit)
+    }
+  },
+
+  Url: {
+    og ({ expanded_url: url }, {}, context, info) {
+      return iframely(url)
+    }
+  },
+
+  IFramelyAPI: {
+    og (obj, { url }, {}, context, info) {
+      return iframely(url)
     }
   },
 

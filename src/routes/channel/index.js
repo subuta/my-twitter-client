@@ -99,6 +99,7 @@ const enhance = compose(
 )
 
 const renderRow = ({ row, user, setSizeRef, style, styles }) => {
+  // console.log('row = ', row)
   return (
     <Tweet
       className={`row-${row.id_str} ${styles.Row}`}
@@ -185,6 +186,7 @@ const Channel = enhance((props) => {
                   rows={rows}
                   groupBy={groupRowBy}
                   renderGroupHeader={(props) => renderGroupHeader({ ...props, styles })}
+                  overScanCount={6}
                   reversed
                 >
                   {(props) => renderRow({ ...props, user, styles })}
@@ -221,6 +223,7 @@ Channel.getInitialProps = async () => {
   `
 
   const data = await graphQLClient.request(query, { user_id: USER_ID, limit: 100 })
+
   return _.get(data, 'twitter', [])
 }
 

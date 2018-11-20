@@ -117,6 +117,8 @@ type Url {
     display_url: String
     expanded_url: String
     unwound: Unwound
+
+    og: LinksAndMeta
 }
 
 type Entities {
@@ -284,8 +286,68 @@ type TwitterMutationAPI {
     ): Tweet
 }
 
+# Iframely resnposes
+type IframelyMeta {
+  label_1_reading_time: String,
+  shortlink: String,
+  description: String
+  theme_color: String
+  title: String
+  amphtml: String
+  author: String
+  duration: Int
+  author_url: String
+  date: String
+  views: Int
+  likes: Int
+  category: String
+  keywords: String
+  media: String
+  canonical: String
+  site: String
+}
+
+type IframelyMedia {
+  width: Int
+  height: Int
+  max_width: Int
+  aspect_ratio: Float
+  scrolling: String
+}
+
+type IframelyLink {
+  html: String
+  href: String
+  type: String
+  rel: [String]
+  media: IframelyMedia
+}
+
+type IframelyLinks {
+  summary: [IframelyLink]
+  player: [IframelyLink]
+  app: [IframelyLink]
+  thumbnail: [IframelyLink]
+  icon: [IframelyLink]
+}
+
+type LinksAndMeta {
+  meta: IframelyMeta!
+  links: IframelyLinks
+  rel: [String]
+  html: String
+}
+
+# Iframely related api.
+type IFramelyAPI {
+  og(
+    url: String!
+  ): LinksAndMeta
+}
+
 type Query {
     twitter: TwitterAPI
+    iframely: IFramelyAPI
 }
 
 type Mutation {

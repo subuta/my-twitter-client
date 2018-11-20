@@ -7,7 +7,7 @@ import {
   screen
 } from 'css-as-js'
 
-const Tweet = apply('py-1')
+const Tweet = apply('py-2')
 
 const Avatar = {
   ...apply('rounded'),

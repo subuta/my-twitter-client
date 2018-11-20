@@ -1,0 +1,30 @@
+version: '2'
+services:
+  redis:
+    image: redis:3.2.8
+    command: >
+      --appendonly yes
+      --requirepass password
+    environment:
+      - REDIS_PASSWORD=password
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./db/redis:/data
+
+  iframely:
+    build:
+      context: ./Dockerfiles/iframely
+      dockerfile: ./Dockerfile
+      args:
+        - GOOGLE_MAPS_API_KEY
+        - APP_DOMAIN
+    ports:
+      - "8061:8061"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=password
+    volumes:
+      - ./Dockerfiles/iframely/config.local.js:/iframely/config.local.js
+    links:
+      - redis

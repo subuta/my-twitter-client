@@ -37,9 +37,37 @@ export const tweetFields = gql`
         display_url
         indices
         expanded_url
+
+        og {
+          meta {
+            description
+            title
+            author_url
+            date
+            media
+            canonical
+            site
+          }
+
+          links {
+            thumbnail {
+              href
+              type
+              rel
+            }
+
+            icon {
+              href
+              type
+              rel
+            }
+          }
+        }
       }
 
       media {
+        id_str
+        type
         url
         display_url
         media_url
