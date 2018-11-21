@@ -96,6 +96,29 @@ type Media {
     id_str: String
     expanded_url: String
     media_url_https: String
+
+    # Only shown at extended_entities media.
+    video_info: VideoInfo
+    additional_media_info: AdditionalMediaInfo
+}
+
+type AdditionalMediaInfo {
+    title: String
+    description: String
+    embeddable: Boolean
+    monetizable: Boolean
+}
+
+type VideoInfo {
+    aspect_ratio: [Int]
+    duration_millis: Int
+    variants: [VideoVariant]
+}
+
+type VideoVariant {
+    bitrate: Int
+    content_type: String
+    url: String
 }
 
 type MediaSizes {
@@ -161,10 +184,6 @@ type PollOption {
     text: String
 }
 
-type ExtendedEntities {
-    media: [Media]
-}
-
 type MatchingRule {
     tag: String,
     id: ID,
@@ -185,6 +204,8 @@ type Tweet {
     full_text: String
     source: String
     truncated: Boolean
+
+    in_reply_to_status: Tweet
     in_reply_to_status_id: ID
     in_reply_to_status_id_str: String
     in_reply_to_user_id: ID
@@ -214,7 +235,7 @@ type Tweet {
     retweet_count: Int
     favorite_count: Int
     entities: Entities
-    extended_entities: ExtendedEntities
+    extended_entities: Entities
     favorited: Boolean
     retweeted: Boolean
     possibly_sensitive: Boolean

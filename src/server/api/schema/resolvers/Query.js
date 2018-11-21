@@ -17,7 +17,11 @@ export default {
   Tweet: {
     retweets ({ id_str: tweetId }, { limit = 5 }, context, info) {
       return t.getRetweets(tweetId, limit)
-    }
+    },
+
+    in_reply_to_status ({ in_reply_to_status_id_str: tweetId }, {}, context, info) {
+      return tweetId ? t.getTweet(tweetId) : null
+    },
   },
 
   Url: {

@@ -75,17 +75,24 @@ const getPromiseWithCache = async (...args) => {
 
 // Queries
 const getUser = (identifier, identity) => getPromiseWithCache('users/show', { [identifier]: identity })
-const getTweet = (id) => getPromiseWithCache('statuses/show', { id })
-const getRetweets = (id, count) => getPromiseWithCache('statuses/retweets', { id, count })
-const getFriends = (id, count, cursor) => getPromiseWithCache('friends/list', { id, count, cursor }, 'users')
-const getFollowers = (id, count, cursor) => getPromiseWithCache('followers/list', { id, count, cursor }, 'users')
-const searchFor = (queryParams) => getPromiseWithCache('search/tweets', queryParams, 'statuses')
+
+const getTweet = (id) => getPromiseWithCache('statuses/show', {
+  id,
+  tweet_mode: 'extended',
+})
+
 const getTweets = (userId, count, max_id) => getPromiseWithCache(`statuses/user_timeline`, _.pickBy({
   count,
   tweet_mode: 'extended',
   user_id: userId,
   max_id: max_id
 }, _.identity))
+
+
+const getRetweets = (id, count) => getPromiseWithCache('statuses/retweets', { id, count })
+const getFriends = (id, count, cursor) => getPromiseWithCache('friends/list', { id, count, cursor }, 'users')
+const getFollowers = (id, count, cursor) => getPromiseWithCache('followers/list', { id, count, cursor }, 'users')
+const searchFor = (queryParams) => getPromiseWithCache('search/tweets', queryParams, 'statuses')
 
 // Mutations
 const postTweet = (status) => getPromiseWithCache('statuses/update', { status }, null, 'post')

@@ -10,6 +10,8 @@ import _ from 'lodash'
 import dayjs from 'src/utils/dayjs'
 import emoji from 'src/utils/emoji'
 
+import TweetEntity from 'src/components/TweetEntity'
+
 import withStyles from './style'
 
 const enhance = compose(
@@ -37,7 +39,11 @@ export default enhance((props) => {
   } = user
 
   const createdAt = dayjs(created_at)
-  const urlEntities = _.get(tweet, 'entities.urls', [])
+
+  const extendedEntities = tweet.extended_entities
+  const entities = tweet.entities
+
+  const urlEntities = entities.urls || []
 
   const tweetHtml = twitter.autoLink(emoji.replace_unified(full_text), {
     targetBlank: true,
@@ -69,6 +75,11 @@ export default enhance((props) => {
           <p
             className='leading-tight whitespace-pre-wrap'
             dangerouslySetInnerHTML={{ __html: tweetHtml }}
+          />
+
+          <TweetEntity
+            extendedEntities={extendedEntities}
+            entities={entities}
           />
         </div>
       </div>

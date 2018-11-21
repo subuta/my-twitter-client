@@ -214,6 +214,15 @@ Channel.getInitialProps = async () => {
 
         tweets(user_id: $user_id, limit: $limit) {
           ...tweetFields
+
+          in_reply_to_status {
+            ...tweetFields
+          }
+
+          retweeted_status {
+            ...tweetFields
+          }
+          
           quoted_status {
             ...tweetFields
           }

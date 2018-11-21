@@ -1,0 +1,1050 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render with empty props. 1`] = `
+<Styled(branch(branch(branch(Component))))
+  entities={Object {}}
+  extendedEntities={Object {}}
+>
+  <Style
+    Component={[Function]}
+    Style={
+      FreeStyle {
+        "_children": Object {},
+        "_counters": Object {},
+        "_keys": Array [],
+        "changeId": 0,
+        "changes": Object {
+          "add": [Function],
+          "change": [Function],
+          "remove": [Function],
+        },
+        "debug": true,
+        "hash": [Function],
+        "id": "f2",
+        "sheet": Array [],
+      }
+    }
+    componentName="branch(branch(branch(Component)))"
+    componentProps={
+      Object {
+        "entities": Object {},
+        "extendedEntities": Object {},
+        "styles": Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        },
+      }
+    }
+  >
+    <branch(branch(branch(Component)))
+      entities={Object {}}
+      extendedEntities={Object {}}
+      styles={
+        Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        }
+      }
+    >
+      <renderComponent(Component)
+        entities={Object {}}
+        extendedEntities={Object {}}
+        styles={
+          Object {
+            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+          }
+        }
+      >
+        <Component
+          entities={Object {}}
+          extendedEntities={Object {}}
+          styles={
+            Object {
+              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+            }
+          }
+        />
+      </renderComponent(Component)>
+    </branch(branch(branch(Component)))>
+  </Style>
+</Styled(branch(branch(branch(Component))))>
+`;
+
+exports[`should render with size. 1`] = `
+<Styled(branch(branch(branch(Component))))
+  entities={
+    Object {
+      "hashtags": Array [],
+      "media": Array [
+        Object {
+          "display_url": "pic.twitter.com/IIMBa4I4Vp",
+          "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+          "id": 1049606350135685100,
+          "id_str": "1049606350135685120",
+          "indices": Array [
+            12,
+            35,
+          ],
+          "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+          "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+          "sizes": Object {
+            "large": Object {
+              "h": 172,
+              "resize": "fit",
+              "w": 220,
+            },
+            "medium": Object {
+              "h": 172,
+              "resize": "fit",
+              "w": 220,
+            },
+            "small": Object {
+              "h": 172,
+              "resize": "fit",
+              "w": 220,
+            },
+            "thumb": Object {
+              "h": 150,
+              "resize": "crop",
+              "w": 150,
+            },
+          },
+          "type": "photo",
+          "url": "https://t.co/IIMBa4I4Vp",
+        },
+      ],
+      "symbols": Array [],
+      "urls": Array [],
+      "user_mentions": Array [],
+    }
+  }
+  extendedEntities={
+    Object {
+      "media": Array [
+        Object {
+          "display_url": "pic.twitter.com/IIMBa4I4Vp",
+          "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+          "id": 1049606350135685100,
+          "id_str": "1049606350135685120",
+          "indices": Array [
+            12,
+            35,
+          ],
+          "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+          "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+          "sizes": Object {
+            "large": Object {
+              "h": 172,
+              "resize": "fit",
+              "w": 220,
+            },
+            "medium": Object {
+              "h": 172,
+              "resize": "fit",
+              "w": 220,
+            },
+            "small": Object {
+              "h": 172,
+              "resize": "fit",
+              "w": 220,
+            },
+            "thumb": Object {
+              "h": 150,
+              "resize": "crop",
+              "w": 150,
+            },
+          },
+          "type": "animated_gif",
+          "url": "https://t.co/IIMBa4I4Vp",
+          "video_info": Object {
+            "aspect_ratio": Array [
+              55,
+              43,
+            ],
+            "variants": Array [
+              Object {
+                "bitrate": 0,
+                "content_type": "video/mp4",
+                "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+              },
+            ],
+          },
+        },
+      ],
+    }
+  }
+>
+  <Style
+    Component={[Function]}
+    Style={
+      FreeStyle {
+        "_children": Object {},
+        "_counters": Object {},
+        "_keys": Array [],
+        "changeId": 0,
+        "changes": Object {
+          "add": [Function],
+          "change": [Function],
+          "remove": [Function],
+        },
+        "debug": true,
+        "hash": [Function],
+        "id": "f2",
+        "sheet": Array [],
+      }
+    }
+    componentName="branch(branch(branch(Component)))"
+    componentProps={
+      Object {
+        "entities": Object {
+          "hashtags": Array [],
+          "media": Array [
+            Object {
+              "display_url": "pic.twitter.com/IIMBa4I4Vp",
+              "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+              "id": 1049606350135685100,
+              "id_str": "1049606350135685120",
+              "indices": Array [
+                12,
+                35,
+              ],
+              "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "medium": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "small": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "thumb": Object {
+                  "h": 150,
+                  "resize": "crop",
+                  "w": 150,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/IIMBa4I4Vp",
+            },
+          ],
+          "symbols": Array [],
+          "urls": Array [],
+          "user_mentions": Array [],
+        },
+        "extendedEntities": Object {
+          "media": Array [
+            Object {
+              "display_url": "pic.twitter.com/IIMBa4I4Vp",
+              "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+              "id": 1049606350135685100,
+              "id_str": "1049606350135685120",
+              "indices": Array [
+                12,
+                35,
+              ],
+              "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "medium": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "small": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "thumb": Object {
+                  "h": 150,
+                  "resize": "crop",
+                  "w": 150,
+                },
+              },
+              "type": "animated_gif",
+              "url": "https://t.co/IIMBa4I4Vp",
+              "video_info": Object {
+                "aspect_ratio": Array [
+                  55,
+                  43,
+                ],
+                "variants": Array [
+                  Object {
+                    "bitrate": 0,
+                    "content_type": "video/mp4",
+                    "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        "styles": Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        },
+      }
+    }
+  >
+    <branch(branch(branch(Component)))
+      entities={
+        Object {
+          "hashtags": Array [],
+          "media": Array [
+            Object {
+              "display_url": "pic.twitter.com/IIMBa4I4Vp",
+              "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+              "id": 1049606350135685100,
+              "id_str": "1049606350135685120",
+              "indices": Array [
+                12,
+                35,
+              ],
+              "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "medium": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "small": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "thumb": Object {
+                  "h": 150,
+                  "resize": "crop",
+                  "w": 150,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/IIMBa4I4Vp",
+            },
+          ],
+          "symbols": Array [],
+          "urls": Array [],
+          "user_mentions": Array [],
+        }
+      }
+      extendedEntities={
+        Object {
+          "media": Array [
+            Object {
+              "display_url": "pic.twitter.com/IIMBa4I4Vp",
+              "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+              "id": 1049606350135685100,
+              "id_str": "1049606350135685120",
+              "indices": Array [
+                12,
+                35,
+              ],
+              "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "medium": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "small": Object {
+                  "h": 172,
+                  "resize": "fit",
+                  "w": 220,
+                },
+                "thumb": Object {
+                  "h": 150,
+                  "resize": "crop",
+                  "w": 150,
+                },
+              },
+              "type": "animated_gif",
+              "url": "https://t.co/IIMBa4I4Vp",
+              "video_info": Object {
+                "aspect_ratio": Array [
+                  55,
+                  43,
+                ],
+                "variants": Array [
+                  Object {
+                    "bitrate": 0,
+                    "content_type": "video/mp4",
+                    "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                  },
+                ],
+              },
+            },
+          ],
+        }
+      }
+      styles={
+        Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        }
+      }
+    >
+      <branch(branch(Component))
+        entities={
+          Object {
+            "hashtags": Array [],
+            "media": Array [
+              Object {
+                "display_url": "pic.twitter.com/IIMBa4I4Vp",
+                "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+                "id": 1049606350135685100,
+                "id_str": "1049606350135685120",
+                "indices": Array [
+                  12,
+                  35,
+                ],
+                "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                "sizes": Object {
+                  "large": Object {
+                    "h": 172,
+                    "resize": "fit",
+                    "w": 220,
+                  },
+                  "medium": Object {
+                    "h": 172,
+                    "resize": "fit",
+                    "w": 220,
+                  },
+                  "small": Object {
+                    "h": 172,
+                    "resize": "fit",
+                    "w": 220,
+                  },
+                  "thumb": Object {
+                    "h": 150,
+                    "resize": "crop",
+                    "w": 150,
+                  },
+                },
+                "type": "photo",
+                "url": "https://t.co/IIMBa4I4Vp",
+              },
+            ],
+            "symbols": Array [],
+            "urls": Array [],
+            "user_mentions": Array [],
+          }
+        }
+        extendedEntities={
+          Object {
+            "media": Array [
+              Object {
+                "display_url": "pic.twitter.com/IIMBa4I4Vp",
+                "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+                "id": 1049606350135685100,
+                "id_str": "1049606350135685120",
+                "indices": Array [
+                  12,
+                  35,
+                ],
+                "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                "sizes": Object {
+                  "large": Object {
+                    "h": 172,
+                    "resize": "fit",
+                    "w": 220,
+                  },
+                  "medium": Object {
+                    "h": 172,
+                    "resize": "fit",
+                    "w": 220,
+                  },
+                  "small": Object {
+                    "h": 172,
+                    "resize": "fit",
+                    "w": 220,
+                  },
+                  "thumb": Object {
+                    "h": 150,
+                    "resize": "crop",
+                    "w": 150,
+                  },
+                },
+                "type": "animated_gif",
+                "url": "https://t.co/IIMBa4I4Vp",
+                "video_info": Object {
+                  "aspect_ratio": Array [
+                    55,
+                    43,
+                  ],
+                  "variants": Array [
+                    Object {
+                      "bitrate": 0,
+                      "content_type": "video/mp4",
+                      "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                    },
+                  ],
+                },
+              },
+            ],
+          }
+        }
+        styles={
+          Object {
+            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+          }
+        }
+      >
+        <renderComponent(Component)
+          entities={
+            Object {
+              "hashtags": Array [],
+              "media": Array [
+                Object {
+                  "display_url": "pic.twitter.com/IIMBa4I4Vp",
+                  "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+                  "id": 1049606350135685100,
+                  "id_str": "1049606350135685120",
+                  "indices": Array [
+                    12,
+                    35,
+                  ],
+                  "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                  "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                  "sizes": Object {
+                    "large": Object {
+                      "h": 172,
+                      "resize": "fit",
+                      "w": 220,
+                    },
+                    "medium": Object {
+                      "h": 172,
+                      "resize": "fit",
+                      "w": 220,
+                    },
+                    "small": Object {
+                      "h": 172,
+                      "resize": "fit",
+                      "w": 220,
+                    },
+                    "thumb": Object {
+                      "h": 150,
+                      "resize": "crop",
+                      "w": 150,
+                    },
+                  },
+                  "type": "photo",
+                  "url": "https://t.co/IIMBa4I4Vp",
+                },
+              ],
+              "symbols": Array [],
+              "urls": Array [],
+              "user_mentions": Array [],
+            }
+          }
+          extendedEntities={
+            Object {
+              "media": Array [
+                Object {
+                  "display_url": "pic.twitter.com/IIMBa4I4Vp",
+                  "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+                  "id": 1049606350135685100,
+                  "id_str": "1049606350135685120",
+                  "indices": Array [
+                    12,
+                    35,
+                  ],
+                  "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                  "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                  "sizes": Object {
+                    "large": Object {
+                      "h": 172,
+                      "resize": "fit",
+                      "w": 220,
+                    },
+                    "medium": Object {
+                      "h": 172,
+                      "resize": "fit",
+                      "w": 220,
+                    },
+                    "small": Object {
+                      "h": 172,
+                      "resize": "fit",
+                      "w": 220,
+                    },
+                    "thumb": Object {
+                      "h": 150,
+                      "resize": "crop",
+                      "w": 150,
+                    },
+                  },
+                  "type": "animated_gif",
+                  "url": "https://t.co/IIMBa4I4Vp",
+                  "video_info": Object {
+                    "aspect_ratio": Array [
+                      55,
+                      43,
+                    ],
+                    "variants": Array [
+                      Object {
+                        "bitrate": 0,
+                        "content_type": "video/mp4",
+                        "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                      },
+                    ],
+                  },
+                },
+              ],
+            }
+          }
+          styles={
+            Object {
+              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+            }
+          }
+        >
+          <Component
+            entities={
+              Object {
+                "hashtags": Array [],
+                "media": Array [
+                  Object {
+                    "display_url": "pic.twitter.com/IIMBa4I4Vp",
+                    "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+                    "id": 1049606350135685100,
+                    "id_str": "1049606350135685120",
+                    "indices": Array [
+                      12,
+                      35,
+                    ],
+                    "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                    "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                    "sizes": Object {
+                      "large": Object {
+                        "h": 172,
+                        "resize": "fit",
+                        "w": 220,
+                      },
+                      "medium": Object {
+                        "h": 172,
+                        "resize": "fit",
+                        "w": 220,
+                      },
+                      "small": Object {
+                        "h": 172,
+                        "resize": "fit",
+                        "w": 220,
+                      },
+                      "thumb": Object {
+                        "h": 150,
+                        "resize": "crop",
+                        "w": 150,
+                      },
+                    },
+                    "type": "photo",
+                    "url": "https://t.co/IIMBa4I4Vp",
+                  },
+                ],
+                "symbols": Array [],
+                "urls": Array [],
+                "user_mentions": Array [],
+              }
+            }
+            extendedEntities={
+              Object {
+                "media": Array [
+                  Object {
+                    "display_url": "pic.twitter.com/IIMBa4I4Vp",
+                    "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+                    "id": 1049606350135685100,
+                    "id_str": "1049606350135685120",
+                    "indices": Array [
+                      12,
+                      35,
+                    ],
+                    "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                    "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+                    "sizes": Object {
+                      "large": Object {
+                        "h": 172,
+                        "resize": "fit",
+                        "w": 220,
+                      },
+                      "medium": Object {
+                        "h": 172,
+                        "resize": "fit",
+                        "w": 220,
+                      },
+                      "small": Object {
+                        "h": 172,
+                        "resize": "fit",
+                        "w": 220,
+                      },
+                      "thumb": Object {
+                        "h": 150,
+                        "resize": "crop",
+                        "w": 150,
+                      },
+                    },
+                    "type": "animated_gif",
+                    "url": "https://t.co/IIMBa4I4Vp",
+                    "video_info": Object {
+                      "aspect_ratio": Array [
+                        55,
+                        43,
+                      ],
+                      "variants": Array [
+                        Object {
+                          "bitrate": 0,
+                          "content_type": "video/mp4",
+                          "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                        },
+                      ],
+                    },
+                  },
+                ],
+              }
+            }
+            styles={
+              Object {
+                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+              }
+            }
+          >
+            <ReactPlayer
+              config={
+                Object {
+                  "dailymotion": Object {
+                    "params": Object {
+                      "api": 1,
+                      "endscreen-enable": false,
+                    },
+                    "preload": false,
+                  },
+                  "facebook": Object {
+                    "appId": "1309697205772819",
+                  },
+                  "file": Object {
+                    "attributes": Object {},
+                    "dashVersion": "2.9.2",
+                    "forceAudio": false,
+                    "forceDASH": false,
+                    "forceHLS": false,
+                    "forceVideo": false,
+                    "hlsOptions": Object {},
+                    "hlsVersion": "0.10.1",
+                    "tracks": Array [],
+                  },
+                  "mixcloud": Object {
+                    "options": Object {
+                      "hide_cover": 1,
+                    },
+                  },
+                  "soundcloud": Object {
+                    "options": Object {
+                      "buying": false,
+                      "download": false,
+                      "liking": false,
+                      "sharing": false,
+                      "show_comments": false,
+                      "show_playcount": false,
+                      "visual": true,
+                    },
+                  },
+                  "twitch": Object {
+                    "options": Object {},
+                  },
+                  "vimeo": Object {
+                    "playerOptions": Object {
+                      "autopause": false,
+                      "byline": false,
+                      "portrait": false,
+                      "title": false,
+                    },
+                    "preload": false,
+                  },
+                  "wistia": Object {
+                    "options": Object {},
+                  },
+                  "youtube": Object {
+                    "playerVars": Object {
+                      "iv_load_policy": 3,
+                      "modestbranding": 1,
+                      "playsinline": 1,
+                      "rel": 0,
+                      "showinfo": 0,
+                    },
+                    "preload": false,
+                  },
+                }
+              }
+              controls={true}
+              height="360px"
+              loop={true}
+              muted={true}
+              onBuffer={[Function]}
+              onDisablePIP={[Function]}
+              onDuration={[Function]}
+              onEnablePIP={[Function]}
+              onEnded={[Function]}
+              onError={[Function]}
+              onPause={[Function]}
+              onPlay={[Function]}
+              onProgress={[Function]}
+              onReady={[Function]}
+              onSeek={[Function]}
+              onStart={[Function]}
+              pip={false}
+              playbackRate={1}
+              playing={true}
+              playsinline={false}
+              progressInterval={1000}
+              style={Object {}}
+              url="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
+              volume={null}
+              width="640px"
+              wrapper="div"
+            >
+              <div
+                style={
+                  Object {
+                    "height": "360px",
+                    "width": "640px",
+                  }
+                }
+              >
+                <Player
+                  activePlayer={[Function]}
+                  config={
+                    Object {
+                      "dailymotion": Object {
+                        "params": Object {
+                          "api": 1,
+                          "endscreen-enable": false,
+                        },
+                        "preload": false,
+                      },
+                      "facebook": Object {
+                        "appId": "1309697205772819",
+                      },
+                      "file": Object {
+                        "attributes": Object {},
+                        "dashVersion": "2.9.2",
+                        "forceAudio": false,
+                        "forceDASH": false,
+                        "forceHLS": false,
+                        "forceVideo": false,
+                        "hlsOptions": Object {},
+                        "hlsVersion": "0.10.1",
+                        "tracks": Array [],
+                      },
+                      "mixcloud": Object {
+                        "options": Object {
+                          "hide_cover": 1,
+                        },
+                      },
+                      "soundcloud": Object {
+                        "options": Object {
+                          "buying": false,
+                          "download": false,
+                          "liking": false,
+                          "sharing": false,
+                          "show_comments": false,
+                          "show_playcount": false,
+                          "visual": true,
+                        },
+                      },
+                      "twitch": Object {
+                        "options": Object {},
+                      },
+                      "vimeo": Object {
+                        "playerOptions": Object {
+                          "autopause": false,
+                          "byline": false,
+                          "portrait": false,
+                          "title": false,
+                        },
+                        "preload": false,
+                      },
+                      "wistia": Object {
+                        "options": Object {},
+                      },
+                      "youtube": Object {
+                        "playerVars": Object {
+                          "iv_load_policy": 3,
+                          "modestbranding": 1,
+                          "playsinline": 1,
+                          "rel": 0,
+                          "showinfo": 0,
+                        },
+                        "preload": false,
+                      },
+                    }
+                  }
+                  controls={true}
+                  height="360px"
+                  key="FilePlayer"
+                  loop={true}
+                  muted={true}
+                  onBuffer={[Function]}
+                  onDisablePIP={[Function]}
+                  onDuration={[Function]}
+                  onEnablePIP={[Function]}
+                  onEnded={[Function]}
+                  onError={[Function]}
+                  onPause={[Function]}
+                  onPlay={[Function]}
+                  onProgress={[Function]}
+                  onReady={[Function]}
+                  onSeek={[Function]}
+                  onStart={[Function]}
+                  pip={false}
+                  playbackRate={1}
+                  playing={true}
+                  playsinline={false}
+                  progressInterval={1000}
+                  style={Object {}}
+                  url="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
+                  volume={null}
+                  width="640px"
+                  wrapper="div"
+                >
+                  <FilePlayer
+                    activePlayer={[Function]}
+                    config={
+                      Object {
+                        "dailymotion": Object {
+                          "params": Object {
+                            "api": 1,
+                            "endscreen-enable": false,
+                          },
+                          "preload": false,
+                        },
+                        "facebook": Object {
+                          "appId": "1309697205772819",
+                        },
+                        "file": Object {
+                          "attributes": Object {},
+                          "dashVersion": "2.9.2",
+                          "forceAudio": false,
+                          "forceDASH": false,
+                          "forceHLS": false,
+                          "forceVideo": false,
+                          "hlsOptions": Object {},
+                          "hlsVersion": "0.10.1",
+                          "tracks": Array [],
+                        },
+                        "mixcloud": Object {
+                          "options": Object {
+                            "hide_cover": 1,
+                          },
+                        },
+                        "soundcloud": Object {
+                          "options": Object {
+                            "buying": false,
+                            "download": false,
+                            "liking": false,
+                            "sharing": false,
+                            "show_comments": false,
+                            "show_playcount": false,
+                            "visual": true,
+                          },
+                        },
+                        "twitch": Object {
+                          "options": Object {},
+                        },
+                        "vimeo": Object {
+                          "playerOptions": Object {
+                            "autopause": false,
+                            "byline": false,
+                            "portrait": false,
+                            "title": false,
+                          },
+                          "preload": false,
+                        },
+                        "wistia": Object {
+                          "options": Object {},
+                        },
+                        "youtube": Object {
+                          "playerVars": Object {
+                            "iv_load_policy": 3,
+                            "modestbranding": 1,
+                            "playsinline": 1,
+                            "rel": 0,
+                            "showinfo": 0,
+                          },
+                          "preload": false,
+                        },
+                      }
+                    }
+                    controls={true}
+                    height="360px"
+                    loop={true}
+                    muted={true}
+                    onBuffer={[Function]}
+                    onDisablePIP={[Function]}
+                    onDuration={[Function]}
+                    onEnablePIP={[Function]}
+                    onEnded={[Function]}
+                    onError={[Function]}
+                    onLoaded={[Function]}
+                    onPause={[Function]}
+                    onPlay={[Function]}
+                    onProgress={[Function]}
+                    onReady={[Function]}
+                    onSeek={[Function]}
+                    onStart={[Function]}
+                    pip={false}
+                    playbackRate={1}
+                    playing={true}
+                    playsinline={false}
+                    progressInterval={1000}
+                    style={Object {}}
+                    url="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
+                    volume={null}
+                    width="640px"
+                    wrapper="div"
+                  >
+                    <video
+                      autoPlay={true}
+                      controls={true}
+                      loop={true}
+                      muted={true}
+                      preload="auto"
+                      src="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
+                      style={
+                        Object {
+                          "height": "100%",
+                          "width": "100%",
+                        }
+                      }
+                    />
+                  </FilePlayer>
+                </Player>
+              </div>
+            </ReactPlayer>
+          </Component>
+        </renderComponent(Component)>
+      </branch(branch(Component))>
+    </branch(branch(branch(Component)))>
+  </Style>
+</Styled(branch(branch(branch(Component))))>
+`;
