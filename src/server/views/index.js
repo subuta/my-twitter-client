@@ -50,7 +50,7 @@ router.get('*', async (ctx) => {
 
     // Redirect to 503 page by default.
     console.error(err)
-    return ctx.redirect('/503')
+    // return ctx.redirect('/503')
   }
 
   ctx.body = html

@@ -29,7 +29,9 @@
       "text-summary",
       "lcov"
     ],
-    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
     "setupTestFrameworkScriptFile": "<rootDir>/scripts/jest.setup.js"
   },
   "homepage": "https://github.com/subuta/play-with-rollup#readme",

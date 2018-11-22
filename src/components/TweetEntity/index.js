@@ -1,16 +1,15 @@
 import React from 'react'
 import _ from 'lodash'
 
-import ReactPlayer from 'react-player'
-
 import {
   compose,
-  withProps,
   branch,
   renderComponent
 } from 'recompose'
 
 import withStyles from './style'
+
+import Video from 'src/components/Video'
 
 const MEDIA_TYPE_ANIMATED_GIF = 'animated_gif'
 
@@ -43,19 +42,23 @@ const withAnimatedGif = branch(
   },
   renderComponent(({ entities: { media }, extendedEntities }) => {
     const animatedGifMedia = findMediaByType(extendedEntities, MEDIA_TYPE_ANIMATED_GIF)
-    const video = _.find(_.get(animatedGifMedia, 'video_info.variants', []), (variant) => _.startsWith(variant.content_type, 'video/'))
+    const sources = _.map(_.get(animatedGifMedia, 'video_info.variants', []), ({ content_type = '', url = '' }) => ({ type: content_type, src: url}))
 
-    if (!video) {
+    if (_.isEmpty(sources)) {
       return null
     }
 
+    const sizes = animatedGifMedia.sizes
+    const size = sizes.large || sizes.small
+
     return (
-      <ReactPlayer
-        url={video.url}
-        muted
-        controls
-        playing
+      <Video
+        className='mt-2'
+        autoPlay
         loop
+        muted
+        style={{ height: size.h, width: size.w }}
+        sources={sources}
       />
     )
   }),
