@@ -1,74 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should render with empty props. 1`] = `
-<Styled(branch(branch(branch(Component))))
-  entities={Object {}}
-  extendedEntities={Object {}}
->
-  <Style
-    Component={[Function]}
-    Style={
-      FreeStyle {
-        "_children": Object {},
-        "_counters": Object {},
-        "_keys": Array [],
-        "changeId": 0,
-        "changes": Object {
-          "add": [Function],
-          "change": [Function],
-          "remove": [Function],
-        },
-        "debug": true,
-        "hash": [Function],
-        "id": "f2",
-        "sheet": Array [],
-      }
-    }
-    componentName="branch(branch(branch(Component)))"
-    componentProps={
-      Object {
-        "entities": Object {},
-        "extendedEntities": Object {},
-        "styles": Object {
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        },
-      }
-    }
-  >
-    <branch(branch(branch(Component)))
-      entities={Object {}}
-      extendedEntities={Object {}}
-      styles={
-        Object {
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        }
-      }
-    >
-      <renderComponent(Component)
-        entities={Object {}}
-        extendedEntities={Object {}}
-        styles={
-          Object {
-            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-          }
-        }
-      >
-        <Component
-          entities={Object {}}
-          extendedEntities={Object {}}
-          styles={
-            Object {
-              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-            }
-          }
-        />
-      </renderComponent(Component)>
-    </branch(branch(branch(Component)))>
-  </Style>
-</Styled(branch(branch(branch(Component))))>
-`;
-
-exports[`should render with size. 1`] = `
+exports[`should render with ANIMATED_GIF. 1`] = `
 <Styled(branch(branch(branch(Component))))
   entities={
     Object {
@@ -729,321 +661,849 @@ exports[`should render with size. 1`] = `
               }
             }
           >
-            <ReactPlayer
-              config={
-                Object {
-                  "dailymotion": Object {
-                    "params": Object {
-                      "api": 1,
-                      "endscreen-enable": false,
-                    },
-                    "preload": false,
-                  },
-                  "facebook": Object {
-                    "appId": "1309697205772819",
-                  },
-                  "file": Object {
-                    "attributes": Object {},
-                    "dashVersion": "2.9.2",
-                    "forceAudio": false,
-                    "forceDASH": false,
-                    "forceHLS": false,
-                    "forceVideo": false,
-                    "hlsOptions": Object {},
-                    "hlsVersion": "0.10.1",
-                    "tracks": Array [],
-                  },
-                  "mixcloud": Object {
-                    "options": Object {
-                      "hide_cover": 1,
-                    },
-                  },
-                  "soundcloud": Object {
-                    "options": Object {
-                      "buying": false,
-                      "download": false,
-                      "liking": false,
-                      "sharing": false,
-                      "show_comments": false,
-                      "show_playcount": false,
-                      "visual": true,
-                    },
-                  },
-                  "twitch": Object {
-                    "options": Object {},
-                  },
-                  "vimeo": Object {
-                    "playerOptions": Object {
-                      "autopause": false,
-                      "byline": false,
-                      "portrait": false,
-                      "title": false,
-                    },
-                    "preload": false,
-                  },
-                  "wistia": Object {
-                    "options": Object {},
-                  },
-                  "youtube": Object {
-                    "playerVars": Object {
-                      "iv_load_policy": 3,
-                      "modestbranding": 1,
-                      "playsinline": 1,
-                      "rel": 0,
-                      "showinfo": 0,
-                    },
-                    "preload": false,
-                  },
-                }
-              }
-              controls={true}
-              height="360px"
+            <withHandlers(Component)
+              autoPlay={true}
+              className="mt-2"
               loop={true}
               muted={true}
-              onBuffer={[Function]}
-              onDisablePIP={[Function]}
-              onDuration={[Function]}
-              onEnablePIP={[Function]}
-              onEnded={[Function]}
-              onError={[Function]}
-              onPause={[Function]}
-              onPlay={[Function]}
-              onProgress={[Function]}
-              onReady={[Function]}
-              onSeek={[Function]}
-              onStart={[Function]}
-              pip={false}
-              playbackRate={1}
-              playing={true}
-              playsinline={false}
-              progressInterval={1000}
-              style={Object {}}
-              url="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
-              volume={null}
-              width="640px"
-              wrapper="div"
+              sources={
+                Array [
+                  Object {
+                    "src": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                    "type": "video/mp4",
+                  },
+                ]
+              }
+              style={
+                Object {
+                  "height": 172,
+                  "width": 220,
+                }
+              }
             >
-              <div
+              <Component
+                autoPlay={true}
+                className="mt-2"
+                loop={true}
+                muted={true}
+                play={[Function]}
+                setRef={[Function]}
+                sources={
+                  Array [
+                    Object {
+                      "src": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                      "type": "video/mp4",
+                    },
+                  ]
+                }
                 style={
                   Object {
-                    "height": "360px",
-                    "width": "640px",
+                    "height": 172,
+                    "width": 220,
                   }
                 }
               >
-                <Player
-                  activePlayer={[Function]}
-                  config={
-                    Object {
-                      "dailymotion": Object {
-                        "params": Object {
-                          "api": 1,
-                          "endscreen-enable": false,
-                        },
-                        "preload": false,
-                      },
-                      "facebook": Object {
-                        "appId": "1309697205772819",
-                      },
-                      "file": Object {
-                        "attributes": Object {},
-                        "dashVersion": "2.9.2",
-                        "forceAudio": false,
-                        "forceDASH": false,
-                        "forceHLS": false,
-                        "forceVideo": false,
-                        "hlsOptions": Object {},
-                        "hlsVersion": "0.10.1",
-                        "tracks": Array [],
-                      },
-                      "mixcloud": Object {
-                        "options": Object {
-                          "hide_cover": 1,
-                        },
-                      },
-                      "soundcloud": Object {
-                        "options": Object {
-                          "buying": false,
-                          "download": false,
-                          "liking": false,
-                          "sharing": false,
-                          "show_comments": false,
-                          "show_playcount": false,
-                          "visual": true,
-                        },
-                      },
-                      "twitch": Object {
-                        "options": Object {},
-                      },
-                      "vimeo": Object {
-                        "playerOptions": Object {
-                          "autopause": false,
-                          "byline": false,
-                          "portrait": false,
-                          "title": false,
-                        },
-                        "preload": false,
-                      },
-                      "wistia": Object {
-                        "options": Object {},
-                      },
-                      "youtube": Object {
-                        "playerVars": Object {
-                          "iv_load_policy": 3,
-                          "modestbranding": 1,
-                          "playsinline": 1,
-                          "rel": 0,
-                          "showinfo": 0,
-                        },
-                        "preload": false,
-                      },
-                    }
-                  }
-                  controls={true}
-                  height="360px"
-                  key="FilePlayer"
+                <video
+                  autoPlay={true}
+                  className="mt-2"
                   loop={true}
                   muted={true}
-                  onBuffer={[Function]}
-                  onDisablePIP={[Function]}
-                  onDuration={[Function]}
-                  onEnablePIP={[Function]}
-                  onEnded={[Function]}
-                  onError={[Function]}
-                  onPause={[Function]}
-                  onPlay={[Function]}
-                  onProgress={[Function]}
-                  onReady={[Function]}
-                  onSeek={[Function]}
-                  onStart={[Function]}
-                  pip={false}
-                  playbackRate={1}
-                  playing={true}
-                  playsinline={false}
-                  progressInterval={1000}
-                  style={Object {}}
-                  url="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
-                  volume={null}
-                  width="640px"
-                  wrapper="div"
-                >
-                  <FilePlayer
-                    activePlayer={[Function]}
-                    config={
-                      Object {
-                        "dailymotion": Object {
-                          "params": Object {
-                            "api": 1,
-                            "endscreen-enable": false,
-                          },
-                          "preload": false,
-                        },
-                        "facebook": Object {
-                          "appId": "1309697205772819",
-                        },
-                        "file": Object {
-                          "attributes": Object {},
-                          "dashVersion": "2.9.2",
-                          "forceAudio": false,
-                          "forceDASH": false,
-                          "forceHLS": false,
-                          "forceVideo": false,
-                          "hlsOptions": Object {},
-                          "hlsVersion": "0.10.1",
-                          "tracks": Array [],
-                        },
-                        "mixcloud": Object {
-                          "options": Object {
-                            "hide_cover": 1,
-                          },
-                        },
-                        "soundcloud": Object {
-                          "options": Object {
-                            "buying": false,
-                            "download": false,
-                            "liking": false,
-                            "sharing": false,
-                            "show_comments": false,
-                            "show_playcount": false,
-                            "visual": true,
-                          },
-                        },
-                        "twitch": Object {
-                          "options": Object {},
-                        },
-                        "vimeo": Object {
-                          "playerOptions": Object {
-                            "autopause": false,
-                            "byline": false,
-                            "portrait": false,
-                            "title": false,
-                          },
-                          "preload": false,
-                        },
-                        "wistia": Object {
-                          "options": Object {},
-                        },
-                        "youtube": Object {
-                          "playerVars": Object {
-                            "iv_load_policy": 3,
-                            "modestbranding": 1,
-                            "playsinline": 1,
-                            "rel": 0,
-                            "showinfo": 0,
-                          },
-                          "preload": false,
-                        },
-                      }
+                  preload="auto"
+                  style={
+                    Object {
+                      "height": 172,
+                      "width": 220,
                     }
-                    controls={true}
-                    height="360px"
-                    loop={true}
-                    muted={true}
-                    onBuffer={[Function]}
-                    onDisablePIP={[Function]}
-                    onDuration={[Function]}
-                    onEnablePIP={[Function]}
-                    onEnded={[Function]}
-                    onError={[Function]}
-                    onLoaded={[Function]}
-                    onPause={[Function]}
-                    onPlay={[Function]}
-                    onProgress={[Function]}
-                    onReady={[Function]}
-                    onSeek={[Function]}
-                    onStart={[Function]}
-                    pip={false}
-                    playbackRate={1}
-                    playing={true}
-                    playsinline={false}
-                    progressInterval={1000}
-                    style={Object {}}
-                    url="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
-                    volume={null}
-                    width="640px"
-                    wrapper="div"
-                  >
-                    <video
-                      autoPlay={true}
-                      controls={true}
-                      loop={true}
-                      muted={true}
-                      preload="auto"
-                      src="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
-                      style={
-                        Object {
-                          "height": "100%",
-                          "width": "100%",
-                        }
-                      }
-                    />
-                  </FilePlayer>
-                </Player>
-              </div>
-            </ReactPlayer>
+                  }
+                >
+                  <source
+                    key="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
+                    src="https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4"
+                    type="video/mp4"
+                  />
+                  Your browser does not support the video tag.
+                </video>
+              </Component>
+            </withHandlers(Component)>
           </Component>
         </renderComponent(Component)>
       </branch(branch(Component))>
+    </branch(branch(branch(Component)))>
+  </Style>
+</Styled(branch(branch(branch(Component))))>
+`;
+
+exports[`should render with ONLY_PHOTO. 1`] = `
+<Styled(branch(branch(branch(Component))))
+  entities={
+    Object {
+      "media": Array [
+        Object {
+          "additional_media_info": null,
+          "display_url": "pic.twitter.com/uc9iteuAQ8",
+          "id_str": "967319472796180480",
+          "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+          "sizes": Object {
+            "large": Object {
+              "h": 1290,
+              "resize": "fit",
+              "w": 1838,
+            },
+            "small": Object {
+              "h": 477,
+              "resize": "fit",
+              "w": 680,
+            },
+          },
+          "type": "photo",
+          "url": "https://t.co/uc9iteuAQ8",
+          "video_info": null,
+        },
+      ],
+      "urls": Array [],
+    }
+  }
+>
+  <Style
+    Component={[Function]}
+    Style={
+      FreeStyle {
+        "_children": Object {},
+        "_counters": Object {},
+        "_keys": Array [],
+        "changeId": 0,
+        "changes": Object {
+          "add": [Function],
+          "change": [Function],
+          "remove": [Function],
+        },
+        "debug": true,
+        "hash": [Function],
+        "id": "f2",
+        "sheet": Array [],
+      }
+    }
+    componentName="branch(branch(branch(Component)))"
+    componentProps={
+      Object {
+        "entities": Object {
+          "media": Array [
+            Object {
+              "additional_media_info": null,
+              "display_url": "pic.twitter.com/uc9iteuAQ8",
+              "id_str": "967319472796180480",
+              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 1290,
+                  "resize": "fit",
+                  "w": 1838,
+                },
+                "small": Object {
+                  "h": 477,
+                  "resize": "fit",
+                  "w": 680,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/uc9iteuAQ8",
+              "video_info": null,
+            },
+          ],
+          "urls": Array [],
+        },
+        "styles": Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        },
+      }
+    }
+  >
+    <branch(branch(branch(Component)))
+      entities={
+        Object {
+          "media": Array [
+            Object {
+              "additional_media_info": null,
+              "display_url": "pic.twitter.com/uc9iteuAQ8",
+              "id_str": "967319472796180480",
+              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 1290,
+                  "resize": "fit",
+                  "w": 1838,
+                },
+                "small": Object {
+                  "h": 477,
+                  "resize": "fit",
+                  "w": 680,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/uc9iteuAQ8",
+              "video_info": null,
+            },
+          ],
+          "urls": Array [],
+        }
+      }
+      styles={
+        Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        }
+      }
+    >
+      <branch(branch(Component))
+        entities={
+          Object {
+            "media": Array [
+              Object {
+                "additional_media_info": null,
+                "display_url": "pic.twitter.com/uc9iteuAQ8",
+                "id_str": "967319472796180480",
+                "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                "sizes": Object {
+                  "large": Object {
+                    "h": 1290,
+                    "resize": "fit",
+                    "w": 1838,
+                  },
+                  "small": Object {
+                    "h": 477,
+                    "resize": "fit",
+                    "w": 680,
+                  },
+                },
+                "type": "photo",
+                "url": "https://t.co/uc9iteuAQ8",
+                "video_info": null,
+              },
+            ],
+            "urls": Array [],
+          }
+        }
+        styles={
+          Object {
+            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+          }
+        }
+      >
+        <branch(Component)
+          entities={
+            Object {
+              "media": Array [
+                Object {
+                  "additional_media_info": null,
+                  "display_url": "pic.twitter.com/uc9iteuAQ8",
+                  "id_str": "967319472796180480",
+                  "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                  "sizes": Object {
+                    "large": Object {
+                      "h": 1290,
+                      "resize": "fit",
+                      "w": 1838,
+                    },
+                    "small": Object {
+                      "h": 477,
+                      "resize": "fit",
+                      "w": 680,
+                    },
+                  },
+                  "type": "photo",
+                  "url": "https://t.co/uc9iteuAQ8",
+                  "video_info": null,
+                },
+              ],
+              "urls": Array [],
+            }
+          }
+          styles={
+            Object {
+              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+            }
+          }
+        >
+          <Component
+            entities={
+              Object {
+                "media": Array [
+                  Object {
+                    "additional_media_info": null,
+                    "display_url": "pic.twitter.com/uc9iteuAQ8",
+                    "id_str": "967319472796180480",
+                    "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                    "sizes": Object {
+                      "large": Object {
+                        "h": 1290,
+                        "resize": "fit",
+                        "w": 1838,
+                      },
+                      "small": Object {
+                        "h": 477,
+                        "resize": "fit",
+                        "w": 680,
+                      },
+                    },
+                    "type": "photo",
+                    "url": "https://t.co/uc9iteuAQ8",
+                    "video_info": null,
+                  },
+                ],
+                "urls": Array [],
+              }
+            }
+            styles={
+              Object {
+                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+              }
+            }
+          >
+            <div>
+              hoge
+            </div>
+          </Component>
+        </branch(Component)>
+      </branch(branch(Component))>
+    </branch(branch(branch(Component)))>
+  </Style>
+</Styled(branch(branch(branch(Component))))>
+`;
+
+exports[`should render with ONLYPHOTO. 1`] = `
+<Styled(branch(branch(branch(Component))))
+  entities={
+    Object {
+      "media": Array [
+        Object {
+          "additional_media_info": null,
+          "display_url": "pic.twitter.com/uc9iteuAQ8",
+          "id_str": "967319472796180480",
+          "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+          "sizes": Object {
+            "large": Object {
+              "h": 1290,
+              "resize": "fit",
+              "w": 1838,
+            },
+            "small": Object {
+              "h": 477,
+              "resize": "fit",
+              "w": 680,
+            },
+          },
+          "type": "photo",
+          "url": "https://t.co/uc9iteuAQ8",
+          "video_info": null,
+        },
+      ],
+      "urls": Array [],
+    }
+  }
+>
+  <Style
+    Component={[Function]}
+    Style={
+      FreeStyle {
+        "_children": Object {},
+        "_counters": Object {},
+        "_keys": Array [],
+        "changeId": 0,
+        "changes": Object {
+          "add": [Function],
+          "change": [Function],
+          "remove": [Function],
+        },
+        "debug": true,
+        "hash": [Function],
+        "id": "f2",
+        "sheet": Array [],
+      }
+    }
+    componentName="branch(branch(branch(Component)))"
+    componentProps={
+      Object {
+        "entities": Object {
+          "media": Array [
+            Object {
+              "additional_media_info": null,
+              "display_url": "pic.twitter.com/uc9iteuAQ8",
+              "id_str": "967319472796180480",
+              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 1290,
+                  "resize": "fit",
+                  "w": 1838,
+                },
+                "small": Object {
+                  "h": 477,
+                  "resize": "fit",
+                  "w": 680,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/uc9iteuAQ8",
+              "video_info": null,
+            },
+          ],
+          "urls": Array [],
+        },
+        "styles": Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        },
+      }
+    }
+  >
+    <branch(branch(branch(Component)))
+      entities={
+        Object {
+          "media": Array [
+            Object {
+              "additional_media_info": null,
+              "display_url": "pic.twitter.com/uc9iteuAQ8",
+              "id_str": "967319472796180480",
+              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 1290,
+                  "resize": "fit",
+                  "w": 1838,
+                },
+                "small": Object {
+                  "h": 477,
+                  "resize": "fit",
+                  "w": 680,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/uc9iteuAQ8",
+              "video_info": null,
+            },
+          ],
+          "urls": Array [],
+        }
+      }
+      styles={
+        Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        }
+      }
+    >
+      <branch(branch(Component))
+        entities={
+          Object {
+            "media": Array [
+              Object {
+                "additional_media_info": null,
+                "display_url": "pic.twitter.com/uc9iteuAQ8",
+                "id_str": "967319472796180480",
+                "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                "sizes": Object {
+                  "large": Object {
+                    "h": 1290,
+                    "resize": "fit",
+                    "w": 1838,
+                  },
+                  "small": Object {
+                    "h": 477,
+                    "resize": "fit",
+                    "w": 680,
+                  },
+                },
+                "type": "photo",
+                "url": "https://t.co/uc9iteuAQ8",
+                "video_info": null,
+              },
+            ],
+            "urls": Array [],
+          }
+        }
+        styles={
+          Object {
+            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+          }
+        }
+      >
+        <branch(Component)
+          entities={
+            Object {
+              "media": Array [
+                Object {
+                  "additional_media_info": null,
+                  "display_url": "pic.twitter.com/uc9iteuAQ8",
+                  "id_str": "967319472796180480",
+                  "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                  "sizes": Object {
+                    "large": Object {
+                      "h": 1290,
+                      "resize": "fit",
+                      "w": 1838,
+                    },
+                    "small": Object {
+                      "h": 477,
+                      "resize": "fit",
+                      "w": 680,
+                    },
+                  },
+                  "type": "photo",
+                  "url": "https://t.co/uc9iteuAQ8",
+                  "video_info": null,
+                },
+              ],
+              "urls": Array [],
+            }
+          }
+          styles={
+            Object {
+              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+            }
+          }
+        >
+          <Component
+            entities={
+              Object {
+                "media": Array [
+                  Object {
+                    "additional_media_info": null,
+                    "display_url": "pic.twitter.com/uc9iteuAQ8",
+                    "id_str": "967319472796180480",
+                    "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                    "sizes": Object {
+                      "large": Object {
+                        "h": 1290,
+                        "resize": "fit",
+                        "w": 1838,
+                      },
+                      "small": Object {
+                        "h": 477,
+                        "resize": "fit",
+                        "w": 680,
+                      },
+                    },
+                    "type": "photo",
+                    "url": "https://t.co/uc9iteuAQ8",
+                    "video_info": null,
+                  },
+                ],
+                "urls": Array [],
+              }
+            }
+            styles={
+              Object {
+                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+              }
+            }
+          >
+            <div>
+              hoge
+            </div>
+          </Component>
+        </branch(Component)>
+      </branch(branch(Component))>
+    </branch(branch(branch(Component)))>
+  </Style>
+</Styled(branch(branch(branch(Component))))>
+`;
+
+exports[`should render with PHOTO. 1`] = `
+<Styled(branch(branch(branch(Component))))
+  entities={
+    Object {
+      "media": Array [
+        Object {
+          "additional_media_info": null,
+          "display_url": "pic.twitter.com/uc9iteuAQ8",
+          "id_str": "967319472796180480",
+          "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+          "sizes": Object {
+            "large": Object {
+              "h": 1290,
+              "resize": "fit",
+              "w": 1838,
+            },
+            "small": Object {
+              "h": 477,
+              "resize": "fit",
+              "w": 680,
+            },
+          },
+          "type": "photo",
+          "url": "https://t.co/uc9iteuAQ8",
+          "video_info": null,
+        },
+      ],
+      "urls": Array [],
+    }
+  }
+>
+  <Style
+    Component={[Function]}
+    Style={
+      FreeStyle {
+        "_children": Object {},
+        "_counters": Object {},
+        "_keys": Array [],
+        "changeId": 0,
+        "changes": Object {
+          "add": [Function],
+          "change": [Function],
+          "remove": [Function],
+        },
+        "debug": true,
+        "hash": [Function],
+        "id": "f2",
+        "sheet": Array [],
+      }
+    }
+    componentName="branch(branch(branch(Component)))"
+    componentProps={
+      Object {
+        "entities": Object {
+          "media": Array [
+            Object {
+              "additional_media_info": null,
+              "display_url": "pic.twitter.com/uc9iteuAQ8",
+              "id_str": "967319472796180480",
+              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 1290,
+                  "resize": "fit",
+                  "w": 1838,
+                },
+                "small": Object {
+                  "h": 477,
+                  "resize": "fit",
+                  "w": 680,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/uc9iteuAQ8",
+              "video_info": null,
+            },
+          ],
+          "urls": Array [],
+        },
+        "styles": Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        },
+      }
+    }
+  >
+    <branch(branch(branch(Component)))
+      entities={
+        Object {
+          "media": Array [
+            Object {
+              "additional_media_info": null,
+              "display_url": "pic.twitter.com/uc9iteuAQ8",
+              "id_str": "967319472796180480",
+              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+              "sizes": Object {
+                "large": Object {
+                  "h": 1290,
+                  "resize": "fit",
+                  "w": 1838,
+                },
+                "small": Object {
+                  "h": 477,
+                  "resize": "fit",
+                  "w": 680,
+                },
+              },
+              "type": "photo",
+              "url": "https://t.co/uc9iteuAQ8",
+              "video_info": null,
+            },
+          ],
+          "urls": Array [],
+        }
+      }
+      styles={
+        Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        }
+      }
+    >
+      <branch(branch(Component))
+        entities={
+          Object {
+            "media": Array [
+              Object {
+                "additional_media_info": null,
+                "display_url": "pic.twitter.com/uc9iteuAQ8",
+                "id_str": "967319472796180480",
+                "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                "sizes": Object {
+                  "large": Object {
+                    "h": 1290,
+                    "resize": "fit",
+                    "w": 1838,
+                  },
+                  "small": Object {
+                    "h": 477,
+                    "resize": "fit",
+                    "w": 680,
+                  },
+                },
+                "type": "photo",
+                "url": "https://t.co/uc9iteuAQ8",
+                "video_info": null,
+              },
+            ],
+            "urls": Array [],
+          }
+        }
+        styles={
+          Object {
+            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+          }
+        }
+      >
+        <branch(Component)
+          entities={
+            Object {
+              "media": Array [
+                Object {
+                  "additional_media_info": null,
+                  "display_url": "pic.twitter.com/uc9iteuAQ8",
+                  "id_str": "967319472796180480",
+                  "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                  "sizes": Object {
+                    "large": Object {
+                      "h": 1290,
+                      "resize": "fit",
+                      "w": 1838,
+                    },
+                    "small": Object {
+                      "h": 477,
+                      "resize": "fit",
+                      "w": 680,
+                    },
+                  },
+                  "type": "photo",
+                  "url": "https://t.co/uc9iteuAQ8",
+                  "video_info": null,
+                },
+              ],
+              "urls": Array [],
+            }
+          }
+          styles={
+            Object {
+              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+            }
+          }
+        >
+          <Component
+            entities={
+              Object {
+                "media": Array [
+                  Object {
+                    "additional_media_info": null,
+                    "display_url": "pic.twitter.com/uc9iteuAQ8",
+                    "id_str": "967319472796180480",
+                    "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                    "sizes": Object {
+                      "large": Object {
+                        "h": 1290,
+                        "resize": "fit",
+                        "w": 1838,
+                      },
+                      "small": Object {
+                        "h": 477,
+                        "resize": "fit",
+                        "w": 680,
+                      },
+                    },
+                    "type": "photo",
+                    "url": "https://t.co/uc9iteuAQ8",
+                    "video_info": null,
+                  },
+                ],
+                "urls": Array [],
+              }
+            }
+            styles={
+              Object {
+                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+              }
+            }
+          >
+            <div>
+              hoge
+            </div>
+          </Component>
+        </branch(Component)>
+      </branch(branch(Component))>
+    </branch(branch(branch(Component)))>
+  </Style>
+</Styled(branch(branch(branch(Component))))>
+`;
+
+exports[`should render with empty props. 1`] = `
+<Styled(branch(branch(branch(Component))))
+  entities={Object {}}
+  extendedEntities={Object {}}
+>
+  <Style
+    Component={[Function]}
+    Style={
+      FreeStyle {
+        "_children": Object {},
+        "_counters": Object {},
+        "_keys": Array [],
+        "changeId": 0,
+        "changes": Object {
+          "add": [Function],
+          "change": [Function],
+          "remove": [Function],
+        },
+        "debug": true,
+        "hash": [Function],
+        "id": "f2",
+        "sheet": Array [],
+      }
+    }
+    componentName="branch(branch(branch(Component)))"
+    componentProps={
+      Object {
+        "entities": Object {},
+        "extendedEntities": Object {},
+        "styles": Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        },
+      }
+    }
+  >
+    <branch(branch(branch(Component)))
+      entities={Object {}}
+      extendedEntities={Object {}}
+      styles={
+        Object {
+          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+        }
+      }
+    >
+      <renderComponent(Component)
+        entities={Object {}}
+        extendedEntities={Object {}}
+        styles={
+          Object {
+            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+          }
+        }
+      >
+        <Component
+          entities={Object {}}
+          extendedEntities={Object {}}
+          styles={
+            Object {
+              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
+            }
+          }
+        />
+      </renderComponent(Component)>
     </branch(branch(branch(Component)))>
   </Style>
 </Styled(branch(branch(branch(Component))))>

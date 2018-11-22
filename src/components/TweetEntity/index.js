@@ -11,9 +11,12 @@ import withStyles from './style'
 
 import Video from 'src/components/Video'
 
+const MEDIA_TYPE_PHOTO = 'photo'
 const MEDIA_TYPE_ANIMATED_GIF = 'animated_gif'
 
 const findMediaByType = (entities = {}, type) => _.find(_.get(entities, 'media', []), (media) => media.type === type)
+const filterMediaByType = (entities = {}, type) => _.filter(_.get(entities, 'media', []), (media) => media.type === type)
+const getSize = (sizes = {}) => sizes.small || sizes.medium || sizes.thumb || sizes.large
 
 const withEmpty = branch(
   ({ entities: { media, urls } }) => {
@@ -23,14 +26,31 @@ const withEmpty = branch(
   _.identity
 )
 
-const withOnlyMedia = branch(
-  ({ entities: { media, urls } }) => {
-    return _.isEmpty(urls) && !_.isEmpty(media)
+const withPhoto = branch(
+  ({ entities, extendedEntities = {} }) => {
+    const photoMedia = findMediaByType(entities, MEDIA_TYPE_PHOTO)
+    const extendedPhotoMedia = findMediaByType(extendedEntities, MEDIA_TYPE_PHOTO)
+    const { urls } = entities
+    return _.isEmpty(urls) && photoMedia && extendedPhotoMedia
   },
-  renderComponent(({ entities: { media }, extendedEntities }) => {
-    return (
-      <h1>media</h1>
-    )
+  renderComponent(({ entities, extendedEntities }) => {
+    const photoMedia = filterMediaByType(entities, MEDIA_TYPE_PHOTO)
+    const extendedPhotoMedia = filterMediaByType(extendedEntities, MEDIA_TYPE_PHOTO)
+
+    const mediaList = _.isEmpty(extendedPhotoMedia) ? photoMedia : extendedPhotoMedia
+
+    return _.map(mediaList, (media) => {
+      const size = getSize(media.sizes)
+      return (
+        <img
+          className='mb-2'
+          key={media.media_url}
+          src={media.media_url}
+          style={{height: size.h, width: size.w}}
+          alt={media.url}
+        />
+      )
+    })
   }),
   _.identity
 )
@@ -48,8 +68,7 @@ const withAnimatedGif = branch(
       return null
     }
 
-    const sizes = animatedGifMedia.sizes
-    const size = sizes.large || sizes.small
+    const size = getSize(animatedGifMedia.sizes)
 
     return (
       <Video
@@ -69,7 +88,7 @@ const enhance = compose(
   withStyles,
   withEmpty,
   withAnimatedGif,
-  withOnlyMedia
+  withPhoto,
 )
 
 export default enhance(({ entities: { media, urls } }) => {

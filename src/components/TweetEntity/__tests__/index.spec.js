@@ -60,6 +60,31 @@ const ENTITIES = {
         }
       }
     ]
+  },
+
+  PHOTO: {
+    urls: [],
+    media: [{
+      id_str: '967319472796180480',
+      type: 'photo',
+      url: 'https://t.co/uc9iteuAQ8',
+      display_url: 'pic.twitter.com/uc9iteuAQ8',
+      media_url: 'http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg',
+      sizes: {
+        small: {
+          w: 680,
+          h: 477,
+          resize: 'fit'
+        },
+        large: {
+          w: 1838,
+          h: 1290,
+          resize: 'fit'
+        }
+      },
+      video_info: null,
+      additional_media_info: null
+    }]
   }
 }
 
@@ -116,6 +141,60 @@ const EXTENDED_ENTITIES = {
         }
       }
     ]
+  },
+
+  PHOTO: {
+    urls: [],
+    media: [
+      {
+        id_str: '967319472796180480',
+        type: 'photo',
+        url: 'https://t.co/uc9iteuAQ8',
+        display_url: 'pic.twitter.com/uc9iteuAQ8',
+        media_url: 'http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg',
+        sizes: {
+          small: { w: 680, h: 477, resize: 'fit' },
+          large: { w: 1838, h: 1290, resize: 'fit' }
+        },
+        video_info: null,
+        additional_media_info: null
+      }, {
+        id_str: '967319508791656448',
+        type: 'photo',
+        url: 'https://t.co/uc9iteuAQ8',
+        display_url: 'pic.twitter.com/uc9iteuAQ8',
+        media_url: 'http://pbs.twimg.com/media/DWyb99nVAAAD2pC.jpg',
+        sizes: {
+          small: { w: 680, h: 477, resize: 'fit' },
+          large: { w: 1839, h: 1291, resize: 'fit' }
+        },
+        video_info: null,
+        additional_media_info: null
+      }, {
+        id_str: '967319543302402048',
+        type: 'photo',
+        url: 'https://t.co/uc9iteuAQ8',
+        display_url: 'pic.twitter.com/uc9iteuAQ8',
+        media_url: 'http://pbs.twimg.com/media/DWyb_-LVMAA25Nb.jpg',
+        sizes: {
+          small: { w: 680, h: 477, resize: 'fit' },
+          large: { w: 1839, h: 1291, resize: 'fit' }
+        },
+        video_info: null,
+        additional_media_info: null
+      }, {
+        id_str: '967319660986183680',
+        type: 'photo',
+        url: 'https://t.co/uc9iteuAQ8',
+        display_url: 'pic.twitter.com/uc9iteuAQ8',
+        media_url: 'http://pbs.twimg.com/media/DWycG0lVMAA8u27.jpg',
+        sizes: {
+          small: { w: 680, h: 477, resize: 'fit' },
+          large: { w: 1838, h: 1290, resize: 'fit' }
+        },
+        video_info: null,
+        additional_media_info: null
+      }]
   }
 }
 
@@ -131,7 +210,18 @@ test('should render with empty props.', () => {
   expect(tree).toMatchSnapshot()
 })
 
-test('should render with size.', () => {
+test('should render with PHOTO.', () => {
+  const tree = mount(
+    <TweetEntity
+      entities={ENTITIES.PHOTO}
+    />
+  )
+
+  // Testing for snapshot.
+  expect(tree).toMatchSnapshot()
+})
+
+test('should render with ANIMATED_GIF.', () => {
   const tree = mount(
     <TweetEntity
       entities={ENTITIES.ANIMATED_GIF}
