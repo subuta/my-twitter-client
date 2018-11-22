@@ -33,24 +33,34 @@ const withPhoto = branch(
     const { urls } = entities
     return _.isEmpty(urls) && photoMedia && extendedPhotoMedia
   },
-  renderComponent(({ entities, extendedEntities }) => {
+  renderComponent(({ styles, createdAt, entities, extendedEntities }) => {
     const photoMedia = filterMediaByType(entities, MEDIA_TYPE_PHOTO)
     const extendedPhotoMedia = filterMediaByType(extendedEntities, MEDIA_TYPE_PHOTO)
 
     const mediaList = _.isEmpty(extendedPhotoMedia) ? photoMedia : extendedPhotoMedia
 
-    return _.map(mediaList, (media) => {
-      const size = getSize(media.sizes)
-      return (
-        <img
-          className='mb-2'
-          key={media.media_url}
-          src={media.media_url}
-          style={{height: size.h, width: size.w}}
-          alt={media.url}
-        />
-      )
-    })
+    return (
+      <div>
+        {createdAt && (
+          <small className='text-grey-darker'>Attached image at {createdAt.format('YYYY-MM-DD, h:mm A')}</small>
+        )}
+
+        <div>
+          {_.map(mediaList, (media) => {
+            const size = getSize(media.sizes)
+            return (
+              <img
+                className={styles.TweetImage}
+                key={media.media_url}
+                src={media.media_url}
+                style={{ maxHeight: size.h, height: 'auto', width: size.w }}
+                alt={media.url}
+              />
+            )
+          })}
+        </div>
+      </div>
+    )
   }),
   _.identity
 )
@@ -62,7 +72,10 @@ const withAnimatedGif = branch(
   },
   renderComponent(({ entities: { media }, extendedEntities }) => {
     const animatedGifMedia = findMediaByType(extendedEntities, MEDIA_TYPE_ANIMATED_GIF)
-    const sources = _.map(_.get(animatedGifMedia, 'video_info.variants', []), ({ content_type = '', url = '' }) => ({ type: content_type, src: url}))
+    const sources = _.map(_.get(animatedGifMedia, 'video_info.variants', []), ({ content_type = '', url = '' }) => ({
+      type: content_type,
+      src: url
+    }))
 
     if (_.isEmpty(sources)) {
       return null
@@ -76,7 +89,7 @@ const withAnimatedGif = branch(
         autoPlay
         loop
         muted
-        style={{ height: size.h, width: size.w }}
+        style={{ maxHeight: size.h, height: 'auto', width: size.w }}
         sources={sources}
       />
     )

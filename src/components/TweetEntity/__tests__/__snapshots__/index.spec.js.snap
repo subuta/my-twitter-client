@@ -224,6 +224,7 @@ exports[`should render with ANIMATED_GIF. 1`] = `
           ],
         },
         "styles": Object {
+          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
           "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
         },
       }
@@ -333,6 +334,7 @@ exports[`should render with ANIMATED_GIF. 1`] = `
       }
       styles={
         Object {
+          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
           "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
         }
       }
@@ -441,6 +443,7 @@ exports[`should render with ANIMATED_GIF. 1`] = `
         }
         styles={
           Object {
+            "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
             "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
           }
         }
@@ -549,6 +552,7 @@ exports[`should render with ANIMATED_GIF. 1`] = `
           }
           styles={
             Object {
+              "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
               "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
             }
           }
@@ -657,6 +661,7 @@ exports[`should render with ANIMATED_GIF. 1`] = `
             }
             styles={
               Object {
+                "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
                 "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
               }
             }
@@ -676,7 +681,8 @@ exports[`should render with ANIMATED_GIF. 1`] = `
               }
               style={
                 Object {
-                  "height": 172,
+                  "height": "auto",
+                  "maxHeight": 172,
                   "width": 220,
                 }
               }
@@ -698,7 +704,8 @@ exports[`should render with ANIMATED_GIF. 1`] = `
                 }
                 style={
                   Object {
-                    "height": 172,
+                    "height": "auto",
+                    "maxHeight": 172,
                     "width": 220,
                   }
                 }
@@ -711,7 +718,8 @@ exports[`should render with ANIMATED_GIF. 1`] = `
                   preload="auto"
                   style={
                     Object {
-                      "height": 172,
+                      "height": "auto",
+                      "maxHeight": 172,
                       "width": 220,
                     }
                   }
@@ -727,478 +735,6 @@ exports[`should render with ANIMATED_GIF. 1`] = `
             </withHandlers(Component)>
           </Component>
         </renderComponent(Component)>
-      </branch(branch(Component))>
-    </branch(branch(branch(Component)))>
-  </Style>
-</Styled(branch(branch(branch(Component))))>
-`;
-
-exports[`should render with ONLY_PHOTO. 1`] = `
-<Styled(branch(branch(branch(Component))))
-  entities={
-    Object {
-      "media": Array [
-        Object {
-          "additional_media_info": null,
-          "display_url": "pic.twitter.com/uc9iteuAQ8",
-          "id_str": "967319472796180480",
-          "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-          "sizes": Object {
-            "large": Object {
-              "h": 1290,
-              "resize": "fit",
-              "w": 1838,
-            },
-            "small": Object {
-              "h": 477,
-              "resize": "fit",
-              "w": 680,
-            },
-          },
-          "type": "photo",
-          "url": "https://t.co/uc9iteuAQ8",
-          "video_info": null,
-        },
-      ],
-      "urls": Array [],
-    }
-  }
->
-  <Style
-    Component={[Function]}
-    Style={
-      FreeStyle {
-        "_children": Object {},
-        "_counters": Object {},
-        "_keys": Array [],
-        "changeId": 0,
-        "changes": Object {
-          "add": [Function],
-          "change": [Function],
-          "remove": [Function],
-        },
-        "debug": true,
-        "hash": [Function],
-        "id": "f2",
-        "sheet": Array [],
-      }
-    }
-    componentName="branch(branch(branch(Component)))"
-    componentProps={
-      Object {
-        "entities": Object {
-          "media": Array [
-            Object {
-              "additional_media_info": null,
-              "display_url": "pic.twitter.com/uc9iteuAQ8",
-              "id_str": "967319472796180480",
-              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 1290,
-                  "resize": "fit",
-                  "w": 1838,
-                },
-                "small": Object {
-                  "h": 477,
-                  "resize": "fit",
-                  "w": 680,
-                },
-              },
-              "type": "photo",
-              "url": "https://t.co/uc9iteuAQ8",
-              "video_info": null,
-            },
-          ],
-          "urls": Array [],
-        },
-        "styles": Object {
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        },
-      }
-    }
-  >
-    <branch(branch(branch(Component)))
-      entities={
-        Object {
-          "media": Array [
-            Object {
-              "additional_media_info": null,
-              "display_url": "pic.twitter.com/uc9iteuAQ8",
-              "id_str": "967319472796180480",
-              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 1290,
-                  "resize": "fit",
-                  "w": 1838,
-                },
-                "small": Object {
-                  "h": 477,
-                  "resize": "fit",
-                  "w": 680,
-                },
-              },
-              "type": "photo",
-              "url": "https://t.co/uc9iteuAQ8",
-              "video_info": null,
-            },
-          ],
-          "urls": Array [],
-        }
-      }
-      styles={
-        Object {
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        }
-      }
-    >
-      <branch(branch(Component))
-        entities={
-          Object {
-            "media": Array [
-              Object {
-                "additional_media_info": null,
-                "display_url": "pic.twitter.com/uc9iteuAQ8",
-                "id_str": "967319472796180480",
-                "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-                "sizes": Object {
-                  "large": Object {
-                    "h": 1290,
-                    "resize": "fit",
-                    "w": 1838,
-                  },
-                  "small": Object {
-                    "h": 477,
-                    "resize": "fit",
-                    "w": 680,
-                  },
-                },
-                "type": "photo",
-                "url": "https://t.co/uc9iteuAQ8",
-                "video_info": null,
-              },
-            ],
-            "urls": Array [],
-          }
-        }
-        styles={
-          Object {
-            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-          }
-        }
-      >
-        <branch(Component)
-          entities={
-            Object {
-              "media": Array [
-                Object {
-                  "additional_media_info": null,
-                  "display_url": "pic.twitter.com/uc9iteuAQ8",
-                  "id_str": "967319472796180480",
-                  "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-                  "sizes": Object {
-                    "large": Object {
-                      "h": 1290,
-                      "resize": "fit",
-                      "w": 1838,
-                    },
-                    "small": Object {
-                      "h": 477,
-                      "resize": "fit",
-                      "w": 680,
-                    },
-                  },
-                  "type": "photo",
-                  "url": "https://t.co/uc9iteuAQ8",
-                  "video_info": null,
-                },
-              ],
-              "urls": Array [],
-            }
-          }
-          styles={
-            Object {
-              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-            }
-          }
-        >
-          <Component
-            entities={
-              Object {
-                "media": Array [
-                  Object {
-                    "additional_media_info": null,
-                    "display_url": "pic.twitter.com/uc9iteuAQ8",
-                    "id_str": "967319472796180480",
-                    "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-                    "sizes": Object {
-                      "large": Object {
-                        "h": 1290,
-                        "resize": "fit",
-                        "w": 1838,
-                      },
-                      "small": Object {
-                        "h": 477,
-                        "resize": "fit",
-                        "w": 680,
-                      },
-                    },
-                    "type": "photo",
-                    "url": "https://t.co/uc9iteuAQ8",
-                    "video_info": null,
-                  },
-                ],
-                "urls": Array [],
-              }
-            }
-            styles={
-              Object {
-                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-              }
-            }
-          >
-            <div>
-              hoge
-            </div>
-          </Component>
-        </branch(Component)>
-      </branch(branch(Component))>
-    </branch(branch(branch(Component)))>
-  </Style>
-</Styled(branch(branch(branch(Component))))>
-`;
-
-exports[`should render with ONLYPHOTO. 1`] = `
-<Styled(branch(branch(branch(Component))))
-  entities={
-    Object {
-      "media": Array [
-        Object {
-          "additional_media_info": null,
-          "display_url": "pic.twitter.com/uc9iteuAQ8",
-          "id_str": "967319472796180480",
-          "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-          "sizes": Object {
-            "large": Object {
-              "h": 1290,
-              "resize": "fit",
-              "w": 1838,
-            },
-            "small": Object {
-              "h": 477,
-              "resize": "fit",
-              "w": 680,
-            },
-          },
-          "type": "photo",
-          "url": "https://t.co/uc9iteuAQ8",
-          "video_info": null,
-        },
-      ],
-      "urls": Array [],
-    }
-  }
->
-  <Style
-    Component={[Function]}
-    Style={
-      FreeStyle {
-        "_children": Object {},
-        "_counters": Object {},
-        "_keys": Array [],
-        "changeId": 0,
-        "changes": Object {
-          "add": [Function],
-          "change": [Function],
-          "remove": [Function],
-        },
-        "debug": true,
-        "hash": [Function],
-        "id": "f2",
-        "sheet": Array [],
-      }
-    }
-    componentName="branch(branch(branch(Component)))"
-    componentProps={
-      Object {
-        "entities": Object {
-          "media": Array [
-            Object {
-              "additional_media_info": null,
-              "display_url": "pic.twitter.com/uc9iteuAQ8",
-              "id_str": "967319472796180480",
-              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 1290,
-                  "resize": "fit",
-                  "w": 1838,
-                },
-                "small": Object {
-                  "h": 477,
-                  "resize": "fit",
-                  "w": 680,
-                },
-              },
-              "type": "photo",
-              "url": "https://t.co/uc9iteuAQ8",
-              "video_info": null,
-            },
-          ],
-          "urls": Array [],
-        },
-        "styles": Object {
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        },
-      }
-    }
-  >
-    <branch(branch(branch(Component)))
-      entities={
-        Object {
-          "media": Array [
-            Object {
-              "additional_media_info": null,
-              "display_url": "pic.twitter.com/uc9iteuAQ8",
-              "id_str": "967319472796180480",
-              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 1290,
-                  "resize": "fit",
-                  "w": 1838,
-                },
-                "small": Object {
-                  "h": 477,
-                  "resize": "fit",
-                  "w": 680,
-                },
-              },
-              "type": "photo",
-              "url": "https://t.co/uc9iteuAQ8",
-              "video_info": null,
-            },
-          ],
-          "urls": Array [],
-        }
-      }
-      styles={
-        Object {
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        }
-      }
-    >
-      <branch(branch(Component))
-        entities={
-          Object {
-            "media": Array [
-              Object {
-                "additional_media_info": null,
-                "display_url": "pic.twitter.com/uc9iteuAQ8",
-                "id_str": "967319472796180480",
-                "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-                "sizes": Object {
-                  "large": Object {
-                    "h": 1290,
-                    "resize": "fit",
-                    "w": 1838,
-                  },
-                  "small": Object {
-                    "h": 477,
-                    "resize": "fit",
-                    "w": 680,
-                  },
-                },
-                "type": "photo",
-                "url": "https://t.co/uc9iteuAQ8",
-                "video_info": null,
-              },
-            ],
-            "urls": Array [],
-          }
-        }
-        styles={
-          Object {
-            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-          }
-        }
-      >
-        <branch(Component)
-          entities={
-            Object {
-              "media": Array [
-                Object {
-                  "additional_media_info": null,
-                  "display_url": "pic.twitter.com/uc9iteuAQ8",
-                  "id_str": "967319472796180480",
-                  "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-                  "sizes": Object {
-                    "large": Object {
-                      "h": 1290,
-                      "resize": "fit",
-                      "w": 1838,
-                    },
-                    "small": Object {
-                      "h": 477,
-                      "resize": "fit",
-                      "w": 680,
-                    },
-                  },
-                  "type": "photo",
-                  "url": "https://t.co/uc9iteuAQ8",
-                  "video_info": null,
-                },
-              ],
-              "urls": Array [],
-            }
-          }
-          styles={
-            Object {
-              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-            }
-          }
-        >
-          <Component
-            entities={
-              Object {
-                "media": Array [
-                  Object {
-                    "additional_media_info": null,
-                    "display_url": "pic.twitter.com/uc9iteuAQ8",
-                    "id_str": "967319472796180480",
-                    "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-                    "sizes": Object {
-                      "large": Object {
-                        "h": 1290,
-                        "resize": "fit",
-                        "w": 1838,
-                      },
-                      "small": Object {
-                        "h": 477,
-                        "resize": "fit",
-                        "w": 680,
-                      },
-                    },
-                    "type": "photo",
-                    "url": "https://t.co/uc9iteuAQ8",
-                    "video_info": null,
-                  },
-                ],
-                "urls": Array [],
-              }
-            }
-            styles={
-              Object {
-                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-              }
-            }
-          >
-            <div>
-              hoge
-            </div>
-          </Component>
-        </branch(Component)>
       </branch(branch(Component))>
     </branch(branch(branch(Component)))>
   </Style>
@@ -1285,6 +821,7 @@ exports[`should render with PHOTO. 1`] = `
           "urls": Array [],
         },
         "styles": Object {
+          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
           "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
         },
       }
@@ -1321,6 +858,7 @@ exports[`should render with PHOTO. 1`] = `
       }
       styles={
         Object {
+          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
           "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
         }
       }
@@ -1356,6 +894,7 @@ exports[`should render with PHOTO. 1`] = `
         }
         styles={
           Object {
+            "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
             "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
           }
         }
@@ -1391,6 +930,7 @@ exports[`should render with PHOTO. 1`] = `
           }
           styles={
             Object {
+              "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
               "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
             }
           }
@@ -1426,6 +966,7 @@ exports[`should render with PHOTO. 1`] = `
             }
             styles={
               Object {
+                "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
                 "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
               }
             }
@@ -1471,6 +1012,7 @@ exports[`should render with empty props. 1`] = `
         "entities": Object {},
         "extendedEntities": Object {},
         "styles": Object {
+          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
           "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
         },
       }
@@ -1481,6 +1023,7 @@ exports[`should render with empty props. 1`] = `
       extendedEntities={Object {}}
       styles={
         Object {
+          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
           "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
         }
       }
@@ -1490,6 +1033,7 @@ exports[`should render with empty props. 1`] = `
         extendedEntities={Object {}}
         styles={
           Object {
+            "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
             "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
           }
         }
@@ -1499,6 +1043,7 @@ exports[`should render with empty props. 1`] = `
           extendedEntities={Object {}}
           styles={
             Object {
+              "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
               "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
             }
           }

@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 import t from 'src/server/utils/twitter'
 import iframely from 'src/server/utils/iframely'
 
@@ -26,7 +28,17 @@ export default {
 
   Url: {
     og ({ expanded_url: url }, {}, context, info) {
-      return iframely(url)
+      return iframely(url).catch(err => {
+        const status = _.get(err, 'response.status')
+
+        // Ignore 4XX
+        if (status && status > 400 && status < 500) {
+          return null
+        }
+
+        // Re-throw otherwise.
+        throw err
+      })
     }
   },
 

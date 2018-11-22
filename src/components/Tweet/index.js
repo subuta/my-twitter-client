@@ -78,6 +78,7 @@ export default enhance((props) => {
           />
 
           <TweetEntity
+            createdAt={createdAt}
             extendedEntities={extendedEntities}
             entities={entities}
           />

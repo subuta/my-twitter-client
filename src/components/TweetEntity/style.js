@@ -9,6 +9,9 @@ import {
 
 const TweetMedia = apply('py-2')
 
+const TweetImage = apply('mt-2 border rounded')
+
 export default createWithStyles({
+  TweetImage,
   TweetMedia
 })
