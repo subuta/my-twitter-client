@@ -22,15 +22,28 @@ const SiteIcon = {
 }
 
 const Meta = {
-  ...apply('w-full flex flex-col h-32'),
+  ...apply('w-full flex flex-col'),
 
   ...screen('lg', {
+    height: 'auto',
     width: 500
   })
 }
 
+const LargeOGImage = {
+  ...apply('w-full flex-none flex items-center justify-center bg-cover bg-center rounded-t-lg'),
+
+  height: 130,
+
+  ...screen('lg', {
+    height: 260
+  })
+}
+
 const SmallOGImage = {
-  ...apply('h-32 w-32 flex-none flex items-center justify-center bg-cover bg-center rounded-l-lg')
+  ...apply('h-24 w-24 flex-none flex items-center justify-center bg-cover bg-grey-lighter bg-center rounded-l-lg'),
+
+  ...screen('lg', apply('h-32 w-32'))
 }
 
 const PlayIcon = {
@@ -48,6 +61,7 @@ export default createWithStyles({
   OG,
   SiteIcon,
   Meta,
+  LargeOGImage,
   SmallOGImage,
   PlayIcon
 })

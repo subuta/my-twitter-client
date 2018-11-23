@@ -35,6 +35,7 @@ const SCROLL_DIRECTION_NONE = 'SCROLL_DIRECTION_NONE'
 const SCROLL_DIRECTION_DOWN = 'SCROLL_DIRECTION_DOWN'
 
 const USER_ID = '320096369' // @subuta_nico.
+const WIDTH_SMALL = 576
 
 import Tweet from 'src/components/Tweet'
 
@@ -98,11 +99,11 @@ const enhance = compose(
   withStyles
 )
 
-const renderRow = ({ row, user, setSizeRef, style, styles }) => {
-  // console.log('row = ', row)
+const renderRow = ({ row, isMobile, user, setSizeRef, style, styles }) => {
   return (
     <Tweet
       className={`row-${row.id_str} ${styles.Row}`}
+      isMobile={isMobile}
       style={style}
       user={user}
       tweet={row}
@@ -111,13 +112,20 @@ const renderRow = ({ row, user, setSizeRef, style, styles }) => {
   )
 }
 
-const renderGroupHeader = ({ row, setSizeRef, style, styles }) => {
+const renderGroupHeader = ({ row, isMobile, setSizeRef, style, styles }) => {
   const { groupHeader } = row
+
+  let groupHeaderContainerClass = styles.GroupHeaderContainer
+  if (!isMobile) {
+    // Only-enable sticky header for non-mobile browser.
+    groupHeaderContainerClass += ' c-sticky'
+  }
+
   return (
     <div style={style} className='pointer-events-none'>
       <div
         ref={setSizeRef}
-        className={`c-sticky ${styles.GroupHeaderContainer}`}
+        className={groupHeaderContainerClass}
       >
         <div className={styles.GroupHeader}>
           <span className={styles.GroupHeaderLabel}>{groupHeader}</span>
@@ -170,10 +178,11 @@ const Channel = enhance((props) => {
       </Helmet>
 
       <div className='flex flex-col h-screen'>
-        <header className='pt-4 pb-2 px-4 flex-0'>Fixed header area</header>
+        <header className={styles.Header}>Fixed header area</header>
 
         <Sized>
           {({ size, setSizeRef }) => {
+            const isMobile = WIDTH_SMALL > size.width
             return (
               <div
                 className='flex-1 overflow-hidden'
@@ -185,11 +194,11 @@ const Channel = enhance((props) => {
                   height={size.height}
                   rows={rows}
                   groupBy={groupRowBy}
-                  renderGroupHeader={(props) => renderGroupHeader({ ...props, styles })}
+                  renderGroupHeader={(props) => renderGroupHeader({ ...props, isMobile, styles })}
                   overScanCount={6}
                   reversed
                 >
-                  {(props) => renderRow({ ...props, user, styles })}
+                  {(props) => renderRow({ ...props, isMobile, user, styles })}
                 </VirtualList>
               </div>
             )

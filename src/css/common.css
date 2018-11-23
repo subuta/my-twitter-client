@@ -2,6 +2,11 @@ ul {
   @apply list-reset;
 }
 
+/* SEE: https://github.com/tailwindcss/tailwindcss/pull/571 */
+.break-all {
+  word-break: break-all;
+}
+
 .c-sticky {
   position: static;
   position: -webkit-sticky;

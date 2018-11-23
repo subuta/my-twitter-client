@@ -25,7 +25,8 @@ export default enhance((props) => {
     className,
     user,
     tweet,
-    setSizeRef
+    setSizeRef,
+    isMobile
   } = props
 
   const {
@@ -57,27 +58,28 @@ export default enhance((props) => {
       style={style}
     >
       <div
-        className={styles.Tweet + ' flex'}
+        className={styles.Tweet}
         ref={setSizeRef}
       >
         <img
           src={profile_image_url}
           alt='avatar'
-          className={styles.Avatar + ' flex-none mr-2'}
+          className={styles.Avatar}
         />
 
-        <div>
+        <div className='flex-1'>
           <div className='mb-1 flex items-baseline'>
             <b className='text-sm'>{screen_name}</b>
             <small className='ml-1 text-grey-darker'>{createdAt.format('h:mm A')}</small>
           </div>
 
           <p
-            className='leading-tight whitespace-pre-wrap'
+            className={styles.Text}
             dangerouslySetInnerHTML={{ __html: tweetHtml }}
           />
 
           <TweetEntity
+            isMobile={isMobile}
             createdAt={createdAt}
             extendedEntities={extendedEntities}
             entities={entities}
