@@ -182,13 +182,21 @@ const Channel = enhance((props) => {
 
         <Sized>
           {({ size, setSizeRef }) => {
-            const isMobile = WIDTH_SMALL > size.width
+            // FIXME: Better way for detecting mobile.
+            let isMobile = false
+            if (size.width) {
+              isMobile = WIDTH_SMALL > size.width
+            } else {
+              isMobile = WIDTH_SMALL > window.innerWidth
+            }
+
             return (
               <div
                 className='flex-1 overflow-hidden'
                 ref={setSizeRef}
               >
                 <VirtualList
+                  isMobile={isMobile}
                   onLoadMore={onLoadMore}
                   onScroll={onScroll}
                   height={size.height}
@@ -231,7 +239,7 @@ Channel.getInitialProps = async () => {
           retweeted_status {
             ...tweetFields
           }
-          
+
           quoted_status {
             ...tweetFields
           }

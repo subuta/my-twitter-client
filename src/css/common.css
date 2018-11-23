@@ -13,6 +13,11 @@ ul {
   position: sticky;
 }
 
+.icon-xs {
+  height: config('height.4');
+  width: config('height.4');
+}
+
 .icon-sm {
   height: config('height.6');
   width: config('height.6');

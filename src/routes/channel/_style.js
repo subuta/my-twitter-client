@@ -10,7 +10,7 @@ import {
 const Header = {
   ...apply('py-4 px-4 flex-0 border-b'),
 
-  ...screen('lg', apply('pt-4 pb-2 border-none'))
+  ...screen('lg', apply('pt-4 pb-0 border-none'))
 }
 
 const GroupHeaderContainer = {
@@ -20,17 +20,17 @@ const GroupHeaderContainer = {
 }
 
 const GroupHeader = {
-  ...apply('relative py-1 text-sm font-bold border-b'),
+  ...apply('relative py-2 text-sm font-bold border-b'),
 
   ...screen('lg', {
-    ...apply('py-2 border-none'),
+    ...apply('border-none'),
 
-    height: 20,
+    height: 40,
 
     '&:before': {
-      ...apply('absolute pin-t pin-l pin-r block w-full bg-white border-b'),
+      ...apply('absolute pin-t pin-l pin-r block w-full bg-white border-b border-grey-lighter'),
       content: '""',
-      height: 10
+      height: 20
     }
   }),
 }

@@ -3,12 +3,8 @@ import {
   compose,
 } from 'recompose'
 
-import twitter from 'twitter-text'
-
-import _ from 'lodash'
-
 import dayjs from 'src/utils/dayjs'
-import emoji from 'src/utils/emoji'
+import { decorateText } from 'src/utils/tweet'
 
 import TweetEntity from 'src/components/TweetEntity'
 
@@ -46,11 +42,7 @@ export default enhance((props) => {
 
   const urlEntities = entities.urls || []
 
-  const tweetHtml = twitter.autoLink(emoji.replace_unified(full_text), {
-    targetBlank: true,
-    urlTarget: '_blank',
-    urlEntities
-  })
+  const tweetHtml = decorateText(full_text, { urlEntities })
 
   return (
     <div
@@ -81,8 +73,11 @@ export default enhance((props) => {
           <TweetEntity
             isMobile={isMobile}
             createdAt={createdAt}
+            tweet={tweet}
+
             extendedEntities={extendedEntities}
             entities={entities}
+            quotedStatus={tweet.quoted_status}
           />
         </div>
       </div>

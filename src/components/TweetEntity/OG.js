@@ -180,7 +180,7 @@ const withReader = branch(
     return (
       <div className={`flex-col ${className}`}>
         <div
-          className={styles.LargeOGImage}
+          className={`${styles.LargeOGImage} rounded-t-lg`}
           style={{backgroundImage: `url(${thumbnail.href})`}}
         />
 
@@ -197,68 +197,76 @@ const withReader = branch(
   _.identity
 )
 
+const withCard = branch(
+  ({ entities }) => {
+    const firstUrl = _.first(entities.urls)
+    const thumbnail = getThumbnail(firstUrl)
+    return !_.isEmpty(thumbnail)
+  },
+  renderComponent((props) => {
+    const {
+      isMobile = false,
+      entities,
+      styles,
+      setIsExpanded
+    } = props
+    const lastUrl = _.last(entities.urls)
+    const thumbnail = getThumbnail(lastUrl)
+    const { url } = lastUrl
+
+    if (!thumbnail) {
+      return null
+    }
+
+    const meta = getMeta(lastUrl)
+    const siteIcon = getIcon(lastUrl)
+    const hasPlayer = !_.isEmpty(getPlayer(entities))
+
+    let className = styles.OG
+
+    if (hasPlayer && !isMobile) {
+      className += ' has-player'
+    }
+
+    return (
+      <div className={className}>
+        <div
+          className={`${styles.SmallOGImage} rounded-l-lg`}
+          style={{backgroundImage: `url(${thumbnail.href})`}}
+        >
+          <Icon
+            className={styles.PlayIcon}
+            icon='play-button-music-interface-sound'
+            size='lg'
+            onClick={() => {
+              if (!hasPlayer || isMobile) return
+              setIsExpanded(true)
+            }}
+          />
+        </div>
+
+        <Meta
+          url={url}
+          styles={styles}
+          className='flex-1 lg:flex-none p-2 border-l h-24 lg:h-32'
+          siteIcon={siteIcon}
+          meta={meta}
+        />
+      </div>
+    )
+  }),
+  _.identity
+)
+
 const enhance = compose(
   withStyles,
   withState('isExpanded', 'setIsExpanded', false),
   withPlayer,
-  withReader
+  withReader,
+  withCard
 )
 
 export default enhance((props) => {
-  const {
-    entities,
-    styles,
-    setIsExpanded,
-    isMobile
-  } = props
-  const lastUrl = _.last(entities.urls)
-  const thumbnail = getThumbnail(lastUrl)
-  const { url } = lastUrl
-
-  if (!thumbnail) {
-    return null
-  }
-
-  const meta = getMeta(lastUrl)
-  const siteIcon = getIcon(lastUrl)
-  const hasPlayer = !_.isEmpty(getPlayer(entities))
-
-  // if (meta.media === 'reader') {
-  //   console.log('meta', meta, lastUrl)
-  // }
-
-  // console.log('Not handled OG type', props)
-
-  let className = styles.OG
-
-  if (hasPlayer && !isMobile) {
-    className += ' has-player'
-  }
-
-  return (
-    <div className={className}>
-      <div
-        className={styles.SmallOGImage}
-        style={{backgroundImage: `url(${thumbnail.href})`}}
-      >
-        <Icon
-          className={styles.PlayIcon}
-          icon='play-button-music-interface-sound'
-          size='lg'
-          onClick={() => {
-            if (!hasPlayer || isMobile) return
-            setIsExpanded(true)
-          }}
-        />
-      </div>
-
-      <Meta
-        url={url}
-        styles={styles}
-        className='flex-1 lg:flex-none p-2 border-l h-24 lg:h-32'
-        siteIcon={siteIcon}
-        meta={meta}
-      />
-    </div>
-  )
+  console.log('Not handled OG type', props)
+  return null
 })

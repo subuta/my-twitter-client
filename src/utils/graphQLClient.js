@@ -16,6 +16,8 @@ export const userFields = gql`
     url
     friends_count
     followers_count
+
+    verified
   }
 `
 
@@ -129,13 +131,14 @@ export const entitiesFields = gql`
 `
 
 export const tweetFields = gql`
+  ${userFields}
   ${entitiesFields}
   
   fragment tweetFields on Tweet {
     id_str
     
     user {
-      screen_name
+      ...userFields
     }
     
     full_text

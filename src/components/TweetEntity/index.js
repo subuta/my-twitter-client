@@ -7,6 +7,9 @@ import {
   renderComponent
 } from 'recompose'
 
+import { decorateText } from 'src/utils/tweet'
+import Icon from 'src/components/Icon'
+
 import withStyles from './style'
 
 import Video from 'src/components/Video'
@@ -97,9 +100,74 @@ const withAnimatedGif = branch(
   _.identity
 )
 
+const withQuote = branch(
+  ({ quotedStatus }) => quotedStatus,
+  renderComponent((props) => {
+    const {
+      styles,
+      quotedStatus
+    } = props
+
+    const {
+      entities,
+      full_text,
+      user
+    } = quotedStatus
+
+    const {
+      name,
+      screen_name
+    } = user
+
+    const urlEntities = entities.urls || []
+    const media = _.first(entities.media)
+
+    const tweetHtml = decorateText(full_text, { urlEntities })
+
+    return (
+      <div className='mt-2 p-2 inline-flex items-start border rounded-lg'>
+        {media && (
+          <div
+            className={`${styles.SmallOGImage} mr-2 rounded-lg`}
+            style={{backgroundImage: `url(${media.media_url})`}}
+          />
+        )}
+
+        <div className={`${styles.Status}`}>
+          <a
+            className='no-underline text-black hover:underline'
+            href={`https://twitter.com/${screen_name}`}
+            target='_blank'
+          >
+            <p className='mb-1 flex items-center'>
+              <b>{name}</b>
+              <Icon
+                className={`ml-1 ${styles.VerifiedIcon}`}
+                icon='security-protection-protect-shield-firewall-check'
+                size='xs'
+              />
+              <span className='inline-block ml-1 text-grey-darker'>@{screen_name}</span>
+            </p>
+          </a>
+
+          <p
+            className={styles.Text}
+            dangerouslySetInnerHTML={{ __html: tweetHtml }}
+          />
+        </div>
+      </div>
+    )
+  }),
+  _.identity
+)
+
 const withOG = branch(
   ({ entities: { media, urls } }) => {
-    return _.isEmpty(media) && !_.isEmpty(urls)
+    const url = _.first(urls)
+    if (!url) return false
+
+    const hasTitle = _.get(url, 'og.meta.title')
+    return _.isEmpty(media) && hasTitle
   },
   renderComponent(OG),
   _.identity
@@ -110,6 +178,7 @@ const enhance = compose(
   withEmpty,
   withAnimatedGif,
   withPhoto,
+  withQuote,
   withOG
 )
 

@@ -18,7 +18,7 @@ const Avatar = {
 const Text = {
   ...apply('leading-tight whitespace-pre-wrap'),
 
-  '& a': apply('break-all break-words')
+  '& a': apply('break-all break-words text-blue-light no-underline hover:underline')
 }
 
 export default createWithStyles({

@@ -30,8 +30,17 @@ const Meta = {
   })
 }
 
+const Status = {
+  ...apply('w-full'),
+
+  ...screen('lg', {
+    height: 'auto',
+    width: 500
+  })
+}
+
 const LargeOGImage = {
-  ...apply('w-full flex-none flex items-center justify-center bg-cover bg-center rounded-t-lg'),
+  ...apply('w-full flex-none flex items-center justify-center bg-cover bg-center'),
 
   height: 130,
 
@@ -41,27 +50,36 @@ const LargeOGImage = {
 }
 
 const SmallOGImage = {
-  ...apply('h-24 w-24 flex-none flex items-center justify-center bg-cover bg-grey-lighter bg-center rounded-l-lg'),
+  ...apply('h-24 w-24 flex-none flex items-center justify-center bg-cover bg-grey-lighter bg-center'),
 
   ...screen('lg', apply('h-32 w-32'))
 }
 
 const PlayIcon = {
-  ...apply('hidden rounded-full bg-white border-4 border-white opacity-75 cursor-pointer'),
+  ...apply('hidden rounded-full bg-white border-4 border-white opacity-75 cursor-pointer text-blue-light'),
 
   '&:hover': apply('opacity-100'),
-  '.has-player &': apply('block'),
+  '.has-player &': apply('block')
+}
 
-  color: '#62A9E1'
+const VerifiedIcon = apply('text-blue-light')
+
+const Text = {
+  ...apply('leading-tight whitespace-pre-wrap'),
+
+  '& a': apply('break-all break-words text-blue-light no-underline hover:underline')
 }
 
 export default createWithStyles({
   TweetImage,
   TweetMedia,
+  Text,
   OG,
   SiteIcon,
   Meta,
+  Status,
   LargeOGImage,
   SmallOGImage,
+  VerifiedIcon,
   PlayIcon
 })
