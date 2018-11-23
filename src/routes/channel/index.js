@@ -52,6 +52,15 @@ const enhance = compose(
           twitter {
             tweets(user_id: $user_id, limit: $limit, max_id: $max_id) {
               ...tweetFields
+
+              in_reply_to_status {
+                ...tweetFields
+              }
+
+              retweeted_status {
+                ...tweetFields
+              }
+
               quoted_status {
                 ...tweetFields
               }
@@ -99,14 +108,29 @@ const enhance = compose(
   withStyles
 )
 
-const renderRow = ({ row, isMobile, user, setSizeRef, style, styles }) => {
+const renderRow = (props) => {
+  const {
+    row,
+    isMobile,
+    setSizeRef,
+    style,
+    styles
+  } = props
+
+  const retweet = row.retweeted_status
+  const hasRetweet = !!retweet
+
+  const tweet = hasRetweet ? retweet : row
+  const user = hasRetweet ? retweet.user : props.user
+
   return (
     <Tweet
       className={`row-${row.id_str} ${styles.Row}`}
       isMobile={isMobile}
       style={style}
       user={user}
-      tweet={row}
+      isRetweet={hasRetweet}
+      tweet={tweet}
       setSizeRef={setSizeRef}
     />
   )

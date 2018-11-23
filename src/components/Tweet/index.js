@@ -22,7 +22,8 @@ export default enhance((props) => {
     user,
     tweet,
     setSizeRef,
-    isMobile
+    isMobile,
+    isRetweet
   } = props
 
   const {
@@ -34,6 +35,9 @@ export default enhance((props) => {
     screen_name,
     profile_image_url
   } = user
+
+  // FIXME: Add styles for retweet.
+  console.log('isRetweet = ', isRetweet)
 
   const createdAt = dayjs(created_at)
 
