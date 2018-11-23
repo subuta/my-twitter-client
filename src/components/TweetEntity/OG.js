@@ -73,8 +73,19 @@ const Meta = (props) => {
   )
 }
 
-const SiteIcon = ({ link, styles }) => {
-  if (!link) return null
+const enhanceSiteIcon = compose(
+  withState('hasIcon', 'setHasIcon', ({ link }) => !!link)
+)
+
+const SiteIcon = enhanceSiteIcon((props) => {
+  const {
+    setHasIcon,
+    hasIcon,
+    link,
+    styles
+  } = props
+
+  if (!hasIcon) return null
 
   const width = _.get(link, 'media.width')
 
@@ -97,9 +108,11 @@ const SiteIcon = ({ link, styles }) => {
       src={link.href}
       alt="site-icon"
       style={style}
+      // Handle img 404.
+      onError={() => setHasIcon(false)}
     />
   )
-}
+})
 
 const withPlayer = branch(
   ({ entities, isExpanded }) => {
