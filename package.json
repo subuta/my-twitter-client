@@ -12,6 +12,7 @@
     "pdeploy": "cd prisma && prisma deploy",
     "serve:server": "rur start",
     "serve": "run-p watch:css serve:server",
+    "svg": "svg-sprite -C ./svg-sprite-config.json 'src/assets/svg/*.svg'",
     "playground": "graphql playground --port 3001",
     "servep": "NODE_PATH=./ NODE_ENV=production rur start"
   },
@@ -97,6 +98,7 @@
     "sane": "^3.0.0",
     "sinon": "^7.1.0",
     "standard": "^12.0.1",
+    "svg-sprite": "^1.5.0",
     "tailwindcss": "^0.6.6"
   }
 }

@@ -7,3 +7,23 @@ ul {
   position: -webkit-sticky;
   position: sticky;
 }
+
+.icon-sm {
+  height: config('height.6');
+  width: config('height.6');
+}
+
+.icon-md {
+  height: config('height.8');
+  width: config('height.8');
+}
+
+.icon-lg {
+  height: config('height.12');
+  width: config('height.12');
+}
+
+.icon-xl {
+  height: config('height.16');
+  width: config('height.16');
+}

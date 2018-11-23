@@ -10,6 +10,7 @@ import {
 import withStyles from './style'
 
 import Video from 'src/components/Video'
+import OG from './OG'
 
 const MEDIA_TYPE_PHOTO = 'photo'
 const MEDIA_TYPE_ANIMATED_GIF = 'animated_gif'
@@ -30,8 +31,7 @@ const withPhoto = branch(
   ({ entities, extendedEntities = {} }) => {
     const photoMedia = findMediaByType(entities, MEDIA_TYPE_PHOTO)
     const extendedPhotoMedia = findMediaByType(extendedEntities, MEDIA_TYPE_PHOTO)
-    const { urls } = entities
-    return _.isEmpty(urls) && photoMedia && extendedPhotoMedia
+    return photoMedia && extendedPhotoMedia
   },
   renderComponent(({ styles, createdAt, entities, extendedEntities }) => {
     const photoMedia = filterMediaByType(entities, MEDIA_TYPE_PHOTO)
@@ -40,7 +40,7 @@ const withPhoto = branch(
     const mediaList = _.isEmpty(extendedPhotoMedia) ? photoMedia : extendedPhotoMedia
 
     return (
-      <div>
+      <div className='mt-2'>
         {createdAt && (
           <small className='text-grey-darker'>Attached image at {createdAt.format('YYYY-MM-DD, h:mm A')}</small>
         )}
@@ -97,17 +97,24 @@ const withAnimatedGif = branch(
   _.identity
 )
 
+const withOG = branch(
+  ({ entities: { media, urls } }) => {
+    return _.isEmpty(media) && !_.isEmpty(urls)
+  },
+  renderComponent(OG),
+  _.identity
+)
+
 const enhance = compose(
   withStyles,
   withEmpty,
   withAnimatedGif,
   withPhoto,
+  withOG
 )
 
-export default enhance(({ entities: { media, urls } }) => {
-  return (
-    <div>
-      hoge
-    </div>
-  )
+// Defaults to null.
+export default enhance((props) => {
+  console.log('Not handled TweetEntity type', props)
+  return null
 })

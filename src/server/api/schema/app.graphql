@@ -308,24 +308,48 @@ type TwitterMutationAPI {
 }
 
 # Iframely resnposes
+# https://iframely.com/docs/meta
 type IframelyMeta {
-  label_1_reading_time: String,
-  shortlink: String,
-  description: String
-  theme_color: String
   title: String
-  amphtml: String
-  author: String
-  duration: Int
-  author_url: String
+  description: String
   date: String
-  views: Int
-  likes: Int
+  canonical: String
+  shortlink: String
   category: String
   keywords: String
-  media: String
-  canonical: String
+
+  author: String
+  author_url: String
+  copyright: String
+  license: String
+  license_url: String
   site: String
+
+  views: Int
+  likes: Int
+  comments: Int
+  duration: Int
+
+  country_name: String
+  postal_code: String
+  street_address: String
+  region: String
+  locality: String
+  latitude: String
+  longitude: String
+
+  price: String
+  currency_code: String
+  brand: String
+  product_id: String
+  availability: String
+  quantity: String
+
+  # Other fileds
+  label_1_reading_time: String
+  theme_color: String
+  amphtml: String
+  media: String
 }
 
 type IframelyMedia {
@@ -340,7 +364,10 @@ type IframelyLink {
   html: String
   href: String
   type: String
+
+  # https://iframely.com/docs/links
   rel: [String]
+
   media: IframelyMedia
 }
 

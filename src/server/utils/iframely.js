@@ -19,9 +19,14 @@ const snakeCaseKeys = (obj) => {
 }
 
 export const oembed = (url) => axios.get(`${IFRAMELY_ENDPOINT}/oembed`, {
-  params: { url }
+  params: {
+    url
+  }
 }).then(({ data }) => snakeCaseKeys(data))
 
+// https://iframely.com/docs/parameters
 export default (url) => axios.get(`${IFRAMELY_ENDPOINT}/iframely`, {
-  params: { url }
+  params: {
+    url
+  }
 }).then(({ data }) => snakeCaseKeys(data))

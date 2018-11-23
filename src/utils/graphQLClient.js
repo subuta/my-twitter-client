@@ -19,7 +19,41 @@ export const userFields = gql`
   }
 `
 
+export const iframelyLinkFields = gql`
+  fragment iframelyLinkFields on IframelyLink {
+    href
+    type
+    
+    rel
+    
+    media {
+      width
+      height
+      max_width
+      aspect_ratio
+      scrolling
+    }
+  }
+`
+
+export const linksAndMetaFields = gql`
+  fragment linksAndMetaFields on LinksAndMeta {
+    meta {
+      description
+      title
+      author_url
+      date
+      media
+      canonical
+      site
+    }
+  }
+`
+
 export const entitiesFields = gql`
+  ${linksAndMetaFields}
+  ${iframelyLinkFields}
+  
   fragment entitiesFields on Entities {
     urls {
       url
@@ -28,33 +62,27 @@ export const entitiesFields = gql`
       expanded_url
 
       og {
-        meta {
-          description
-          title
-          author_url
-          date
-          media
-          canonical
-          site
-        }
-
+        ...linksAndMetaFields
+        
         links {
+          app {
+            ...iframelyLinkFields
+          }
+
           player {
-            href
-            type
-            rel
+            ...iframelyLinkFields
+          }
+
+          summary {
+            ...iframelyLinkFields
           }
 
           thumbnail {
-            href
-            type
-            rel
+            ...iframelyLinkFields
           }
 
           icon {
-            href
-            type
-            rel
+            ...iframelyLinkFields
           }
         }
       }

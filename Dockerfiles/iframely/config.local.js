@@ -206,7 +206,7 @@
         'min-width': 250,
         hide_media: false,
         hide_thread: false,
-        omit_script: false,
+        omit_script: true,
         center: false,
         // dnt: true,
         cache_ttl: 100 * 365 * 24 * 3600 // 100 Years.

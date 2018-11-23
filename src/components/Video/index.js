@@ -1,8 +1,6 @@
 import React from 'react'
 import _ from 'lodash'
 
-// import ReactPlayer from 'react-player'
-
 import {
   compose,
   withHandlers
