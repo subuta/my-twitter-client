@@ -21,9 +21,9 @@ export default enhance((props) => {
     className,
     user,
     tweet,
+    nextTweet,
     setSizeRef,
-    isMobile,
-    isRetweet
+    isMobile
   } = props
 
   const {
@@ -32,14 +32,20 @@ export default enhance((props) => {
   } = tweet
 
   const {
+    name,
     screen_name,
     profile_image_url
   } = user
 
-  // FIXME: Add styles for retweet.
-  console.log('isRetweet = ', isRetweet)
-
   const createdAt = dayjs(created_at)
+
+  let notHasRecentTweet = true
+  if (_.get(tweet, 'next.created_at')) {
+    const nextCreatedAt = dayjs(tweet.next.created_at)
+    // If tweeted within 10 minutes.
+    const diffInMinute = createdAt.diff(nextCreatedAt, 'minute')
+    notHasRecentTweet = diffInMinute >= 10
+  }
 
   const extendedEntities = tweet.extended_entities
   const entities = tweet.entities
@@ -50,24 +56,42 @@ export default enhance((props) => {
 
   return (
     <div
-      className={className}
+      className={`${className} group hover:bg-grey-lightest`}
       style={style}
     >
       <div
         className={styles.Tweet}
         ref={setSizeRef}
       >
-        <img
-          src={profile_image_url}
-          alt='avatar'
-          className={styles.Avatar}
-        />
+        {notHasRecentTweet ? (
+          <img
+            src={profile_image_url}
+            alt='avatar'
+            className={styles.Avatar}
+          />
+        ) : (
+          <span className={`${styles.CreatedAt} opacity-0 group-hover:opacity-100`}>
+            <small className='text-grey-darker text-xs'>{createdAt.format('h:mm A')}</small>
+          </span>
+        )}
 
         <div className='flex-1'>
-          <div className='mb-1 flex items-baseline'>
-            <b className='text-sm'>{screen_name}</b>
-            <small className='ml-1 text-grey-darker'>{createdAt.format('h:mm A')}</small>
-          </div>
+          {notHasRecentTweet && (
+            <div className='mb-1 flex items-baseline'>
+              <a className='text-black text-sm font-semibold no-underline hover:underline'
+                 href={`https://twitter.com/${screen_name}`}
+                 target='_blank'
+              >
+                {name}
+              </a>
+
+              <small className='ml-1 text-grey-darker text-sm'>
+                @{screen_name}
+              </small>
+
+              <small className='ml-1 text-grey-darker'>{createdAt.format('h:mm A')}</small>
+            </div>
+          )}
 
           <p
             className={styles.Text}
@@ -81,6 +105,7 @@ export default enhance((props) => {
 
             extendedEntities={extendedEntities}
             entities={entities}
+            retweetedStatus={tweet.retweeted_status}
             quotedStatus={tweet.quoted_status}
           />
         </div>

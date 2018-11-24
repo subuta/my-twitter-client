@@ -49,7 +49,7 @@ export default createWithStyles({
   h1: apply('m-4 p-4 hoge border hover:text-yellow'),
   button: apply('ml-4 mb-4 py-2 px-4 text-black border-2 rounded hover:bg-red active:bg-yellow'),
 
-  Row: apply('px-4 w-screen'),
+  Row: apply('px-2 lg:px-4 w-screen'),
 
   Header,
 

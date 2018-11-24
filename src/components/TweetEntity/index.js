@@ -14,6 +14,7 @@ import withStyles from './style'
 
 import Video from 'src/components/Video'
 import OG from './OG'
+import dayjs from '@app/src/utils/dayjs'
 
 const MEDIA_TYPE_PHOTO = 'photo'
 const MEDIA_TYPE_ANIMATED_GIF = 'animated_gif'
@@ -125,7 +126,7 @@ const withQuote = branch(
     const tweetHtml = decorateText(full_text, { urlEntities })
 
     return (
-      <div className='mt-2 p-2 inline-flex items-start border rounded-lg'>
+      <div className='mt-2 p-4 inline-flex items-start border rounded-lg'>
         {media && (
           <div
             className={`${styles.SmallOGImage} mr-2 rounded-lg`}
@@ -161,6 +162,84 @@ const withQuote = branch(
   _.identity
 )
 
+const withReTweet = branch(
+  ({ retweetedStatus }) => retweetedStatus,
+  renderComponent((props) => {
+    const {
+      styles,
+      retweetedStatus,
+      isMobile
+    } = props
+
+    const {
+      full_text,
+      created_at,
+      user,
+      retweeted_status,
+      quoted_status,
+      extended_entities,
+      entities
+    } = retweetedStatus
+
+    const {
+      name,
+      screen_name,
+      profile_image_url
+    } = user
+
+    const createdAt = dayjs(created_at)
+
+    const urlEntities = entities.urls || []
+
+    const tweetHtml = decorateText(full_text, { urlEntities })
+
+    return (
+      <div className={styles.Retweet}>
+        <div className='flex items-center'>
+          <img
+            src={profile_image_url}
+            alt='avatar'
+            className={styles.Avatar}
+          />
+
+          <a className='text-black text-sm font-semibold no-underline hover:underline'
+             href={`https://twitter.com/${screen_name}`}
+             target='_blank'
+          >
+            {name}
+          </a>
+
+          <small className='ml-1 text-grey-darker text-sm'>
+            @{screen_name}
+          </small>
+        </div>
+
+        <p
+          className={styles.Text}
+          dangerouslySetInnerHTML={{ __html: tweetHtml }}
+        />
+
+        <TweetEntity
+          isMobile={isMobile}
+          createdAt={createdAt}
+          tweet={retweetedStatus}
+
+          extendedEntities={extended_entities}
+          entities={entities}
+          retweetedStatus={retweeted_status}
+          quotedStatus={quoted_status}
+        />
+
+        <div className='mt-1 text-grey'>
+          <small>at Twitter</small>
+          <small className='ml-1 pl-1 border-l border-grey-lighter'>{createdAt.format('MMM Do')}</small>
+        </div>
+      </div>
+    )
+  }),
+  _.identity
+)
+
 const withOG = branch(
   ({ entities: { media, urls } }) => {
     const url = _.first(urls)
@@ -176,14 +255,17 @@ const withOG = branch(
 const enhance = compose(
   withStyles,
   withEmpty,
+  withQuote,
+  withReTweet,
   withAnimatedGif,
   withPhoto,
-  withQuote,
   withOG
 )
 
 // Defaults to null.
-export default enhance((props) => {
+const TweetEntity = enhance((props) => {
   console.log('Not handled TweetEntity type', props)
   return null
 })
+
+export default TweetEntity

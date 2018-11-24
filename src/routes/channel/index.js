@@ -110,18 +110,18 @@ const enhance = compose(
 
 const renderRow = (props) => {
   const {
+    rows = [],
     row,
+    index,
     isMobile,
     setSizeRef,
     style,
-    styles
+    styles,
+    user
   } = props
 
   const retweet = row.retweeted_status
   const hasRetweet = !!retweet
-
-  const tweet = hasRetweet ? retweet : row
-  const user = hasRetweet ? retweet.user : props.user
 
   return (
     <Tweet
@@ -130,7 +130,7 @@ const renderRow = (props) => {
       style={style}
       user={user}
       isRetweet={hasRetweet}
-      tweet={tweet}
+      tweet={row}
       setSizeRef={setSizeRef}
     />
   )
@@ -230,7 +230,7 @@ const Channel = enhance((props) => {
                   overScanCount={6}
                   reversed
                 >
-                  {(props) => renderRow({ ...props, isMobile, user, styles })}
+                  {(props) => renderRow({ ...props, rows, isMobile, user, styles })}
                 </VirtualList>
               </div>
             )

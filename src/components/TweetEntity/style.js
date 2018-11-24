@@ -11,6 +11,12 @@ const TweetMedia = apply('py-2')
 
 const TweetImage = apply('mt-1 border rounded')
 
+const Avatar = {
+  ...apply('flex-none mr-2 rounded'),
+  height: 20,
+  width: 20
+}
+
 const OG = {
   ...apply('mt-2 inline-flex items-start border rounded-lg')
 }
@@ -70,7 +76,18 @@ const Text = {
   '& a': apply('break-all break-words text-blue-light no-underline hover:underline')
 }
 
+const Retweet = {
+  ...apply('relative mt-2 py-1 pl-4 flex-1'),
+
+  '&:before': {
+    ...apply('absolute block bg-grey w-1 pin-t pin-b pin-l rounded-full'),
+
+    content: '""'
+  }
+}
+
 export default createWithStyles({
+  Avatar,
   TweetImage,
   TweetMedia,
   Text,
@@ -81,5 +98,6 @@ export default createWithStyles({
   LargeOGImage,
   SmallOGImage,
   VerifiedIcon,
-  PlayIcon
+  PlayIcon,
+  Retweet
 })

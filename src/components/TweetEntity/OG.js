@@ -248,7 +248,7 @@ const withCard = branch(
         <Meta
           url={url}
           styles={styles}
-          className='flex-1 lg:flex-none p-2 border-l h-24 lg:h-32'
+          className='flex-1 lg:flex-none p-4 border-l h-24 lg:h-32'
           siteIcon={siteIcon}
           meta={meta}
         />
