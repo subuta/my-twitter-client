@@ -8,9 +8,9 @@ import {
 } from 'css-as-js'
 
 const Header = {
-  ...apply('py-4 px-4 flex-0 border-b'),
+  ...apply('py-2 px-4 flex-0 flex flex-col items-start border-b'),
 
-  ...screen('lg', apply('pt-4 pb-0 border-none'))
+  ...screen('lg', apply('pt-2 pb-0 border-none'))
 }
 
 const GroupHeaderContainer = {
@@ -25,22 +25,22 @@ const GroupHeader = {
   ...screen('lg', {
     ...apply('border-none'),
 
-    height: 40,
+    height: 20,
 
     '&:before': {
       ...apply('absolute pin-t pin-l pin-r block w-full bg-white border-b border-grey-lighter'),
       content: '""',
-      height: 20
+      height: 10
     }
   }),
 }
 
 const GroupHeaderLabel = {
   ...screen('lg', {
-    ...apply('mx-4 py-1 px-3 absolute pin-a bg-white rounded-full'),
+    ...apply('mx-4 pb-1 px-3 absolute pin-a bg-white rounded-full'),
 
     left: '50%',
-    top: 'calc(50% - 1px)',
+    top: '50%',
     transform: 'translate3d(-50%, -50%, 0)'
   })
 }

@@ -55,10 +55,8 @@ export default enhance((props) => {
   const tweetHtml = decorateText(full_text, { urlEntities })
 
   // TODO: Add Like and RT count.
-  // FIXME: Sticky
   // TODO: Post tweet feature.
   // TODO: Tweet notification.
-  // TODO: Jump to date feature.
   return (
     <div
       className={`${className} group hover:bg-grey-lightest`}

@@ -202,7 +202,11 @@ const Channel = enhance((props) => {
       </Helmet>
 
       <div className='flex flex-col h-screen'>
-        <header className={styles.Header}>Fixed header area</header>
+        <header className={styles.Header}>
+          <span className='flex-1'>Fixed header area</span>
+
+          <span className='flex-none text-sm text-grey-dark'>boom!</span>
+        </header>
 
         <Sized>
           {({ size, setSizeRef }) => {
