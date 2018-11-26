@@ -12,6 +12,8 @@ export default withStyles(() => {
       <Helmet>
         <style type="text/css">{css}</style>
 
+        <title>My Twitter Client</title>
+
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
       </Helmet>
 
