@@ -1,7 +1,7 @@
 import _ from 'lodash'
 
-import t from 'src/server/utils/twitter'
-import iframely from 'src/server/utils/iframely'
+import t from 'src/utils/twitter'
+import iframely from 'src/utils/iframely'
 
 export default {
   Query: {

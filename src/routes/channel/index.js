@@ -19,16 +19,27 @@ import {
   withHandlers,
   withPropsOnChange,
   withStateHandlers,
+  lifecycle
 } from 'recompose'
 
 import withPreventSSR from 'src/hocs/withPreventSSR'
 import withStyles from './_style'
 
 import gql from 'graphql-tag'
+
 import graphQLClient, {
   tweetFields,
   userFields
 } from 'src/utils/graphQLClient'
+
+import {
+  EventTweetPosted
+} from 'src/config'
+
+import {
+  subscribe,
+  unsubscribe
+} from 'src/utils/sse'
 
 const SCROLL_DIRECTION_UP = 'SCROLL_DIRECTION_UP'
 const SCROLL_DIRECTION_NONE = 'SCROLL_DIRECTION_NONE'
@@ -48,7 +59,7 @@ const enhance = compose(
       const query = gql`
         ${tweetFields}
 
-        query getTweetsWithProfile($user_id: ID!, $limit: Int, $max_id: ID!) {
+        query getTweetsWithProfile($user_id: ID!, $limit: Int, $max_id: ID) {
           twitter {
             tweets(user_id: $user_id, limit: $limit, max_id: $max_id) {
               ...tweetFields
@@ -69,19 +80,38 @@ const enhance = compose(
         }
       `
 
-      const data = await graphQLClient.request(query, { user_id: USER_ID, limit: 101, max_id: maxId })
+      const params = _.pickBy({ user_id: USER_ID, limit: 101, max_id: maxId }, _.identity)
+
+      const data = await graphQLClient.request(query, params)
       const tweets = _.get(data, 'twitter.tweets', [])
 
-      return _.tail(tweets)
+      return maxId ? _.tail(tweets) : tweets
+    },
+
+    subscribeStream: () => (fn) => {
+      // Subscribe events
+      subscribe(EventTweetPosted, fn)
+
+      return () => {
+        // Unsubscribe events
+        unsubscribe(EventTweetPosted, fn)
+      }
     }
   }),
   withStateHandlers(
     ({ tweets }) => {
       return {
-        rows: tweets
+        rows: tweets,
+        scrollToIndex: null
       }
     },
     {
+      setRows: (state) => (rows, scrollToIndex = null) => {
+        return { rows, scrollToIndex }
+      },
+
+      resetScrollToIndex: () => () => ({ scrollToIndex: null }),
+
       prependRows: (state) => (rows) => {
         return {
           rows: [...state.rows, ...rows]
@@ -89,20 +119,34 @@ const enhance = compose(
       }
     }
   ),
-  withPropsOnChange(
-    ['prependRows'],
-    ({ prependRows }) => ({
-      // Prevent duplicate call.
-      prependRows: _.debounce(prependRows, 300, { leading: true, trailing: false })
-    })
-  ),
   withHandlers({
+    onReload: ({ setRows, resetScrollToIndex, getTweets }) => async (data) => {
+      const tweets = await getTweets()
+
+      // More better way to handle this.
+      setRows(tweets, 0)
+      requestAnimationFrame(() => resetScrollToIndex())
+    },
+
     onLoadMore: ({ prependRows, rows, getTweets }) => async ({ isAtFirst }) => {
       if (isAtFirst) return
       const lastId = _.get(_.last(rows), 'id_str')
       const tweets = await getTweets(lastId)
-      // Simulate delay of loading.
       prependRows(tweets)
+    }
+  }),
+  lifecycle({
+    componentDidMount () {
+      const {
+        subscribeStream,
+        onReload
+      } = this.props
+
+      this.unSubscribeStream = subscribeStream(onReload)
+    },
+
+    componentWillUnmount () {
+      if (this.unSubscribeStream) this.unSubscribeStream()
     }
   }),
   withStyles
@@ -189,6 +233,7 @@ const groupRowBy = ({ rows, row, index, lastGroupHeader }) => {
 const Channel = enhance((props) => {
   const {
     rows,
+    scrollToIndex,
     onScroll,
     onLoadMore,
     user,
@@ -232,6 +277,7 @@ const Channel = enhance((props) => {
                   groupBy={groupRowBy}
                   renderGroupHeader={(props) => renderGroupHeader({ ...props, isMobile, styles })}
                   overScanCount={6}
+                  scrollToIndex={scrollToIndex}
                   reversed
                 >
                   {(props) => renderRow({ ...props, rows, isMobile, user, styles })}

@@ -88,7 +88,6 @@ const getTweets = (userId, count, max_id) => getPromiseWithCache(`statuses/user_
   max_id: max_id
 }, _.identity))
 
-
 const getRetweets = (id, count) => getPromiseWithCache('statuses/retweets', { id, count })
 const getFriends = (id, count, cursor) => getPromiseWithCache('friends/list', { id, count, cursor }, 'users')
 const getFollowers = (id, count, cursor) => getPromiseWithCache('followers/list', { id, count, cursor }, 'users')
@@ -96,6 +95,37 @@ const searchFor = (queryParams) => getPromiseWithCache('search/tweets', queryPar
 
 // Mutations
 const postTweet = (status) => getPromiseWithCache('statuses/update', { status }, null, 'post')
+
+// Subscribe for twitter status changes of specific user.
+const subscribeTwitterStream = (onData) => {
+  console.log('[subscribeTwitterStream] subscribe')
+
+  const params = {
+    follow: '320096369', // @subuta
+    // track: "#bitcoin,#litecoin,#monero", // #bitcoin, #litecoin, #monero
+    // follow: "422297024,873788249839370240", // @OrchardAI, @tylerbuchea
+    // locations: "-122.75,36.8,-121.75,37.8", // Bounding box -	San Francisco
+  }
+
+  twitterClient.stream('statuses/filter', params)
+    .on('start', response => console.log('[subscribeTwitterStream] start'))
+    .on('data', (data) => {
+      // Force reloading of tweet.
+      cache.reset()
+      onData(data)
+    })
+    .on('ping', () => console.log('[subscribeTwitterStream] ping'))
+    .on('error', error => console.error('[subscribeTwitterStream] error', error))
+    .on('end', response => console.log('[subscribeTwitterStream] end'))
+
+  return () => {
+    console.log('[subscribeTwitterStream] unSubscribe')
+
+    twitterClient.stream.destroy() // emits "end" and "error" event
+  }
+}
+
+const resetCache = () => cache.reset()
 
 export {
   getUser,
@@ -106,7 +136,10 @@ export {
   searchFor,
   getTweets,
 
-  postTweet
+  postTweet,
+
+  subscribeTwitterStream,
+  resetCache
 }
 
 export default {
@@ -118,5 +151,8 @@ export default {
   searchFor,
   getTweets,
 
-  postTweet
+  postTweet,
+
+  subscribeTwitterStream,
+  resetCache
 }

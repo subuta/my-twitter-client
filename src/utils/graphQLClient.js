@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
 import gql from 'graphql-tag'
 
-const ENDPOINT = 'http://localhost:3000/graphql'
+const ENDPOINT = 'http://localhost:3000/api/graphql'
 
 export const userFields = gql`
   fragment userFields on TwitterUser {

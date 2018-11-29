@@ -1,4 +1,4 @@
-import t from 'src/server/utils/twitter'
+import t from 'src/utils/twitter'
 
 export default {
   Mutation: {

@@ -39,6 +39,7 @@
   "dependencies": {
     "@koa/cors": "^2.2.2",
     "apollo-server-koa": "^1.4.0",
+    "async-exit-hook": "^2.0.1",
     "axios": "^0.18.0",
     "bluebird": "^3.5.2",
     "boom": "^7.2.0",
@@ -78,6 +79,7 @@
     "react-ur": "^0.1.15",
     "react-ur-tools": "^0.1.15",
     "recompose": "^0.30.0",
+    "redis": "^2.8.0",
     "resize-observer-polyfill": "^1.5.0",
     "subscriptions-transport-ws": "^0.9.15",
     "twitter-lite": "^0.7.0",

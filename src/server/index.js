@@ -4,6 +4,19 @@ import koaBody from 'koa-body'
 import serve from 'koa-static'
 import cors from '@koa/cors'
 import clearModule from 'clear-module'
+import exitHook from 'async-exit-hook'
+
+import {
+  ChannelAll,
+  EventTweetPosted
+} from 'src/config'
+
+import stream from './api/stream'
+
+import { publish } from 'src/utils/redis'
+import {
+  subscribeTwitterStream
+} from 'src/utils/twitter'
 
 import {
   ROOT_DIR,
@@ -48,6 +61,10 @@ if (dev) {
 // try PUBLIC_DIR first
 app.use(serve(PUBLIC_DIR))
 
+// Mount stream routes.
+app.use(stream.routes())
+app.use(stream.allowedMethods())
+
 // Register views routes/allowedMethods
 if (dev) {
   // Dynamic import modules for development(With no-module-cache).
@@ -70,6 +87,15 @@ if (dev) {
   app.use(views.allowedMethods())
 }
 
+// Subscribe for twitter events.
+const unSubscribeTwitterStream = subscribeTwitterStream((data) => {
+  // Publish tweet event to clients.
+  publish(ChannelAll, {
+    event: EventTweetPosted,
+    data
+  })
+})
+
 const onError = (err) => {
   // Ignore error for page deletion.
   if (err.message.match(/Cannot find module '.*\/pages(\/.*)\.js'/)) {
@@ -82,6 +108,12 @@ const onError = (err) => {
 
 app.on('error', onError)
 process.on('uncaughtException', onError)
+
+exitHook((cb) => {
+  console.log('\r\nTry to exit server ...')
+  unSubscribeTwitterStream()
+  cb()
+})
 
 // Serve the files on port.
 app.listen(port, function () {

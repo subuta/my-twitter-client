@@ -7,7 +7,7 @@ import { graphqlKoa } from 'apollo-server-koa'
 import schema from './schema'
 
 const router = new Router({
-  prefix: '/graphql'
+  prefix: '/api/graphql'
 })
 
 const graphQLServerOptions = {
