@@ -11,6 +11,7 @@ import dayjs, {
 
 import {
   VirtualList,
+  NAMESPACE,
   Sized
 } from 'react-renderless-virtual-list'
 
@@ -50,9 +51,10 @@ const WIDTH_SMALL = 576
 
 import Tweet from 'src/components/Tweet'
 
+const isBrowser = typeof window !== 'undefined'
+
 const enhance = compose(
   hot(module),
-  withPreventSSR,
   withHandlers({
     getTweets: () => async (maxId) => {
       // Get sorted todoes by dueDate ASC.
@@ -101,7 +103,7 @@ const enhance = compose(
   withStateHandlers(
     ({ tweets }) => {
       return {
-        rows: tweets,
+        rows: tweets || [],
         scrollToIndex: null
       }
     },
@@ -166,6 +168,7 @@ const renderRow = (props) => {
 
   const retweet = row.retweeted_status
   const hasRetweet = !!retweet
+  const nextIndex = row[NAMESPACE]['nextIndex']
 
   return (
     <Tweet
@@ -175,6 +178,7 @@ const renderRow = (props) => {
       user={user}
       isRetweet={hasRetweet}
       tweet={row}
+      nextTweet={rows[nextIndex]}
       setSizeRef={setSizeRef}
     />
   )
@@ -260,7 +264,7 @@ const Channel = enhance((props) => {
             if (size.width) {
               isMobile = WIDTH_SMALL > size.width
             } else {
-              isMobile = WIDTH_SMALL > window.innerWidth
+              isMobile = isBrowser ? WIDTH_SMALL > window.innerWidth : false
             }
 
             return (
@@ -280,7 +284,7 @@ const Channel = enhance((props) => {
                   scrollToIndex={scrollToIndex}
                   reversed
                 >
-                  {(props) => renderRow({ ...props, rows, isMobile, user, styles })}
+                  {(props) => renderRow({ ...props, isMobile, user, styles })}
                 </VirtualList>
               </div>
             )

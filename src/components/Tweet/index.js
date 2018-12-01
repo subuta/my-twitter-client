@@ -2,6 +2,7 @@ import React from 'react'
 import {
   compose,
 } from 'recompose'
+import _ from 'lodash'
 
 import dayjs from 'src/utils/dayjs'
 import { decorateText } from 'src/utils/tweet'
@@ -40,8 +41,9 @@ export default enhance((props) => {
   const createdAt = dayjs(created_at)
 
   let notHasRecentTweet = true
-  if (_.get(tweet, 'next.created_at')) {
-    const nextCreatedAt = dayjs(tweet.next.created_at)
+
+  if (nextTweet && nextTweet.created_at) {
+    const nextCreatedAt = dayjs(nextTweet.created_at)
     // If tweeted within 10 minutes.
     const diffInMinute = createdAt.diff(nextCreatedAt, 'minute')
     notHasRecentTweet = diffInMinute >= 10
