@@ -14,7 +14,7 @@ import withStyles from './style'
 
 import Video from 'src/components/Video'
 import OG from './OG'
-import dayjs from '@app/src/utils/dayjs'
+import { fromTwitterDate } from 'src/utils/moment'
 
 const MEDIA_TYPE_PHOTO = 'photo'
 const MEDIA_TYPE_ANIMATED_GIF = 'animated_gif'
@@ -130,7 +130,7 @@ const withQuote = branch(
         {media && (
           <div
             className={`${styles.SmallOGImage} mr-2 rounded-lg`}
-            style={{backgroundImage: `url(${media.media_url})`}}
+            style={{ backgroundImage: `url(${media.media_url})` }}
           />
         )}
 
@@ -187,7 +187,7 @@ const withReTweet = branch(
       profile_image_url
     } = user
 
-    const createdAt = dayjs(created_at)
+    const createdAt = fromTwitterDate(created_at)
 
     const urlEntities = entities.urls || []
 

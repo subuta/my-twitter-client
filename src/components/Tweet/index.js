@@ -4,7 +4,7 @@ import {
 } from 'recompose'
 import _ from 'lodash'
 
-import dayjs from 'src/utils/dayjs'
+import { fromTwitterDate } from 'src/utils/moment'
 import { decorateText } from 'src/utils/tweet'
 
 import TweetEntity from 'src/components/TweetEntity'
@@ -38,12 +38,12 @@ export default enhance((props) => {
     profile_image_url
   } = user
 
-  const createdAt = dayjs(created_at)
+  const createdAt = fromTwitterDate(created_at)
 
   let notHasRecentTweet = true
 
   if (nextTweet && nextTweet.created_at) {
-    const nextCreatedAt = dayjs(nextTweet.created_at)
+    const nextCreatedAt = fromTwitterDate(nextTweet.created_at)
     // If tweeted within 10 minutes.
     const diffInMinute = createdAt.diff(nextCreatedAt, 'minute')
     notHasRecentTweet = diffInMinute >= 10
@@ -75,7 +75,7 @@ export default enhance((props) => {
             className={styles.Avatar}
           />
         ) : (
-          <span className={`${styles.CreatedAt} opacity-0 group-hover:opacity-100`}>
+          <span className={`${styles.CreatedAt} flex-none opacity-0 md:group-hover:opacity-100`}>
             <small className='text-grey-darker text-xs'>{createdAt.format('h:mm A')}</small>
           </span>
         )}

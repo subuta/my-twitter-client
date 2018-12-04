@@ -3,27 +3,25 @@ import { Helmet } from 'react-helmet'
 import { hot } from 'react-hot-loader'
 import _ from 'lodash'
 
-import dayjs, {
+import {
+  fromTwitterDate,
   isToday,
   isThisYear,
   isYesterday
-} from 'src/utils/dayjs'
+} from 'src/utils/moment'
 
 import {
   VirtualList,
-  NAMESPACE,
   Sized
 } from 'react-renderless-virtual-list'
 
 import {
   compose,
   withHandlers,
-  withPropsOnChange,
   withStateHandlers,
   lifecycle
 } from 'recompose'
 
-import withPreventSSR from 'src/hocs/withPreventSSR'
 import withStyles from './_style'
 
 import gql from 'graphql-tag'
@@ -112,9 +110,9 @@ const enhance = compose(
         return { rows, scrollToIndex }
       },
 
-      resetScrollToIndex: () => () => ({ scrollToIndex: null }),
+      setScrollToIndex: () => (scrollToIndex = null) => ({ scrollToIndex }),
 
-      prependRows: (state) => (rows) => {
+      appendRows: (state) => (rows) => {
         return {
           rows: [...state.rows, ...rows]
         }
@@ -122,19 +120,19 @@ const enhance = compose(
     }
   ),
   withHandlers({
-    onReload: ({ setRows, resetScrollToIndex, getTweets }) => async (data) => {
+    onReload: ({ setRows, setScrollToIndex, getTweets }) => async (data) => {
       const tweets = await getTweets()
 
-      // More better way to handle this.
+      // More better way to handle scrollToBottom.
       setRows(tweets, 0)
-      requestAnimationFrame(() => resetScrollToIndex())
+      requestAnimationFrame(() => setScrollToIndex(null))
     },
 
-    onLoadMore: ({ prependRows, rows, getTweets }) => async ({ isAtFirst }) => {
+    onLoadMore: ({ appendRows, rows, getTweets }) => async ({ isAtFirst }) => {
       if (isAtFirst) return
       const lastId = _.get(_.last(rows), 'id_str')
       const tweets = await getTweets(lastId)
-      prependRows(tweets)
+      appendRows(tweets)
     }
   }),
   lifecycle({
@@ -143,6 +141,10 @@ const enhance = compose(
         subscribeStream,
         onReload
       } = this.props
+
+      if (window) {
+        window.onReload = onReload
+      }
 
       this.unSubscribeStream = subscribeStream(onReload)
     },
@@ -158,6 +160,7 @@ const renderRow = (props) => {
   const {
     rows = [],
     row,
+    nextRow,
     index,
     isMobile,
     setSizeRef,
@@ -168,7 +171,6 @@ const renderRow = (props) => {
 
   const retweet = row.retweeted_status
   const hasRetweet = !!retweet
-  const nextIndex = row[NAMESPACE]['nextIndex']
 
   return (
     <Tweet
@@ -178,7 +180,7 @@ const renderRow = (props) => {
       user={user}
       isRetweet={hasRetweet}
       tweet={row}
-      nextTweet={rows[nextIndex]}
+      nextTweet={nextRow}
       setSizeRef={setSizeRef}
     />
   )
@@ -208,7 +210,7 @@ const renderGroupHeader = ({ row, isMobile, setSizeRef, style, styles }) => {
 }
 
 const getGroupHeaderForRow = (row) => {
-  const createdAt = dayjs(row.created_at)
+  const createdAt = fromTwitterDate(row.created_at)
 
   if (isToday(createdAt)) {
     return 'Today'
@@ -244,6 +246,9 @@ const Channel = enhance((props) => {
     styles
   } = props
 
+  const firstRow = _.first(rows)
+  if (!firstRow) return null
+
   return (
     <>
       <Helmet>
@@ -273,6 +278,8 @@ const Channel = enhance((props) => {
                 ref={setSizeRef}
               >
                 <VirtualList
+                  // TODO: More better way to handle unshift row.
+                  key={firstRow.id_str}
                   isMobile={isMobile}
                   onLoadMore={onLoadMore}
                   onScroll={onScroll}

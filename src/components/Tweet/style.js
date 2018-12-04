@@ -17,11 +17,7 @@ const Avatar = {
 
 const CreatedAt = {
   ...apply('flex-none mr-2 text-right whitespace-no-wrap'),
-  width: 40,
-
-  ...screen('lg', {
-    width: 48,
-  })
+  width: 48
 }
 
 const Text = {
