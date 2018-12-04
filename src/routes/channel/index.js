@@ -330,6 +330,7 @@ const Channel = enhance((props) => {
                     onLoadMore={onLoadMore}
                     onScroll={onScroll}
                     height={size.height}
+                    width={size.width}
                     rows={rows}
                     groupBy={groupRowBy}
                     renderGroupHeader={(props) => renderGroupHeader({ ...props, isMobile, styles })}
