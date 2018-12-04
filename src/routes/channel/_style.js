@@ -7,16 +7,45 @@ import {
   screen
 } from 'css-as-js'
 
+const SIDEBAR_WIDTH = 196
+
 const Header = {
   ...apply('py-2 px-4 flex-0 flex flex-col items-start border-b'),
 
   ...screen('lg', apply('pt-2 pb-0 border-none'))
 }
 
+const Logo = {
+  ...apply('block mx-auto text-white'),
+
+  width: '156px !important'
+}
+
+const Sidebar = {
+  ...apply('flex-col items-start justify-between h-screen flex-none bg-purple-darker text-white hidden'),
+
+  width: SIDEBAR_WIDTH,
+
+  ...screen('lg', {
+    ...apply('flex')
+  })
+}
+
+const Content = {
+  ...apply('flex flex-col h-screen flex-1 shadow'),
+
+  ...screen('lg', {
+    width: `calc(100vw - ${SIDEBAR_WIDTH}px)`
+  })
+}
+
 const GroupHeaderContainer = {
   ...apply('pl-4 w-screen z-50'),
 
-  ...screen('lg', apply('pl-0 pin-t'))
+  ...screen('lg', {
+    ...apply('pl-0 pin-t'),
+    width: `calc(100vw - ${SIDEBAR_WIDTH}px)`
+  }),
 }
 
 const GroupHeader = {
@@ -52,6 +81,10 @@ export default createWithStyles({
   Row: apply('px-2 lg:px-4 w-screen'),
 
   Header,
+  Logo,
+
+  Sidebar,
+  Content,
 
   GroupHeaderContainer,
   GroupHeader,

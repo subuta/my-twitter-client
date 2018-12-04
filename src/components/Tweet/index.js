@@ -8,6 +8,7 @@ import { fromTwitterDate } from 'src/utils/moment'
 import { decorateText } from 'src/utils/tweet'
 
 import TweetEntity from 'src/components/TweetEntity'
+import Icon from 'src/components/Icon'
 
 import withStyles from './style'
 
@@ -28,6 +29,7 @@ export default enhance((props) => {
   } = props
 
   const {
+    favorite_count,
     full_text,
     created_at
   } = tweet
@@ -56,9 +58,7 @@ export default enhance((props) => {
 
   const tweetHtml = decorateText(full_text, { urlEntities })
 
-  // TODO: Add Like and RT count.
   // TODO: Post tweet feature.
-  // TODO: Tweet notification.
   return (
     <div
       className={`${className} group hover:bg-grey-lightest`}
@@ -76,7 +76,12 @@ export default enhance((props) => {
           />
         ) : (
           <span className={`${styles.CreatedAt} flex-none opacity-0 md:group-hover:opacity-100`}>
-            <small className='text-grey-darker text-xs'>{createdAt.format('h:mm A')}</small>
+            <a className='no-underline text-grey-darker hover:underline'
+               href={`https://twitter.com/${screen_name}/status/${tweet.id_str}`}
+               target='_blank'
+            >
+              <small className='text-xs'>{createdAt.format('h:mm A')}</small>
+            </a>
           </span>
         )}
 
@@ -94,7 +99,12 @@ export default enhance((props) => {
                 @{screen_name}
               </small>
 
-              <small className='ml-1 text-grey-darker'>{createdAt.format('h:mm A')}</small>
+              <a className='no-underline text-grey-darker hover:underline'
+                 href={`https://twitter.com/${screen_name}/status/${tweet.id_str}`}
+                 target='_blank'
+              >
+                <small className='ml-1'>{createdAt.format('h:mm A')}</small>
+              </a>
             </div>
           )}
 
@@ -113,6 +123,18 @@ export default enhance((props) => {
             retweetedStatus={tweet.retweeted_status}
             quotedStatus={tweet.quoted_status}
           />
+
+          <div>
+            {favorite_count > 0 && (
+              <span className='mt-2 inline-flex p-1 border rounded-lg items-center justify-center'>
+                <Icon className='text-grey-darker'
+                      icon='heart-romantic-love-valentines-day-celebration'
+                      size='xs'
+                />
+                <span className='ml-1 text-xs text-grey-darker font-semibold'>{favorite_count}</span>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>

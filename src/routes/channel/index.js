@@ -40,6 +40,8 @@ import {
   unsubscribe
 } from 'src/utils/sse'
 
+import Icon from 'src/components/Icon'
+
 const SCROLL_DIRECTION_UP = 'SCROLL_DIRECTION_UP'
 const SCROLL_DIRECTION_NONE = 'SCROLL_DIRECTION_NONE'
 const SCROLL_DIRECTION_DOWN = 'SCROLL_DIRECTION_DOWN'
@@ -141,10 +143,6 @@ const enhance = compose(
         subscribeStream,
         onReload
       } = this.props
-
-      if (window) {
-        window.onReload = onReload
-      }
 
       this.unSubscribeStream = subscribeStream(onReload)
     },
@@ -255,48 +253,97 @@ const Channel = enhance((props) => {
         <title>Channel</title>
       </Helmet>
 
-      <div className='flex flex-col h-screen'>
-        <header className={styles.Header}>
-          <span className='flex-1'>Fixed header area</span>
+      <div className='flex items-start justify-start'>
+        <div className={styles.Sidebar}>
+          <div className='w-full'>
+            <div className='pt-2'>
+              <Icon className={styles.Logo}
+                    icon='logo'
+                    size='custom'
+              ></Icon>
+            </div>
 
-          <span className='flex-none text-sm text-grey-dark'>boom!</span>
-        </header>
+            <div className='py-4'>
+              <h3 className='px-4'>Channels</h3>
 
-        <Sized>
-          {({ size, setSizeRef }) => {
-            // FIXME: Better way for detecting mobile.
-            let isMobile = false
-            if (size.width) {
-              isMobile = WIDTH_SMALL > size.width
-            } else {
-              isMobile = isBrowser ? WIDTH_SMALL > window.innerWidth : false
-            }
+              <ul className='mt-2 list-reset'>
+                <li className='px-4 py-1 font-semibold bg-blue-light'>#i_subuta</li>
+              </ul>
+            </div>
+          </div>
 
-            return (
-              <div
-                className='flex-1 overflow-hidden'
-                ref={setSizeRef}
-              >
-                <VirtualList
-                  // TODO: More better way to handle unshift row.
-                  key={firstRow.id_str}
-                  isMobile={isMobile}
-                  onLoadMore={onLoadMore}
-                  onScroll={onScroll}
-                  height={size.height}
-                  rows={rows}
-                  groupBy={groupRowBy}
-                  renderGroupHeader={(props) => renderGroupHeader({ ...props, isMobile, styles })}
-                  overScanCount={6}
-                  scrollToIndex={scrollToIndex}
-                  reversed
+          <div className='px-4 pb-2 text-grey'>
+            {/* Placeholder :) */}
+          </div>
+        </div>
+
+        <div className={styles.Content}>
+          <header className={styles.Header}>
+            <p className='flex-1 w-full flex items-center justify-between'>
+              <b className='text-black'>#i_subuta</b>
+
+              <span className='text-grey'>
+                <span>by</span>
+                <a className='inline-block ml-1 text-grey no-underline hover:underline'
+                   href="https://github.com/subuta"
+                   target='_blank'
                 >
-                  {(props) => renderRow({ ...props, isMobile, user, styles })}
-                </VirtualList>
-              </div>
-            )
-          }}
-        </Sized>
+                  @subuta
+                </a>
+
+                <a className='ml-2 text-grey-darker no-underline'
+                   href="https://github.com/subuta/my-twitter-client"
+                   target='_blank'
+                >
+                  <Icon className=''
+                        icon='social-media-social-media-logo-github-1'
+                        size='xs'
+                  ></Icon>
+                </a>
+              </span>
+            </p>
+
+            <span className='mt-1 flex-none text-sm text-grey-dark'>
+              My daily tweets
+            </span>
+          </header>
+
+          <Sized>
+            {({ size, setSizeRef }) => {
+              // FIXME: Better way for detecting mobile.
+              let isMobile = false
+              if (size.width) {
+                isMobile = WIDTH_SMALL > size.width
+              } else {
+                isMobile = isBrowser ? WIDTH_SMALL > window.innerWidth : false
+              }
+
+              return (
+                <div
+                  className='flex-1 overflow-hidden'
+                  ref={setSizeRef}
+                >
+                  <VirtualList
+                    // More better way to handle here(refresh on prepend.)
+                    key={firstRow.id_str}
+                    isMobile={isMobile}
+                    onLoadMore={onLoadMore}
+                    onScroll={onScroll}
+                    height={size.height}
+                    rows={rows}
+                    groupBy={groupRowBy}
+                    renderGroupHeader={(props) => renderGroupHeader({ ...props, isMobile, styles })}
+                    overScanCount={6}
+                    scrollToIndex={scrollToIndex}
+                    reversed
+                  >
+                    {(props) => renderRow({ ...props, isMobile, user, styles })}
+                  </VirtualList>
+                </div>
+              )
+            }}
+          </Sized>
+        </div>
       </div>
     </>
   )
