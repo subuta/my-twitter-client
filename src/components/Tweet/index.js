@@ -127,7 +127,7 @@ export default enhance((props) => {
           <div>
             {favorite_count > 0 && (
               <span className='mt-2 inline-flex p-1 border rounded-lg items-center justify-center'>
-                <Icon className='text-grey-darker'
+                <Icon className='text-pink-dark'
                       icon='heart-romantic-love-valentines-day-celebration'
                       size='xs'
                 />

@@ -41,6 +41,7 @@ import {
 } from 'src/utils/sse'
 
 import Icon from 'src/components/Icon'
+import Placeholder from 'src/components/Placeholder'
 
 const SCROLL_DIRECTION_UP = 'SCROLL_DIRECTION_UP'
 const SCROLL_DIRECTION_NONE = 'SCROLL_DIRECTION_NONE'
@@ -207,6 +208,21 @@ const renderGroupHeader = ({ row, isMobile, setSizeRef, style, styles }) => {
   )
 }
 
+const renderPlaceholder = (props) => {
+  const {
+    className = 'placeholder',
+    style
+  } = props
+
+  return (
+    <Placeholder
+      key='placeholder'
+      className={className}
+      style={style}
+    />
+  )
+}
+
 const getGroupHeaderForRow = (row) => {
   const createdAt = fromTwitterDate(row.created_at)
 
@@ -273,7 +289,22 @@ const Channel = enhance((props) => {
           </div>
 
           <div className='px-4 pb-2 text-grey'>
-            {/* Placeholder :) */}
+            <span>by</span>
+            <a className='inline-block ml-1 text-grey no-underline hover:underline'
+               href="https://github.com/subuta"
+               target='_blank'
+            >
+              @subuta
+            </a>
+
+            <a className='ml-2 text-grey no-underline'
+               href="https://github.com/subuta/my-twitter-client"
+               target='_blank'
+            >
+              <Icon icon='social-media-social-media-logo-github-1'
+                    size='xs'
+              ></Icon>
+            </a>
           </div>
         </div>
 
@@ -283,23 +314,7 @@ const Channel = enhance((props) => {
               <b className='text-black'>#i_subuta</b>
 
               <span className='text-grey'>
-                <span>by</span>
-                <a className='inline-block ml-1 text-grey no-underline hover:underline'
-                   href="https://github.com/subuta"
-                   target='_blank'
-                >
-                  @subuta
-                </a>
-
-                <a className='ml-2 text-grey-darker no-underline'
-                   href="https://github.com/subuta/my-twitter-client"
-                   target='_blank'
-                >
-                  <Icon className=''
-                        icon='social-media-social-media-logo-github-1'
-                        size='xs'
-                  ></Icon>
-                </a>
+                {/* Placeholder :) */}
               </span>
             </p>
 
@@ -334,6 +349,7 @@ const Channel = enhance((props) => {
                     rows={rows}
                     groupBy={groupRowBy}
                     renderGroupHeader={(props) => renderGroupHeader({ ...props, isMobile, styles })}
+                    renderPlaceholder={renderPlaceholder}
                     overScanCount={6}
                     scrollToIndex={scrollToIndex}
                     reversed
