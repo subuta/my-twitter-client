@@ -3,7 +3,6 @@ import logger from 'koa-logger'
 import koaBody from 'koa-body'
 import serve from 'koa-static'
 import cors from '@koa/cors'
-import clearModule from 'clear-module'
 import exitHook from 'async-exit-hook'
 
 import {
@@ -14,6 +13,7 @@ import {
 import stream from './api/stream'
 
 import { publish } from 'src/utils/redis'
+import { clear } from 'src/utils/clearModule'
 import {
   subscribeTwitterStream
 } from 'src/utils/twitter'
@@ -51,9 +51,13 @@ if (dev) {
   })
   watcher.on('ready', () => {
     watcher.on('all', () => {
-      console.log('Clearing src module cache from server')
-      clearModule.match(/src/)
-      clearModule.match(/(css-as-js|react-ur)/)
+      const cleared = clear([
+        '@/src/**',
+        '@/node_modules/{css-as-js, react-ur}/**',
+        // Modules to be ignored.
+        '!@/src/utils/cache.js'
+      ])
+      console.log(`Cleared ${cleared.length} modules from module cache inside @/src`)
     })
   })
 }

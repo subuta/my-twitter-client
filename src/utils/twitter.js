@@ -2,7 +2,6 @@
 
 import Twitter from 'twitter-lite'
 import _ from 'lodash'
-import LRU from 'lru-cache'
 import crypto from 'crypto'
 
 const {
@@ -12,11 +11,7 @@ const {
   TWITTER_ACCESS_TOKEN_SECRET
 } = process.env
 
-// Simple LRU Cache.
-const cache = LRU({
-  max: 1000,
-  maxAge: 1000 * 60 * 60 // 1h
-})
+import cache from './cache'
 
 // Hash function.
 const sha1 = (data) => {

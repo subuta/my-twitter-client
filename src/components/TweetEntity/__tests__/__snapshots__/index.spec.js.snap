@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render with ANIMATED_GIF. 1`] = `
-<Styled(branch(branch(branch(Component))))
+<branch(branch(branch(branch(branch(branch(Component))))))
   entities={
     Object {
       "hashtags": Array [],
@@ -104,133 +104,110 @@ exports[`should render with ANIMATED_GIF. 1`] = `
     }
   }
 >
-  <Style
-    Component={[Function]}
-    Style={
-      FreeStyle {
-        "_children": Object {},
-        "_counters": Object {},
-        "_keys": Array [],
-        "changeId": 0,
-        "changes": Object {
-          "add": [Function],
-          "change": [Function],
-          "remove": [Function],
-        },
-        "debug": true,
-        "hash": [Function],
-        "id": "f2",
-        "sheet": Array [],
+  <branch(branch(branch(branch(branch(Component)))))
+    entities={
+      Object {
+        "hashtags": Array [],
+        "media": Array [
+          Object {
+            "display_url": "pic.twitter.com/IIMBa4I4Vp",
+            "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+            "id": 1049606350135685100,
+            "id_str": "1049606350135685120",
+            "indices": Array [
+              12,
+              35,
+            ],
+            "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+            "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+            "sizes": Object {
+              "large": Object {
+                "h": 172,
+                "resize": "fit",
+                "w": 220,
+              },
+              "medium": Object {
+                "h": 172,
+                "resize": "fit",
+                "w": 220,
+              },
+              "small": Object {
+                "h": 172,
+                "resize": "fit",
+                "w": 220,
+              },
+              "thumb": Object {
+                "h": 150,
+                "resize": "crop",
+                "w": 150,
+              },
+            },
+            "type": "photo",
+            "url": "https://t.co/IIMBa4I4Vp",
+          },
+        ],
+        "symbols": Array [],
+        "urls": Array [],
+        "user_mentions": Array [],
       }
     }
-    componentName="branch(branch(branch(Component)))"
-    componentProps={
+    extendedEntities={
       Object {
-        "entities": Object {
-          "hashtags": Array [],
-          "media": Array [
-            Object {
-              "display_url": "pic.twitter.com/IIMBa4I4Vp",
-              "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
-              "id": 1049606350135685100,
-              "id_str": "1049606350135685120",
-              "indices": Array [
-                12,
-                35,
-              ],
-              "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
-              "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 172,
-                  "resize": "fit",
-                  "w": 220,
-                },
-                "medium": Object {
-                  "h": 172,
-                  "resize": "fit",
-                  "w": 220,
-                },
-                "small": Object {
-                  "h": 172,
-                  "resize": "fit",
-                  "w": 220,
-                },
-                "thumb": Object {
-                  "h": 150,
-                  "resize": "crop",
-                  "w": 150,
-                },
+        "media": Array [
+          Object {
+            "display_url": "pic.twitter.com/IIMBa4I4Vp",
+            "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
+            "id": 1049606350135685100,
+            "id_str": "1049606350135685120",
+            "indices": Array [
+              12,
+              35,
+            ],
+            "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+            "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
+            "sizes": Object {
+              "large": Object {
+                "h": 172,
+                "resize": "fit",
+                "w": 220,
               },
-              "type": "photo",
-              "url": "https://t.co/IIMBa4I4Vp",
-            },
-          ],
-          "symbols": Array [],
-          "urls": Array [],
-          "user_mentions": Array [],
-        },
-        "extendedEntities": Object {
-          "media": Array [
-            Object {
-              "display_url": "pic.twitter.com/IIMBa4I4Vp",
-              "expanded_url": "https://twitter.com/subuta_nico/status/1049606383195152384/photo/1",
-              "id": 1049606350135685100,
-              "id_str": "1049606350135685120",
-              "indices": Array [
-                12,
-                35,
-              ],
-              "media_url": "http://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
-              "media_url_https": "https://pbs.twimg.com/tweet_video_thumb/DpDzahXU8AAb81_.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 172,
-                  "resize": "fit",
-                  "w": 220,
-                },
-                "medium": Object {
-                  "h": 172,
-                  "resize": "fit",
-                  "w": 220,
-                },
-                "small": Object {
-                  "h": 172,
-                  "resize": "fit",
-                  "w": 220,
-                },
-                "thumb": Object {
-                  "h": 150,
-                  "resize": "crop",
-                  "w": 150,
-                },
+              "medium": Object {
+                "h": 172,
+                "resize": "fit",
+                "w": 220,
               },
-              "type": "animated_gif",
-              "url": "https://t.co/IIMBa4I4Vp",
-              "video_info": Object {
-                "aspect_ratio": Array [
-                  55,
-                  43,
-                ],
-                "variants": Array [
-                  Object {
-                    "bitrate": 0,
-                    "content_type": "video/mp4",
-                    "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
-                  },
-                ],
+              "small": Object {
+                "h": 172,
+                "resize": "fit",
+                "w": 220,
+              },
+              "thumb": Object {
+                "h": 150,
+                "resize": "crop",
+                "w": 150,
               },
             },
-          ],
-        },
-        "styles": Object {
-          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        },
+            "type": "animated_gif",
+            "url": "https://t.co/IIMBa4I4Vp",
+            "video_info": Object {
+              "aspect_ratio": Array [
+                55,
+                43,
+              ],
+              "variants": Array [
+                Object {
+                  "bitrate": 0,
+                  "content_type": "video/mp4",
+                  "url": "https://video.twimg.com/tweet_video/DpDzahXU8AAb81_.mp4",
+                },
+              ],
+            },
+          },
+        ],
       }
     }
   >
-    <branch(branch(branch(Component)))
+    <branch(branch(branch(branch(Component))))
       entities={
         Object {
           "hashtags": Array [],
@@ -332,14 +309,8 @@ exports[`should render with ANIMATED_GIF. 1`] = `
           ],
         }
       }
-      styles={
-        Object {
-          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        }
-      }
     >
-      <branch(branch(Component))
+      <branch(branch(branch(Component)))
         entities={
           Object {
             "hashtags": Array [],
@@ -439,12 +410,6 @@ exports[`should render with ANIMATED_GIF. 1`] = `
                 },
               },
             ],
-          }
-        }
-        styles={
-          Object {
-            "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
           }
         }
       >
@@ -550,12 +515,6 @@ exports[`should render with ANIMATED_GIF. 1`] = `
               ],
             }
           }
-          styles={
-            Object {
-              "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-            }
-          }
         >
           <Component
             entities={
@@ -659,12 +618,6 @@ exports[`should render with ANIMATED_GIF. 1`] = `
                 ],
               }
             }
-            styles={
-              Object {
-                "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-              }
-            }
           >
             <withHandlers(Component)
               autoPlay={true}
@@ -735,14 +688,14 @@ exports[`should render with ANIMATED_GIF. 1`] = `
             </withHandlers(Component)>
           </Component>
         </renderComponent(Component)>
-      </branch(branch(Component))>
-    </branch(branch(branch(Component)))>
-  </Style>
-</Styled(branch(branch(branch(Component))))>
+      </branch(branch(branch(Component)))>
+    </branch(branch(branch(branch(Component))))>
+  </branch(branch(branch(branch(branch(Component)))))>
+</branch(branch(branch(branch(branch(branch(Component))))))>
 `;
 
 exports[`should render with PHOTO. 1`] = `
-<Styled(branch(branch(branch(Component))))
+<branch(branch(branch(branch(branch(branch(Component))))))
   entities={
     Object {
       "media": Array [
@@ -772,62 +725,37 @@ exports[`should render with PHOTO. 1`] = `
     }
   }
 >
-  <Style
-    Component={[Function]}
-    Style={
-      FreeStyle {
-        "_children": Object {},
-        "_counters": Object {},
-        "_keys": Array [],
-        "changeId": 0,
-        "changes": Object {
-          "add": [Function],
-          "change": [Function],
-          "remove": [Function],
-        },
-        "debug": true,
-        "hash": [Function],
-        "id": "f2",
-        "sheet": Array [],
-      }
-    }
-    componentName="branch(branch(branch(Component)))"
-    componentProps={
+  <branch(branch(branch(branch(branch(Component)))))
+    entities={
       Object {
-        "entities": Object {
-          "media": Array [
-            Object {
-              "additional_media_info": null,
-              "display_url": "pic.twitter.com/uc9iteuAQ8",
-              "id_str": "967319472796180480",
-              "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
-              "sizes": Object {
-                "large": Object {
-                  "h": 1290,
-                  "resize": "fit",
-                  "w": 1838,
-                },
-                "small": Object {
-                  "h": 477,
-                  "resize": "fit",
-                  "w": 680,
-                },
+        "media": Array [
+          Object {
+            "additional_media_info": null,
+            "display_url": "pic.twitter.com/uc9iteuAQ8",
+            "id_str": "967319472796180480",
+            "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+            "sizes": Object {
+              "large": Object {
+                "h": 1290,
+                "resize": "fit",
+                "w": 1838,
               },
-              "type": "photo",
-              "url": "https://t.co/uc9iteuAQ8",
-              "video_info": null,
+              "small": Object {
+                "h": 477,
+                "resize": "fit",
+                "w": 680,
+              },
             },
-          ],
-          "urls": Array [],
-        },
-        "styles": Object {
-          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        },
+            "type": "photo",
+            "url": "https://t.co/uc9iteuAQ8",
+            "video_info": null,
+          },
+        ],
+        "urls": Array [],
       }
     }
   >
-    <branch(branch(branch(Component)))
+    <branch(branch(branch(branch(Component))))
       entities={
         Object {
           "media": Array [
@@ -856,14 +784,8 @@ exports[`should render with PHOTO. 1`] = `
           "urls": Array [],
         }
       }
-      styles={
-        Object {
-          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        }
-      }
     >
-      <branch(branch(Component))
+      <branch(branch(branch(Component)))
         entities={
           Object {
             "media": Array [
@@ -892,14 +814,8 @@ exports[`should render with PHOTO. 1`] = `
             "urls": Array [],
           }
         }
-        styles={
-          Object {
-            "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-          }
-        }
       >
-        <branch(Component)
+        <branch(branch(Component))
           entities={
             Object {
               "media": Array [
@@ -928,14 +844,8 @@ exports[`should render with PHOTO. 1`] = `
               "urls": Array [],
             }
           }
-          styles={
-            Object {
-              "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-            }
-          }
         >
-          <Component
+          <branch(Component)
             entities={
               Object {
                 "media": Array [
@@ -964,92 +874,58 @@ exports[`should render with PHOTO. 1`] = `
                 "urls": Array [],
               }
             }
-            styles={
-              Object {
-                "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-                "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-              }
-            }
           >
-            <div>
-              hoge
-            </div>
-          </Component>
-        </branch(Component)>
-      </branch(branch(Component))>
-    </branch(branch(branch(Component)))>
-  </Style>
-</Styled(branch(branch(branch(Component))))>
+            <Component
+              entities={
+                Object {
+                  "media": Array [
+                    Object {
+                      "additional_media_info": null,
+                      "display_url": "pic.twitter.com/uc9iteuAQ8",
+                      "id_str": "967319472796180480",
+                      "media_url": "http://pbs.twimg.com/media/DWyb73hVoAA4RKr.jpg",
+                      "sizes": Object {
+                        "large": Object {
+                          "h": 1290,
+                          "resize": "fit",
+                          "w": 1838,
+                        },
+                        "small": Object {
+                          "h": 477,
+                          "resize": "fit",
+                          "w": 680,
+                        },
+                      },
+                      "type": "photo",
+                      "url": "https://t.co/uc9iteuAQ8",
+                      "video_info": null,
+                    },
+                  ],
+                  "urls": Array [],
+                }
+              }
+            />
+          </branch(Component)>
+        </branch(branch(Component))>
+      </branch(branch(branch(Component)))>
+    </branch(branch(branch(branch(Component))))>
+  </branch(branch(branch(branch(branch(Component)))))>
+</branch(branch(branch(branch(branch(branch(Component))))))>
 `;
 
 exports[`should render with empty props. 1`] = `
-<Styled(branch(branch(branch(Component))))
+<branch(branch(branch(branch(branch(branch(Component))))))
   entities={Object {}}
   extendedEntities={Object {}}
 >
-  <Style
-    Component={[Function]}
-    Style={
-      FreeStyle {
-        "_children": Object {},
-        "_counters": Object {},
-        "_keys": Array [],
-        "changeId": 0,
-        "changes": Object {
-          "add": [Function],
-          "change": [Function],
-          "remove": [Function],
-        },
-        "debug": true,
-        "hash": [Function],
-        "id": "f2",
-        "sheet": Array [],
-      }
-    }
-    componentName="branch(branch(branch(Component)))"
-    componentProps={
-      Object {
-        "entities": Object {},
-        "extendedEntities": Object {},
-        "styles": Object {
-          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        },
-      }
-    }
+  <renderComponent(Component)
+    entities={Object {}}
+    extendedEntities={Object {}}
   >
-    <branch(branch(branch(Component)))
+    <Component
       entities={Object {}}
       extendedEntities={Object {}}
-      styles={
-        Object {
-          "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-          "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-        }
-      }
-    >
-      <renderComponent(Component)
-        entities={Object {}}
-        extendedEntities={Object {}}
-        styles={
-          Object {
-            "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-            "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-          }
-        }
-      >
-        <Component
-          entities={Object {}}
-          extendedEntities={Object {}}
-          styles={
-            Object {
-              "TweetImage": "branch(branch(branch(Component)))_TweetImage_f45h",
-              "TweetMedia": "branch(branch(branch(Component)))_TweetMedia_f45h",
-            }
-          }
-        />
-      </renderComponent(Component)>
-    </branch(branch(branch(Component)))>
-  </Style>
-</Styled(branch(branch(branch(Component))))>
+    />
+  </renderComponent(Component)>
+</branch(branch(branch(branch(branch(branch(Component))))))>
 `;

@@ -2,6 +2,7 @@ module.exports = (wallaby) => {
   return {
     files: [
       'src/**/*.js',
+      'config.js',
       'scripts/jest.setup.js',
       '!src/**/__tests__/*.js'
     ],

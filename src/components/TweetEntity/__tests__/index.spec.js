@@ -8,13 +8,13 @@ import TweetEntity from '../index'
 // SEE: https://github.com/CookPete/react-player/blob/488f82da421ac9a27c2e52137767d19cc7f47a3e/test/players/FilePlayer.js#L12-L18
 class MockMediaStream {}
 
-global.navigator = {}
-global.window = {
-  MediaStream: MockMediaStream,
-  URL: {
-    createObjectURL: url => 'mockObjectURL'
-  }
-}
+global.window['MediaStream'] = MockMediaStream
+global.URL['createObjectURL'] = url => 'mockObjectURL'
+
+// Mock style function for nodejs.
+jest.mock('../style', () => {
+  return (Component) => Component
+})
 
 const ENTITIES = {
   ANIMATED_GIF: {
